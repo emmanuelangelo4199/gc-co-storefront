@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# turbo & other
+dist/
+.output
+
+
+# local env files
+.env
+
+# misc
+.vscode
