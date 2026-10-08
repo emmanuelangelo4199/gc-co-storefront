@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en" style="">
+    <head>
+        <!-- Document Metadata -->
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="web_standard" name="shell-type" />
+        <title>Gelo &amp; Co.</title>
+        <!-- Google Fonts & Material Symbols -->
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+        {% load static %}
+        <!-- Global Base Styles -->
+        <style>
+            @layer base {
+                html,
+                body {
+                    margin: 0;
+                    padding: 0;
+                }
+                body {
+                    overscroll-behavior: none;
+                }
+                main > :first-child {
+                    margin-top: 0 !important;
+                }
+                main > :last-child {
+                    margin-bottom: 0 !important;
+                }
+            }
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
+
+        <!-- Tailwind CSS CDN & Config -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "surface-dim": "#d0dbed",
+                            "on-secondary-fixed": "#410002",
+                            "inverse-surface": "#27313f",
+                            "surface-container-high": "#dee9fc",
+                            "surface-container-low": "#eff4ff",
+                            "on-secondary-fixed-variant": "#93000b",
+                            "surface-container": "#e6eeff",
+                            "on-secondary-container": "#fffbff",
+                            "inverse-primary": "#80d5cb",
+                            tertiary: "#005e40",
+                            "tertiary-container": "#007954",
+                            "inverse-on-surface": "#eaf1ff",
+                            "surface-container-lowest": "#ffffff",
+                            "primary-fixed-dim": "#80d5cb",
+                            "surface-bright": "#f8f9ff",
+                            "on-surface-variant": "#3e4947",
+                            "on-secondary": "#ffffff",
+                            "tertiary-fixed-dim": "#68dba9",
+                            "primary-fixed": "#9cf2e8",
+                            "on-primary-fixed-variant": "#00504a",
+                            "on-tertiary-fixed-variant": "#005137",
+                            error: "#ba1a1a",
+                            "on-tertiary": "#ffffff",
+                            "outline-variant": "#bdc9c6",
+                            "on-primary": "#ffffff",
+                            "on-surface": "#121c2a",
+                            "primary-container": "#0f766e",
+                            "surface-tint": "#006a63",
+                            "on-primary-container": "#a3faef",
+                            "on-error-container": "#93000a",
+                            "on-background": "#121c2a",
+                            "on-error": "#ffffff",
+                            background: "#f8f9ff",
+                            surface: "#f8f9ff",
+                            "on-tertiary-fixed": "#002114",
+                            "secondary-fixed-dim": "#ffb4ab",
+                            "on-primary-fixed": "#00201d",
+                            primary: "#005c55",
+                            outline: "#6e7977",
+                            "secondary-fixed": "#ffdad6",
+                            "secondary-container": "#e02928",
+                            "error-container": "#ffdad6",
+                            "surface-variant": "#d9e3f6",
+                            secondary: "#bb0112",
+                            "tertiary-fixed": "#85f8c4",
+                            "surface-container-highest": "#d9e3f6",
+                            "on-tertiary-container": "#99ffce",
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                        spacing: {
+                            "space-lg": "1.5rem",
+                            margin: "2rem",
+                            gutter: "1.5rem",
+                            "gutter-mobile": "1rem",
+                            "space-md": "1rem",
+                            "space-xl": "2rem",
+                            "space-xs": "0.25rem",
+                            "space-sm": "0.5rem",
+                            "margin-mobile": "1rem",
+                        },
+                        fontFamily: {
+                            display: ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "headline-lg-mobile": ["Inter"],
+                            "title-md": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-md": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "headline-sm": ["Inter"],
+                            "display-mobile": ["Inter"],
+                            "body-sm": ["Inter"],
+                        },
+                        fontSize: {
+                            display: [
+                                "48px",
+                                { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" },
+                            ],
+                            "headline-lg": [
+                                "36px",
+                                { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" },
+                            ],
+                            "headline-lg-mobile": [
+                                "28px",
+                                { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "700" },
+                            ],
+                            "title-md": ["18px", { lineHeight: "26px", fontWeight: "600" }],
+                            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                            "label-md": [
+                                "12px",
+                                { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" },
+                            ],
+                            "label-lg": [
+                                "14px",
+                                { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" },
+                            ],
+                            "headline-md": [
+                                "24px",
+                                { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" },
+                            ],
+                            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                            "label-sm": [
+                                "11px",
+                                { lineHeight: "14px", letterSpacing: "0.03em", fontWeight: "500" },
+                            ],
+                            "headline-sm": [
+                                "20px",
+                                { lineHeight: "28px", letterSpacing: "-0.005em", fontWeight: "600" },
+                            ],
+                            "display-mobile": [
+                                "32px",
+                                { lineHeight: "40px", letterSpacing: "-0.015em", fontWeight: "700" },
+                            ],
+                            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+
+    <body class="bg-surface font-body-md text-on-surface antialiased">
+        <!-- HEADER SECTION -->
+        <header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+            <div class="h-28 w-full">
+                <!-- Top Navigation Bar -->
+                <div class="h-16 max-w-[1280px] mx-auto px-margin flex items-center justify-between gap-space-md">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-space-sm shrink-0">
+                        <a class="flex items-center gap-space-xs" data-path="home" href="#">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYxciJ9zLZjcQnvCqGg-1xZBaO-U9ZAmaMKz35C5Sx1bd9AIIilAclpG7ocX21K-hguAKKBJPHGaC630RKZu1vYdR-KyRe_J0ggFPXQJOv6_AVnLYcu-AJG7JG5MLLptr5_ecGtfsEewYzBcle7PJPced7G9FF7OfxWpQA5EMSewxMk9SIdbrQ1IbwsnxabLo5U3yMNbgJwhfa750xSSOOmnXrJJ8RLXI5psimNIOpWan4nwdwvOjNelzaEzUu8zzub6I" alt="Gelo &amp; Co. Logo" class="h-11 w-11 object-contain rounded-full" />
+                            <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Gelo &amp; Co.</span>
+                        </a>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="flex-1 max-w-xl mx-space-md">
+                        <div class="relative flex items-center w-full">
+                            <span class="material-symbols-outlined absolute left-3 text-outline text-xl pointer-events-none">search</span>
+                            <input
+                                class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest border border-outline-variant font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary transition-all duration-150"
+                                placeholder="Search products, brands and categories..."
+                                type="text" />
+                        </div>
+                    </div>
+
+                    <!-- User Actions & Cart -->
+                    <div class="flex items-center gap-space-md shrink-0">
+                        <!-- Shopping Bag -->
+                        <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="#">
+                            <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                            <span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">3</span>
+                        </a>
+
+                        <!-- User Profile & Account -->
+                        <div class="flex items-center gap-space-sm pl-space-sm border-l border-outline-variant">
+                            <div class="flex items-center gap-space-xs">
+                                <img
+                                    alt="Profile"
+                                    class="w-8 h-8 rounded-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNdyB4fhaqsIu0SpNsdFmaGsLL0IZBuclsTZARFKG5hC1Oq3_1pFmmH5nKVyTTQopvYNSUjWJGypzEk7kaKJ4QaHdH_KmBQJq-Msk4Aa14AjeVuzNM544LUdy8QyEKei0wSN81kBKehLD4WP2MgNjrB3LGBPGAMmCUltNSYJIZdtYrYz6U-FQlq8UBhZ8Rcrxj3zLY-W7ALGdcK2O96Rnr26NnNHbgKUnOXlF_jY-RUGlAAqkgtbSQRxj0ncZx37YbZJkthDsZbpjgYVo" />
+                                <div class="flex flex-col text-left">
+                                    <span class="font-label-md text-label-md text-on-surface font-semibold">Emmanuel Angelo</span>
+                                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="#">My Orders</a>
+                                </div>
+                            </div>
+                            <a class="p-space-xs text-on-surface-variant hover:text-secondary transition-colors flex items-center" data-path="login" href="#" title="Sign out">
+                                <span class="material-symbols-outlined text-xl">logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Categories Navigation -->
+                <div class="h-12 border-t border-surface-container bg-surface-container-lowest/90 backdrop-blur-md">
+                    <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
+                        <nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary">
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="all-products" href="#">All Products</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="electronics" href="#">Electronics</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="fashion" href="#">Fashion</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="home-lifestyle" href="#">Home</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="accessories" href="#">Accessories</a>
+                            <a class="h-full flex items-center text-on-secondary-fixed-variant hover:text-secondary font-label-lg text-label-lg transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                        </nav>
+                        <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                            <span class="material-symbols-outlined text-base text-tertiary">local_shipping</span>
+                            <span>Free delivery over GH₵ 250 in Accra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="w-full pt-28 bg-surface min-h-[calc(100vh-112px)]">
+            <div class="flex flex-col w-full">
+
+                <!-- Toast Notification Container -->
+                <div
+                    id="toast"
+                    class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-xl translate-y-24 opacity-0">
+                    <span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    <span id="toast-message" class="font-body-sm text-body-sm font-medium">Updated: Showing all 48 inventory items</span>
+                </div>
+
+                <!-- HERO SECTION -->
+                <section class="w-full bg-surface-container-low relative overflow-hidden py-space-xl">
+                    <div class="max-w-[1280px] mx-auto px-margin">
+                        <div class="grid grid-cols-12 gap-gutter items-center">
+                            
+                            <!-- Text Column -->
+                            <div class="col-span-12 lg:col-span-7 flex flex-col items-start gap-space-md z-10">
+                                <h1 class="font-display text-display text-on-surface tracking-tight">
+                                    Everyday Essentials &amp; Modern Lifestyle, <span class="text-primary">Delivered with Ease</span>
+                                </h1>
+                                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                                    Discover top-rated electronics, fashion, home essentials, and accessories with fast nationwide delivery in Ghana. Curated for authentic everyday comfort.
+                                </p>
+                                <div class="flex flex-wrap items-center gap-space-md pt-space-xs">
+                                    <a class="inline-flex items-center justify-center gap-space-xs px-space-lg h-12 bg-primary hover:bg-tertiary text-on-primary font-label-lg text-label-lg rounded-lg shadow-sm hover:shadow-md transition-all active:scale-[0.99]" href="#product-grid">
+                                        <span class="material-symbols-outlined text-xl">shopping_cart</span>
+                                        Shop Now
+                                    </a>
+                                    <a class="inline-flex items-center justify-center gap-space-xs px-space-lg h-12 bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg rounded-lg shadow-sm transition-all" href="#product-grid">
+                                        <span class="material-symbols-outlined text-xl text-secondary">local_fire_department</span>
+                                        Explore Deals
+                                    </a>
+                                </div>
+
+                                <!-- Trust Badges Inline -->
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md w-full pt-space-lg mt-space-sm border-t-0">
+                                    <div class="flex items-center gap-space-xs">
+                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                            <span class="material-symbols-outlined text-lg">local_shipping</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-label-md text-label-md text-on-surface font-semibold">Free Delivery</span>
+                                            <span class="font-label-sm text-label-sm text-outline">Orders over GH₵300</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-space-xs">
+                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                            <span class="material-symbols-outlined text-lg">shield</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-label-md text-label-md text-on-surface font-semibold">Secure Payment</span>
+                                            <span class="font-label-sm text-label-sm text-outline">Momo &amp; Cash on delivery</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-space-xs">
+                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                            <span class="material-symbols-outlined text-lg">published_with_changes</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-label-md text-label-md text-on-surface font-semibold">7-Day Returns</span>
+                                            <span class="font-label-sm text-label-sm text-outline">Hassle-free guarantee</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-space-xs">
+                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                            <span class="material-symbols-outlined text-lg">support_agent</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-label-md text-label-md text-on-surface font-semibold">24/7 Support</span>
+                                            <span class="font-label-sm text-label-sm text-outline">Direct Accra hotline</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Visual Mosaic Column -->
+                            <div class="col-span-12 lg:col-span-5 relative mt-space-md lg:mt-0">
+                                <div class="relative w-full h-[400px] rounded-xl overflow-hidden bg-surface-container-high shadow-lg">
+                                    <img
+                                        class="w-full h-full object-cover"
+                                        data-alt="High-end editorial studio lifestyle composition displaying wireless headphones, premium leather wristwatch, running shoes, and sunglasses arranged neatly on soft architectural stone surfaces, soft natural window light, muted teal and warm amber undertones."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_pjCHZYUYTn6OcDwyth5E2fJgvVNItj1znShOzSh8P0idrU37zJA04pOm6SuuJ59otbV23XedzRBVHdDesALAhJK8MIQsoIJ6p0uscH5uaHoU61-IyH-otDzG-pLCavzeOQsHWBNmkcjyMW3JyQC1diXA1ATU3ONN5ysZiQZhpD1fDwSuDNQi5Bl4SVW17h3FTi2xCCbMgd2VGO4aH0pLvl0KHSjEFlzNqkw7RbUbJNPEe-M4CTP70A" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/70 via-transparent to-transparent flex flex-col justify-end p-space-lg text-on-secondary">
+                                        <span class="font-label-sm text-label-sm tracking-wider uppercase text-primary-fixed font-semibold">Special Weekly Selection</span>
+                                        <h3 class="font-headline-md text-headline-md text-on-secondary font-bold">Smart Audio &amp; Tech Gear</h3>
+                                        <p class="font-body-sm text-body-sm text-surface-container-highest max-w-xs mt-1">
+                                            Save up to 35% on verified wireless acoustic accessories today.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FILTER & TOOLBAR BAR -->
+                <section class="w-full bg-surface-container-lowest sticky top-28 z-30 shadow-sm">
+                    <div class="max-w-[1280px] mx-auto px-margin py-space-sm">
+                        <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+                            
+                            <!-- Category Pill Chips -->
+                            <div id="category-filter" class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0">
+                                <button class="category-chip px-space-md h-9 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm transition-colors" data-cat="all">
+                                    All Products
+                                </button>
+                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Electronics">
+                                    Electronics
+                                </button>
+                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Fashion">
+                                    Fashion
+                                </button>
+                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Home">
+                                    Home &amp; Living
+                                </button>
+                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Accessories">
+                                    Accessories
+                                </button>
+                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="sale">
+                                    Special Deals
+                                </button>
+                            </div>
+
+                            <!-- Controls: Price Filter, Sort, View Toggle, Result Counter -->
+                            <div class="flex flex-wrap items-center gap-space-sm justify-between lg:justify-end">
+                                
+                                <!-- Price Range Filter Dropdown -->
+                                <div class="relative">
+                                    <select id="price-filter" class="h-10 pl-space-sm pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer">
+                                        <option value="all">All Prices</option>
+                                        <option value="under100">Under GH₵100</option>
+                                        <option value="100to300">GH₵100 - GH₵300</option>
+                                        <option value="300plus">GH₵300+</option>
+                                    </select>
+                                    <span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-outline text-lg">arrow_drop_down</span>
+                                </div>
+
+                                <!-- Sort Dropdown -->
+                                <div class="relative">
+                                    <select id="sort-select" class="h-10 pl-space-sm pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer">
+                                        <option value="featured">Newest Arrivals</option>
+                                        <option value="price-low">Price: Low to High</option>
+                                        <option value="price-high">Price: High to Low</option>
+                                        <option value="rating">Top Rated</option>
+                                    </select>
+                                    <span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-outline text-lg">sort</span>
+                                </div>
+
+                                <!-- View Mode Toggles -->
+                                <div class="flex items-center bg-surface-container-low rounded-lg p-0.5">
+                                    <button id="view-grid-btn" class="w-9 h-9 rounded flex items-center justify-center bg-surface-container-lowest text-primary shadow-sm" title="Grid View">
+                                        <span class="material-symbols-outlined text-lg">grid_view</span>
+                                    </button>
+                                    <button id="view-list-btn" class="w-9 h-9 rounded flex items-center justify-center text-outline hover:text-on-surface" title="List View">
+                                        <span class="material-symbols-outlined text-lg">view_list</span>
+                                    </button>
+                                </div>
+
+                                <!-- Result Counter -->
+                                <div class="font-body-sm text-body-sm text-on-surface-variant font-medium pl-space-xs">
+                                    Showing <span id="counter-current" class="text-on-surface font-bold">48</span> of <span class="text-on-surface font-bold">48</span> products
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PRODUCT LISTING GRID SECTION -->
+                <section id="product-grid" class="w-full py-space-xl">
+                    <div class="max-w-[1280px] mx-auto px-margin">
+                        
+                        <!-- Products Grid Container -->
+                        <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                            
+                            <!-- Product Card 1 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="280" data-rating="4.9" data-sale="true">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Lightweight breathable ergonomic running sneakers in crisp modern chalk white and deep teal accents, floating dynamic product photography against warm neutral background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-qlmR64wHg3_BUSKOPKen4hBsSSW81vKqCihJf0AALtVeMZFgeD5c6zgbE2lqn3ZDwYksKY5JiMJUaarGXfnQeqrFBjuv_CfaIzAccGt2xYLxqsqlcmgV0Ge4TevKp0l4eMGDJ2Sw5gTxASqrM4tD1_LnZd0JIlqJu9_M70IHTG8PT9NFESIP6hqlf54wSrvI4aks3k8bK0kvC5ik15WO7OnViz-vXejN0NbY31kjtLvMf7WSAOFObg" />
+                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                        SALE -20%
+                                    </span>
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">CloudStep Runner Sneakers</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(124 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵280.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵350.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="CloudStep Runner Sneakers" data-price="280.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 2 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Accessories" data-price="195" data-rating="4.8" data-sale="false">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Minimalist waterproof commuter laptop backpack in matte charcoal grey, magnetic roll-top closure, studio lighting on soft architectural pedestal."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3t9D7PodpsJ84I-x71QGOqdMdepy4R4maXyKqKutYj4Emt7_8lzNi5dE9B0IhPSxw5_AFBSrp9ZISRQ9dlXme60Tcc-sYCWYqMnpku3ELEmwqN_ALb7dNh_4GrqFWe3u5Sv9TqYHw7s9bYdmya0bU7ANJp4KUNfPdixsw967yw56y3GBWbNmR1tT2BrkYza4XJF9nuMkCzGQO2hkald064Nckipzl4VJ0PbSnKTfWoT59Q5sZww-iVA" />
+                                    <span class="absolute top-2 left-2 bg-primary-container text-on-primary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                        BESTSELLER
+                                    </span>
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Accessories</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Nomad Waterproof Commuter Backpack</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.8</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(89 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵195.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Nomad Waterproof Commuter Backpack" data-price="195.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 3 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Accessories" data-price="420" data-rating="4.9" data-sale="true">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Brushed stainless steel chronograph wristwatch with genuine dark tan leather strap, clean minimalist white dial, dramatic angled editorial studio lighting."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcG6x4GWXMrZFMmS-xHa8EA_IDI1q7OmI0wRJIDP9xnEzS8yZ7zAw9aowVQ0nGGtZDDw1d8gVEmK5Erko-AXgXY-3wrKVIenoYD0ALh8llGO_qsfygJSZRq7TpD92m0exZApSMXhlfsn3NIwcnyiKJj__ny87u6PtUw29LGOg1c1F9hmQDRBCbxdVPPAfpfILkbTY-FRO1WMt4HxtrzZh0Mx61kwaL1hDXp9X_PBU_1q8gySyaiGCKcA" />
+                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                        SALE -19%
+                                    </span>
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Accessories</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Apex Chronograph Minimalist Wristwatch</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(205 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵420.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵520.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Apex Chronograph Minimalist Wristwatch" data-price="420.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 4 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Electronics" data-price="550" data-rating="4.9" data-sale="false">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Over-ear matte black wireless headphones with cushioned ear cups, sleek modern industrial design, soft shadow on clean ivory backdrop."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHlB1KDxbSgwk66YtLSkuQo0ByhAL6rn-yPjUZAABfht0k8_vNAVVDi0pzBxKhCaX01kN2VoZaqwAdvxOe5Hoq41Ein3NE5IusMvGCyo0WhArvqfT5AFbotDaA_lN6DhgYRO93_WVzQtSGBOT6Kj7qo7i-oEeHELxn_iLPXm20-gi4Vsp7KKkrVv6Q5IsZmwJ_B66IPq7MTbTYpyYQk8jy_pIHpjQ4jL0cUJgsexGo1RgmwFw0lOiefw" />
+                                    <span class="absolute top-2 left-2 bg-primary-container text-on-primary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                        BESTSELLER
+                                    </span>
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Electronics</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">SonicFlow Noise-Cancelling Headphones</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(312 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵550.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="SonicFlow Noise-Cancelling Headphones" data-price="550.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 5 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Accessories" data-price="120" data-rating="4.7" data-sale="true">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Classic tortoise-shell acetate sunglasses with dark green polarized lenses lying on warm polished travertine marble, sunlit high-contrast luxury aesthetic."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIZ4XybJBuutpBWg4Zq7YYo5kouvwVYGfpAEGZvWkWJ6h9l6SRwgcHSNwim3TO-JA4VHFtzk3WdDjLIWwdieMRghtCYHUDFsSnzL15neu7CS8t4v0glPGb6LUCBSu0LoFn7z-fGG1tZ7iqR7JyLiw5zOtsZS03i_7NrQHtSeCT9w5JROhQsBbD0pwdeOffeWmzwn0Dxl50ISGeQ14YTDBC6H7Lk1KA2Qi6Jc8M7VkFMYAWS-NBhw0Edw" />
+                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                        SALE -20%
+                                    </span>
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Accessories</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Havana Polarized Classic Sunglasses</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.7</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(64 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵120.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵150.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Havana Polarized Classic Sunglasses" data-price="120.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 6 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Home" data-price="165" data-rating="4.8" data-sale="false">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Architectural modern aluminum LED desk lamp with dimming touch sensor, emitting soft warm ambient glow in Scandinavian home workspace setting."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-dJo-hal4EVpdFRxbjFitrh5MYfTZRcGpS8uUMp7zufSXBg0jV-3fmUkdzIG4XAFF6-LSCyet3ZXM9L-K0IQXs2kvXc5Tt8fyn0xmLwGJpsm6wZYxyHoEKmMmOYncvP3iHHT_sBqiM0xy3A0pm-0x6GbjJbzAJAwvfRURqWluo50GKis74liRJC2Iz0jSFCknU0Jvt13XHfaqdFu6BhT98LZZcto2-HBH7MkXAX65NsMJleDzF9cmtg" />
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Home</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Aura Touch Dimming LED Desk Lamp</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.8</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(52 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵165.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Aura Touch Dimming LED Desk Lamp" data-price="165.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 7 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Home" data-price="85" data-rating="4.6" data-sale="false">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Sleek powder-coated forest green stainless steel insulated water bottle 750ml standing proudly on polished granite stone surface with water droplets."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaensK6oxMZfdjqbZfLFpc9qOYbticeMgOCeDXoNSp__WYLcXIS4ZaN1uuXkvlTLiPRzFy2ODcl5FQMjA4i5pdKZnpPRTeu5j2DqwEzQ0EVlg52xG9cpJhAztZfInuTw715i_1-x_KShJHxIr6rEn8fd3-4GOatfZjFCDZihHXHbeyI5onnbwK2hhG0f5hbc6EA0Mj43rA6PLFbPiyG4oCoEOvZt_DosEiaW9asNqazwSsveig_boggw" />
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Home</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">HydroPeak Insulated Bottle 750ml</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.6</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(78 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵85.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="HydroPeak Insulated Bottle 750ml" data-price="85.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 8 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="95" data-rating="4.7" data-sale="true">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Neatly folded heavy organic cotton crewneck t-shirt in rich emerald pine color against structured cream paper texture background, clean luxury garment photography."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRCBr1ybonSXcfGguS0VfbHwJfS5co2Ro9WGUDSJITKm3uesWkfg5Sof6lZdLoeRpIv6knZaowPB1LxpNJHHiZNb3jY7vEu2e3d7hleZEEGscsdxGUe2Xnp9E6UdAo5Kmq8zOeUnTfEkoV9BFCpzXdXOmdjKnXIN4GdJf01HOg5gEESc8JlSstT__vI1JHztjAmjZ0R5WKf29U1E1O8GrMU3EfZE-1x1Td2zEolz7XVmgGkHsiY8bMgA" />
+                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                        SALE -20%
+                                    </span>
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Heavyweight Cotton Crewneck T-Shirt</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.7</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(110 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵95.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵120.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Heavyweight Cotton Crewneck T-Shirt" data-price="95.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 9 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Electronics" data-price="220" data-rating="4.8" data-sale="false">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Compact waterproof bluetooth speaker with fabric grill exterior in slate teal standing on outdoor teak wood bench, warm natural evening sunlight."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9krFHOnBYGX7y-1AU0icnusPSAZLxLwNv8z2gmmJUappea-DMPW8x5bgfntaBW6gwT9nj3uQcOyQYg7CnZgppkSlWidiSnaZib1jSCYd34Ks53QoL6374Tr2zm08RXkLN1ypevzmpzfQ_JEEAq5rgMJe0YHVW0Nr3rj1fAP7ydwjs05MGnHbWor6-yRvhcqgeDMOdKeCOaxPI58BJijdWaPahp51IZgMqghP2SVpm7EwaAy8QyoFAPw" />
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Electronics</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">PulseBass Portable Bluetooth Speaker</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.8</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(187 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵220.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="PulseBass Portable Bluetooth Speaker" data-price="220.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 10 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Home" data-price="140" data-rating="4.5" data-sale="false">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Ergonomic contoured memory foam lumbar back cushion with dark breathable mesh cover resting comfortably on modern office task chair."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5LxyKoQxjLvTyiAJJmG_5aveldI9s007C_ccJBnbqOGf8P65hTt5n_D8_00h-PAk9X_Choib_q5MPN-9v4CU5tEMYth4MpCyxGMhnsmkYudV3MeTHc7wK7IHA6D7O6UO8gx0SeCnJ9Amj1ykLhi-gvinVhVW2KU3E-qiCrsARG8om-D8hnyqZNOdRZhiTF0zqbUbrHYu7URDjET5olIrqiO6sg0uz3C3e57WdatwV91hr7ojBrhHsJQ" />
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Home</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Ergonomic Memory Foam Cushion</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.5</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(45 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵140.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Ergonomic Memory Foam Cushion" data-price="140.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 11 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Electronics" data-price="175" data-rating="4.9" data-sale="true">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Ultra-slim magnetic fast charging power bank with digital LED battery percentage readout lying next to high-end smartphone on textured concrete surface."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuARVwWKHh8rLR5lk-4HMixAeEEo_ldHwYFDCQUivy2dH7wVJb7Fi1LAcczPztTAm3IiM7QidZXglk658wlkB-yCwPquYXDgLUU5Sayl-ifLcDDj31X6FXypOOfAkWfkcrKt-0CJCx_7SAecZk1otyu4077a5Rb9g2aIDtrN8riL7kvgH8u0V6Qo7dcpg-ZRsYePOuSbTIqpdyZ-EE-OM_7JNGcQddFSkD8q1wS8pI5BP2EAHlpS7R3MfQ" />
+                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                        SALE -16%
+                                    </span>
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Electronics</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">FastCharge 20000mAh Power Bank</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(220 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵175.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵210.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="FastCharge 20000mAh Power Bank" data-price="175.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Product Card 12 -->
+                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="190" data-rating="4.6" data-sale="false">
+                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                    <img
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        data-alt="Handcrafted neutral beige canvas slip-on loafers with natural jute rope espadrille sole resting on sun-drenched terracotta tile."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALFRtp2LVy3ll4silhK3IgARuR38JbOitleIwpJGiASRWH2M7rHZj0whqDlaFN56EHZ_Ih8p6osyGtlt6hj3ln6QgqAFeUyz3pKA3LYBovqkgudUNolATZymN5LukSIrcKDDmNxkOxcz44qhdxAyaDehe3glAr-HpCJq3Ch6KWDjqMduPV3dupbMkvGYRM42T_zd-mfnN4EyoNgkSqjNFYFRgTUfWmY8oQKMS5Tl73RM0McQF_LVY9jA" />
+                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                        <span class="material-symbols-outlined text-lg">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1">
+                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Everyday Canvas Slip-On Loafers</h3>
+                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.6</span>
+                                        <span class="font-label-sm text-label-sm text-outline">(67 reviews)</span>
+                                    </div>
+                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                        <div class="flex flex-col">
+                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵190.00</span>
+                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                        </div>
+                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Everyday Canvas Slip-On Loafers" data-price="190.00">
+                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+
+                        </div>
+
+                        <!-- Pagination / Load More Block -->
+                        <div class="mt-space-xl flex flex-col items-center justify-center gap-space-md">
+                            <div class="w-full max-w-xs flex flex-col items-center gap-space-xs">
+                                <div class="flex justify-between w-full font-label-sm text-label-sm text-outline">
+                                    <span>Showing 12 products</span>
+                                    <span>48 Total</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                                    <div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 25%;"></div>
+                                </div>
+                            </div>
+                            <button
+                                id="load-more-btn"
+                                disabled=""
+                                class="inline-flex items-center justify-center gap-space-sm px-space-xl h-12 bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-lg text-label-lg font-semibold rounded-lg shadow-sm transition-all active:scale-[0.99] opacity-50 pointer-events-none">
+                                <span id="load-spinner" class="material-symbols-outlined text-xl animate-spin hidden">progress_activity</span>
+                                <span id="load-text">All 48 Products Loaded</span>
+                                <span class="material-symbols-outlined text-lg">expand_more</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- FOOTER SECTION-->
+        <footer class="w-full bg-surface-container-lowest border-t border-surface-container mt-space-xl">
+            <div class="max-w-[1280px] mx-auto px-margin pt-space-xl pb-space-lg">
+                
+                <!-- Multi-column links grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl mb-space-xl">
+                    
+                    <!-- Column 1: Brand Info -->
+                    <div class="flex flex-col gap-space-md">
+                        <div class="flex items-center gap-space-xs">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYxciJ9zLZjcQnvCqGg-1xZBaO-U9ZAmaMKz35C5Sx1bd9AIIilAclpG7ocX21K-hguAKKBJPHGaC630RKZu1vYdR-KyRe_J0ggFPXQJOv6_AVnLYcu-AJG7JG5MLLptr5_ecGtfsEewYzBcle7PJPced7G9FF7OfxWpQA5EMSewxMk9SIdbrQ1IbwsnxabLo5U3yMNbgJwhfa750xSSOOmnXrJJ8RLXI5psimNIOpWan4nwdwvOjNelzaEzUu8zzub6I" alt="Gelo &amp; Co. Logo" class="h-11 w-11 object-contain rounded-full" />
+                            <span class="font-headline-sm text-headline-sm text-primary font-bold">Gelo &amp; Co.</span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                            Gelo &amp; Co. brings quality everyday lifestyle goods, tech and apparel right to your doorstep across Ghana with seamless payments and fast delivery.
+                        </p>
+                    </div>
+
+                    <!-- Column 2: Quick Links -->
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Quick Links</h3>
+                        <div class="flex flex-col gap-space-xs">
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="all-products" href="#">Shop All</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="new-arrivals" href="#">New Arrivals</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="order-tracking" href="#">Order Tracking</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="faqs" href="#">FAQs</a>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Customer Care -->
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Customer Care &amp; Policies</h3>
+                        <div class="flex flex-col gap-space-xs">
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="contact-us" href="#">Contact Us</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="shipping-and-delivery" href="#">Shipping &amp; Delivery</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="return-policy" href="#">Return Policy</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a>
+                        </div>
+                    </div>
+
+                    <!-- Column 4: Contact & Social -->
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Contact &amp; Social</h3>
+                        <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">call</span>
+                                <span>+233 20 863 0575</span>
+                            </div>
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">mail</span>
+                                <span>support@geloandco.com.gh</span>
+                            </div>
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">location_on</span>
+                                <span>Accra, Ghana</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-space-sm mt-space-xs">
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">alternate_email</span>
+                            </a>
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">photo_camera</span>
+                            </a>
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">public</span>
+                            </a>
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">work</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Copyright & Payment Methods Bar -->
+                <div class="border-t border-surface-container pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-md">
+                    <p class="font-body-sm text-body-sm text-outline">© 2025 Gelo &amp; Co. Ltd. All rights reserved.</p>
+                    <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cards (Visa / MC)</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">MTN Mobile Money</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Telecel Cash</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cash on Delivery</span>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+        <!-- CLIENT-SIDE JAVASCRIPT BEHAVIOR -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const categoryChips = document.querySelectorAll('.category-chip');
+                const productCards = Array.from(document.querySelectorAll('.product-card'));
+                const sortSelect = document.getElementById('sort-select');
+                const priceFilter = document.getElementById('price-filter');
+                const counterCurrent = document.getElementById('counter-current');
+                const productsContainer = document.getElementById('products-container');
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                const loadSpinner = document.getElementById('load-spinner');
+                const loadText = document.getElementById('load-text');
+                const viewGridBtn = document.getElementById('view-grid-btn');
+                const viewListBtn = document.getElementById('view-list-btn');
+
+                let currentCategory = 'all';
+
+                // Wishlist toggle
+                document.querySelectorAll('.favorite-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const icon = btn.querySelector('.material-symbols-outlined');
+                        const isFavorited = icon.style.fontVariationSettings?.includes("'FILL' 1");
+                        if (isFavorited) {
+                            icon.style.fontVariationSettings = "'FILL' 0";
+                            btn.classList.remove('text-secondary');
+                            btn.classList.add('text-on-surface-variant');
+                            showToast('Removed from your Wishlist');
+                        } else {
+                            icon.style.fontVariationSettings = "'FILL' 1";
+                            btn.classList.remove('text-on-surface-variant');
+                            btn.classList.add('text-secondary');
+                            showToast('Saved to your Wishlist');
+                        }
+                    });
+                });
+
+                // Add to cart buttons
+                document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const name = btn.getAttribute('data-name');
+                        const price = btn.getAttribute('data-price');
+                        
+                        // Animate button feedback
+                        btn.classList.add('bg-tertiary');
+                        btn.innerHTML = `<span class="material-symbols-outlined text-lg">check</span> Added`;
+                        setTimeout(() => {
+                            btn.classList.remove('bg-tertiary');
+                            btn.innerHTML = `<span class="material-symbols-outlined text-lg">shopping_bag</span> Add`;
+                        }, 1400);
+
+                        showToast(`${name} added to cart (GH₵${price})`);
+                    });
+                });
+
+                // Category Filter logic
+                categoryChips.forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        categoryChips.forEach(c => {
+                            c.className = 'category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors';
+                        });
+                        chip.className = 'category-chip px-space-md h-9 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm transition-colors';
+                        currentCategory = chip.getAttribute('data-cat');
+                        applyFiltersAndSort();
+                    });
+                });
+
+                // Price filter change
+                priceFilter.addEventListener('change', applyFiltersAndSort);
+
+                // Sort select change
+                sortSelect.addEventListener('change', applyFiltersAndSort);
+
+                function applyFiltersAndSort() {
+                    const priceVal = priceFilter.value;
+                    const sortVal = sortSelect.value;
+                    let visibleCount = 0;
+
+                    productCards.forEach(card => {
+                        const cardCat = card.getAttribute('data-category');
+                        const isSale = card.getAttribute('data-sale') === 'true';
+                        const cardPrice = parseFloat(card.getAttribute('data-price'));
+
+                        // Category matching
+                        let catMatch = false;
+                        if (currentCategory === 'all') catMatch = true;
+                        else if (currentCategory === 'sale') catMatch = isSale;
+                        else catMatch = (cardCat === currentCategory);
+
+                        // Price matching
+                        let priceMatch = false;
+                        if (priceVal === 'all') priceMatch = true;
+                        else if (priceVal === 'under100') priceMatch = cardPrice < 100;
+                        else if (priceVal === '100to300') priceMatch = (cardPrice >= 100 && cardPrice <= 300);
+                        else if (priceVal === '300plus') priceMatch = cardPrice > 300;
+
+                        if (catMatch && priceMatch) {
+                            card.classList.remove('hidden');
+                            visibleCount++;
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+
+                    // Sorting visible cards
+                    const sorted = productCards.slice().sort((a, b) => {
+                        const priceA = parseFloat(a.getAttribute('data-price'));
+                        const priceB = parseFloat(b.getAttribute('data-price'));
+                        const ratingA = parseFloat(a.getAttribute('data-rating'));
+                        const ratingB = parseFloat(b.getAttribute('data-rating'));
+
+                        if (sortVal === 'price-low') return priceA - priceB;
+                        if (sortVal === 'price-high') return priceB - priceA;
+                        if (sortVal === 'rating') return ratingB - ratingA;
+                        return 0; // default featured
+                    });
+
+                    sorted.forEach(card => productsContainer.appendChild(card));
+                    counterCurrent.textContent = visibleCount;
+                }
+
+                // View switcher
+                viewGridBtn.addEventListener('click', () => {
+                    productsContainer.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter';
+                    viewGridBtn.className = 'w-9 h-9 rounded flex items-center justify-center bg-surface-container-lowest text-primary shadow-sm';
+                    viewListBtn.className = 'w-9 h-9 rounded flex items-center justify-center text-outline hover:text-on-surface';
+                });
+
+                viewListBtn.addEventListener('click', () => {
+                    productsContainer.className = 'grid grid-cols-1 gap-space-md';
+                    viewListBtn.className = 'w-9 h-9 rounded flex items-center justify-center bg-surface-container-lowest text-primary shadow-sm';
+                    viewGridBtn.className = 'w-9 h-9 rounded flex items-center justify-center text-outline hover:text-on-surface';
+                });
+
+                // Load more simulation
+                loadMoreBtn.addEventListener('click', () => {
+                    loadSpinner.classList.remove('hidden');
+                    loadText.textContent = 'Loading...';
+                    loadMoreBtn.disabled = true;
+
+                    setTimeout(() => {
+                        loadSpinner.classList.add('hidden');
+                        loadText.textContent = 'All 48 Products Loaded';
+                        counterCurrent.textContent = '48';
+                        loadMoreBtn.classList.add('opacity-50', 'pointer-events-none');
+                        showToast('Updated: Showing all 48 inventory items');
+                    }, 800);
+                });
+
+                function showToast(msg) {
+                    toastMessage.textContent = msg;
+                    toast.classList.remove('translate-y-24', 'opacity-0');
+                    toast.classList.add('translate-y-0', 'opacity-100');
+                    setTimeout(() => {
+                        toast.classList.remove('translate-y-0', 'opacity-100');
+                        toast.classList.add('translate-y-24', 'opacity-0');
+                    }, 2500);
+                }
+            });
+        </script>
+
+    </body>
+</html>

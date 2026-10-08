@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en" style="">
+  <head>
+    <!-- Document Metadata -->
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <title>Gelo &amp; Co.</title>
+
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+
+    <!-- Global Base Styles -->
+    <style>
+      @layer base {
+        html, body {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        main > :first-child {
+            margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    <!-- Tailwind CSS CDN & Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+          darkMode: "class",
+          theme: {
+              extend: {
+                  colors: {
+                      "surface-dim": "#d0dbed",
+                      "on-secondary-fixed": "#410002",
+                      "inverse-surface": "#27313f",
+                      "surface-container-high": "#dee9fc",
+                      "surface-container-low": "#eff4ff",
+                      "on-secondary-fixed-variant": "#93000b",
+                      "surface-container": "#e6eeff",
+                      "on-secondary-container": "#fffbff",
+                      "inverse-primary": "#80d5cb",
+                      tertiary: "#005e40",
+                      "tertiary-container": "#007954",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed-dim": "#80d5cb",
+                      "surface-bright": "#f8f9ff",
+                      "on-surface-variant": "#3e4947",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed-dim": "#68dba9",
+                      "primary-fixed": "#9cf2e8",
+                      "on-primary-fixed-variant": "#00504a",
+                      "on-tertiary-fixed-variant": "#005137",
+                      error: "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "outline-variant": "#bdc9c6",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#121c2a",
+                      "primary-container": "#0f766e",
+                      "surface-tint": "#006a63",
+                      "on-primary-container": "#a3faef",
+                      "on-error-container": "#93000a",
+                      "on-background": "#121c2a",
+                      "on-error": "#ffffff",
+                      background: "#f8f9ff",
+                      surface: "#f8f9ff",
+                      "on-tertiary-fixed": "#002114",
+                      "secondary-fixed-dim": "#ffb4ab",
+                      "on-primary-fixed": "#00201d",
+                      primary: "#005c55",
+                      outline: "#6e7977",
+                      "secondary-fixed": "#ffdad6",
+                      "secondary-container": "#e02928",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#d9e3f6",
+                      secondary: "#bb0112",
+                      "tertiary-fixed": "#85f8c4",
+                      "surface-container-highest": "#d9e3f6",
+                      "on-tertiary-container": "#99ffce"
+                  },
+                  borderRadius: {
+                      DEFAULT: "0.25rem",
+                      lg: "0.5rem",
+                      xl: "0.75rem",
+                      full: "9999px"
+                  },
+                  spacing: {
+                      "space-lg": "1.5rem",
+                      margin: "2rem",
+                      gutter: "1.5rem",
+                      "gutter-mobile": "1rem",
+                      "space-md": "1rem",
+                      "space-xl": "2rem",
+                      "space-xs": "0.25rem",
+                      "space-sm": "0.5rem",
+                      "margin-mobile": "1rem"
+                  },
+                  fontFamily: {
+                      display: ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "title-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "display-mobile": ["Inter"],
+                      "body-sm": ["Inter"]
+                  },
+                  fontSize: {
+                      display: ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                      "headline-lg": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                      "headline-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "700" }],
+                      "title-md": ["18px", { lineHeight: "26px", fontWeight: "600" }],
+                      "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                      "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }],
+                      "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                      "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                      "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                      "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.03em", fontWeight: "500" }],
+                      "headline-sm": ["20px", { lineHeight: "28px", letterSpacing: "-0.005em", fontWeight: "600" }],
+                      "display-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.015em", fontWeight: "700" }],
+                      "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }]
+                  }
+              }
+          }
+      };
+    </script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface antialiased">
+    <header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+        <div class="h-28 w-full">
+            <div class="h-16 max-w-[1280px] mx-auto px-margin flex items-center justify-between gap-space-md">
+                <div class="flex items-center gap-space-sm shrink-0">
+                    <a class="flex items-center gap-space-xs" data-path="home" href="#">
+                        <img alt="Gelo &amp; Co. Logo" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhKMHlABy861uJ7ePZ9MXPwPzvPyPNlOd6BsTV3uQvHbURgKNVEAqSPMD1DjvdqilvamhQY0H4a-ZHMzvDujfs0-15B5icPC2hXtGDme_aKCAgBkLznKOMn_g9FUmOBfxPPulGUbXlNCVNRykZqoK2Txd_yLLyOMGdrOYxAdzd40uGkQDArifN7SzYHSxTJvMv5nkTx9FPV6duSrvaiPpCsYUfv3A-hlo0s81VmIUaXhQBIG33b23ePLrycY8MsD90bQUdtFlOV8uyxeY" />
+                        <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Gelo &amp; Co.</span>
+                    </a>
+                </div>
+                <div class="flex-1 max-w-xl mx-space-md">
+                    <div class="relative flex items-center w-full">
+                        <span class="material-symbols-outlined absolute left-3 text-outline text-xl pointer-events-none">search</span>
+                        <input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest border border-outline-variant font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary transition-all duration-150" placeholder="Search products, brands and categories..." type="text" />
+                    </div>
+                </div>
+                <div class="flex items-center gap-space-md shrink-0">
+                    <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="#">
+                        <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                        <span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">3</span>
+                    </a>
+                    <div class="flex items-center gap-space-sm pl-space-sm border-l border-outline-variant">
+                        <div class="flex items-center gap-space-xs">
+                            <img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmNvhQWmKiDplHRZbv7daj3fE3RaUQsL5aVxvAftem2azSoDJTgyUIgmVVTAZgISI3F42MxtWkaU1-v13TwDx7hLjcVNB2p8CFvCQAmmIeTbE0lnwzaMwYjt9ab_sBjsg3EOQm_nfg62pBR8ZLWcC5jxKVL9HvybaJj_9FA8vp8vDVSTqGSJA5cmyWkaT75JpuqTjpnznv4JkU93U2KX1V7wWezVuYcP1KGWIOmrKGR5tSxuqpb5-X92ZicTefT_Uj2_xK_7toVRB4lOQ" />
+                            <div class="flex flex-col text-left">
+                                <span class="font-label-md text-label-md text-on-surface font-semibold">Emmanuel Angelo</span>
+                                <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="#">My Orders</a>
+                            </div>
+                        </div>
+                        <a class="p-space-xs text-on-surface-variant hover:text-secondary transition-colors flex items-center" data-path="login" href="#" title="Sign out">
+                            <span class="material-symbols-outlined text-xl">logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="h-12 border-t border-surface-container bg-surface-container-lowest/90 backdrop-blur-md">
+                <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
+                    <nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary">
+                        <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="all-products" href="#">All Products</a>
+                        <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="electronics" href="#">Electronics</a>
+                        <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="fashion" href="#">Fashion</a>
+                        <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="home-lifestyle" href="#">Home</a>
+                        <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="accessories" href="#">Accessories</a>
+                        <a class="h-full flex items-center text-on-secondary-fixed-variant hover:text-secondary font-label-lg text-label-lg transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                    </nav>
+                    <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                        <span class="material-symbols-outlined text-base text-tertiary">local_shipping</span>
+                        <span class="">Free delivery over GH₵ 250 in Accra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="w-full pt-28 bg-surface min-h-[calc(100vh-112px)]">
+        <div class="flex flex-col w-full">
+            <div class="w-full max-w-[1280px] mx-auto px-margin py-space-md">
+                <!-- 1. Breadcrumb Bar -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs py-space-sm mb-space-md">
+                    <nav aria-label="Breadcrumb" class="flex items-center gap-space-xs font-label-md text-label-md text-outline flex-wrap">
+                        <a class="hover:text-primary transition-colors" href="#">Home</a>
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        <a class="hover:text-primary transition-colors" href="#">Electronics</a>
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        <a class="hover:text-primary transition-colors" href="#">Audio &amp; Tech</a>
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        <span class="text-on-surface font-semibold truncate max-w-[200px] sm:max-w-xs">SonicFlow ANC Wireless Headphones</span>
+                    </nav>
+                    <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline shrink-0">
+                        <span class="bg-surface-container px-space-xs py-0.5 rounded text-on-surface-variant font-medium">SKU: SE-AUD-9921</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                        <span class="text-tertiary font-semibold flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">warehouse</span> Accra Central Warehouse
+                        </span>
+                    </div>
+                </div>
+                <!-- 2. Main Product Showcase (2-Column Grid) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start mb-space-xl">
+                    <!-- Left Column: Gallery & Guarantees -->
+                    <div class="lg:col-span-6 flex flex-col gap-space-md">
+                        <!-- Main Image Preview Card -->
+                        <div class="relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden group">
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="bg-secondary text-on-secondary font-label-sm text-label-sm font-bold px-space-sm py-1 rounded-full shadow-sm tracking-wide uppercase">Sale -15%</span>
+                            </div>
+                            <button class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-surface-container-lowest/80 backdrop-blur-md shadow-sm flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="zoom-toggle-btn" title="Zoom image">
+                                <span class="material-symbols-outlined text-lg">zoom_in</span>
+                            </button>
+                            <div class="w-full aspect-square bg-surface-container-low flex items-center justify-center p-space-lg overflow-hidden">
+                                <img alt="SonicFlow ANC Studio Wireless Headphones" class="w-full h-full object-contain transition-transform duration-300 ease-out group-hover:scale-105" data-alt="Premium sleek matte black noise-cancelling over-ear headphones centered on a soft grey gradient background with subtle teal studio lighting accents, ultra-sharp acoustic detailing and textured ear cushions, high-end commercial tech product photography" id="main-product-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMhCTaSoHthyPsMOJrLe4zjjl_mxZ1rcnlYWz7a4CCGniIehO7PAcQtdauOeNqb8yNlU4WUuKGsP1wL7oMSZtZ96wlXeyKuxDUN4hzPXsskFmyeBfHY3qPWLk6KqyBSrpWsCuHg1eyjTdUVIlEyKsHJiUT96lFK79Nh-mJ-VOvBtyL6q2T98XYlbr4e8uebQfg8z0VdFD3lUJU86Dv0IvaHTS8abyrI6ffO_mkR48y7rmpZcjDIB-tdw" />
+                            </div>
+                        </div>
+                        <!-- Thumbnails Gallery -->
+                        <div class="grid grid-cols-4 gap-space-sm">
+                            <button class="gallery-thumb active-thumb bg-surface-container-lowest rounded-lg p-2 shadow-sm transition-all focus:outline-none" data-alt="SonicFlow ANC Studio Wireless Headphones front angled profile on neutral light grey backdrop in soft studio lighting" data-src="placeholder">
+                                <div class="aspect-square bg-surface-container-low rounded overflow-hidden flex items-center justify-center">
+                                    <img alt="Front Angle" class="w-full h-full object-contain pointer-events-none" data-alt="SonicFlow ANC Studio Wireless Headphones front angled profile on neutral light grey backdrop in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACZ88PkiwISBZjkKAltP3yndn3k-HCgIVl9cku3HcZn8O33e40z0tejozhRyLyrWe6fnOpD5vMy_uaT3T6uGQu1mxHwMWEcHRVlmXv6Ge6dO1PEoqOfSeiOddxl7fcYqGlby7Laro7q0FrRYmuKA-FJzlVr5AxKidevrr6pNaiy9FXW0OIpcf1u4xlLOOyCGBUgp47zWyDk19MFvR_auuNL2uYp6dliPVvATk1w6wmqN3j0mWodlrVmQ" />
+                                </div>
+                            </button>
+                            <button class="gallery-thumb bg-surface-container-lowest rounded-lg p-2 shadow-sm transition-all focus:outline-none opacity-80 hover:opacity-100" data-alt="SonicFlow wireless headphones folded neatly into a compact travel configuration on minimal studio backdrop with sleek metallic hinges visible" data-src="placeholder">
+                                <div class="aspect-square bg-surface-container-low rounded overflow-hidden flex items-center justify-center">
+                                    <img alt="Folded Profile" class="w-full h-full object-contain pointer-events-none" data-alt="SonicFlow wireless headphones folded neatly into a compact travel configuration on minimal studio backdrop with sleek metallic hinges visible" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaJCCoomBnshnDXi7bW8G51NSsa-gCRJvS8A4eU8fvaP8MzoTZXmv77EOiTUqpMaZFHKwkVmzvzNA_b-3Sse-0TMLY7XKyfDLzlMIK8zICOa7e0XFC3kDKAqWwD1Aw-ZzlPJ6pKhURuVGyUosiFFGfqUox8nSN9FnEzunpoYo-2ZIX46ynbHcLIeG-oXZ5idQ56SInDOGGr4X6WzFfxGE8lx7UN4-uh1kTsQXCCk2MESK19LrKYbNtKw" />
+                                </div>
+                            </button>
+                            <button class="gallery-thumb bg-surface-container-lowest rounded-lg p-2 shadow-sm transition-all focus:outline-none opacity-80 hover:opacity-100" data-alt="Macro close-up shot of luxurious breathable memory foam acoustic ear cushions with fine mesh and matte soft-touch finish" data-src="placeholder">
+                                <div class="aspect-square bg-surface-container-low rounded overflow-hidden flex items-center justify-center">
+                                    <img alt="Ear Cushion Detail" class="w-full h-full object-contain pointer-events-none" data-alt="Macro close-up shot of luxurious breathable memory foam acoustic ear cushions with fine mesh and matte soft-touch finish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR1ArzFcoTNnJrUSB0umNPn7Z7a-tR2vGpVKeYdKzkLsCvLsfxnnx9gfXUXIxNbnlZQOiCGE4aJljk0u-AUKKiwHMd2EEf9fNOCZRkhee-jAhllE0knV4OcgFtvrZZNQ-20jIfIaggw6pHOfy337iSmLTvbEnnpFXmtJWb5NT8Ri2KuwjxWCrkw1WBrw6vQydV2ylt0qPHsGVB9rMMJfKcbX9begIZ-1rbQIZ3RVfLONi4bEZkQ7kNaA" />
+                                </div>
+                            </button>
+                            <button class="gallery-thumb bg-surface-container-lowest rounded-lg p-2 shadow-sm transition-all focus:outline-none opacity-80 hover:opacity-100" data-alt="Lifestyle shot of modern headphones resting beside a slim hardshell protective travel case and braided USB-C cable on warm wood desk surface" data-src="placeholder">
+                                <div class="aspect-square bg-surface-container-low rounded overflow-hidden flex items-center justify-center">
+                                    <img alt="Travel Case Lifestyle" class="w-full h-full object-contain pointer-events-none" data-alt="Lifestyle shot of modern headphones resting beside a slim hardshell protective travel case and braided USB-C cable on warm wood desk surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACljahEyR-adwHzPK82GJZ1_I_fG0wrKPJ5bzJOeiFRrjYX1SZj3trfEDHkH4Q86DEViWmjst5thvDqrirVQNCebkdJOPrKB87D04_lk6ErkQeYg24vCGkypEvlAQUepyHlffsLC6vuydvcz2fILmAz3wGrUXZoswDvwhFbv8qZbwGoxqZAS0OZlNWlr4ar-kPaMBezIqDny8lsxhbnrrmxxW2aUp4vJY0CS0heGJiwnd4N4pD_506qA" />
+                                </div>
+                            </button>
+                        </div>
+                        <!-- Trust & Guarantee Highlights Strip -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs pt-space-xs">
+                            <div class="flex items-center gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
+                                <span class="material-symbols-outlined text-primary text-xl">verified_user</span>
+                                <div class="flex flex-col">
+                                    <span class="font-label-sm text-label-sm text-on-surface font-semibold">2-Year Warranty</span>
+                                    <span class="font-label-sm text-label-sm text-outline">Official Ghana cover</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
+                                <span class="material-symbols-outlined text-primary text-xl">local_shipping</span>
+                                <div class="flex flex-col">
+                                    <span class="font-label-sm text-label-sm text-on-surface font-semibold">Free Delivery</span>
+                                    <span class="font-label-sm text-label-sm text-outline">Accra &amp; Kumasi metro</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-space-xs p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
+                                <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+                                <div class="flex flex-col">
+                                    <span class="font-label-sm text-label-sm text-on-surface font-semibold">100% Genuine</span>
+                                    <span class="font-label-sm text-label-sm text-outline">Direct manufacturer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right Column: Purchase Details Card -->
+                    <div class="lg:col-span-6 flex flex-col gap-space-md bg-surface-container-lowest p-space-lg md:p-space-xl rounded-xl shadow-sm">
+                        <!-- Header Info -->
+                        <div class="flex flex-col gap-space-xs">
+                            <div class="flex items-center justify-between">
+                                <span class="font-label-md text-label-md font-bold tracking-wider text-primary uppercase">AUDIO &amp; TECH</span>
+                                <div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container">
+                                    <span class="relative flex h-2 w-2">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+                                    </span>
+                                    <span class="font-label-sm text-label-sm text-tertiary font-semibold">18 units left in Accra</span>
+                                </div>
+                            </div>
+                            <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">SonicFlow ANC Studio Wireless Headphones</h1>
+                            <!-- Rating Summary -->
+                            <div class="flex items-center gap-space-sm flex-wrap pt-space-xs">
+                                <div class="flex items-center text-amber-500">
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                </div>
+                                <span class="font-label-md text-label-md font-bold text-on-surface">4.9</span>
+                                <a class="font-label-sm text-label-sm text-primary hover:underline font-medium" href="#reviews">(312 verified customer reviews)</a>
+                                <span class="text-outline-variant">•</span>
+                                <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1,420+ sold in Ghana</span>
+                            </div>
+                        </div>
+                        <!-- Pricing Block -->
+                        <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+                            <div class="flex items-baseline gap-space-sm">
+                                <span class="font-headline-lg text-headline-lg font-bold text-primary tabular-nums">GH₵ 550.00</span>
+                                <span class="font-title-md text-title-md line-through text-outline tabular-nums">GH₵ 650.00</span>
+                            </div>
+                            <span class="bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-bold px-space-sm py-1 rounded-full self-start sm:self-center">Save GH₵ 100.00 (15% OFF)</span>
+                        </div>
+                        <!-- Description Paragraph -->
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Engineered for uninterrupted acoustic precision. Features adaptive hybrid active noise cancellation, custom 40mm titanium drivers, plush dual-density memory foam ear cushions, and seamless multi-point Bluetooth 5.3 pairing.</p>
+                        <!-- Variants Block -->
+                        <div class="flex flex-col gap-space-md pt-space-xs">
+                            <!-- Color Picker -->
+                            <div class="flex flex-col gap-space-xs">
+                                <div class="flex justify-between font-label-md text-label-md">
+                                    <span class="text-on-surface font-semibold">Colorway:</span>
+                                    <span class="text-primary font-bold" id="selected-color-label">Midnight Black</span>
+                                </div>
+                                <div class="flex items-center gap-space-sm">
+                                    <!-- Midnight Black -->
+                                    <button class="color-choice group relative w-10 h-10 rounded-full bg-slate-950 shadow-sm flex items-center justify-center p-0.5 ring-2 ring-primary ring-offset-2 ring-offset-surface-container-lowest focus:outline-none" data-color="Midnight Black" title="Midnight Black">
+                                        <span class="w-full h-full rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-on-primary text-sm">check</span>
+                                        </span>
+                                    </button>
+                                    <!-- Seafoam Teal -->
+                                    <button class="color-choice group relative w-10 h-10 rounded-full bg-teal-800 shadow-sm flex items-center justify-center p-0.5 focus:outline-none" data-color="Seafoam Teal" title="Seafoam Teal">
+                                        <span class="w-full h-full rounded-full bg-teal-700 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-on-primary text-sm opacity-0">check</span>
+                                        </span>
+                                    </button>
+                                    <!-- Silver Mist -->
+                                    <button class="color-choice group relative w-10 h-10 rounded-full bg-slate-300 shadow-sm flex items-center justify-center p-0.5 focus:outline-none" data-color="Silver Mist" title="Silver Mist">
+                                        <span class="w-full h-full rounded-full bg-slate-200 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-slate-800 text-sm opacity-0">check</span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Edition Picker -->
+                            <div class="flex flex-col gap-space-xs">
+                                <span class="font-label-md text-label-md text-on-surface font-semibold">Select Edition:</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+                                    <button class="edition-option p-space-sm rounded-lg text-left bg-surface-container font-label-md text-label-md text-primary font-semibold flex items-center justify-between shadow-sm focus:outline-none" data-edition="standard" data-price-add="0">
+                                        <div class="flex flex-col">
+                                            <span class="">Standard Edition</span>
+                                            <span class="font-label-sm text-label-sm font-normal text-on-surface-variant">Headphones + Braided Aux &amp; USB-C</span>
+                                        </div>
+                                        <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                    </button>
+                                    <button class="edition-option p-space-sm rounded-lg text-left bg-surface-container-low font-label-md text-label-md text-on-surface font-medium flex items-center justify-between shadow-sm hover:bg-surface-container transition-colors focus:outline-none" data-edition="bundle" data-price-add="80">
+                                        <div class="flex flex-col">
+                                            <span class="">Travel Bundle</span>
+                                            <span class="font-label-sm text-label-sm font-normal text-on-surface-variant">+ Rigid Case &amp; Airplane Adapter</span>
+                                        </div>
+                                        <span class="font-label-sm text-label-sm font-bold text-primary">+GH₵ 80</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Quantity & Primary CTA Actions -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm pt-space-xs">
+                            <!-- Stepper -->
+                            <div class="flex items-center justify-between bg-surface-container rounded-lg px-2 h-11 w-full sm:w-36 shrink-0 shadow-sm">
+                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none" id="qty-minus">
+                                    <span class="material-symbols-outlined text-lg">remove</span>
+                                </button>
+                                <input aria-label="Quantity" class="w-12 text-center bg-transparent font-title-md text-title-md font-bold text-on-surface focus:outline-none" id="qty-input" max="18" min="1" readonly="" type="number" value="1" />
+                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none" id="qty-plus">
+                                    <span class="material-symbols-outlined text-lg">add</span>
+                                </button>
+                            </div>
+                            <!-- Add to Cart -->
+                            <button class="flex-1 h-11 px-space-md bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs shadow-md transition-all active:scale-[0.99] focus:outline-none" id="add-to-cart-btn">
+                                <span class="material-symbols-outlined text-xl">shopping_bag</span>
+                                <span class="">Add to Cart</span>
+                            </button>
+                            <!-- Buy Now -->
+                            <button class="h-11 px-space-lg bg-surface-container-high hover:bg-surface-container text-primary rounded-lg font-label-lg text-label-lg font-bold flex items-center justify-center shadow-sm transition-all focus:outline-none shrink-0">Buy Now</button>
+                            <!-- Wishlist & Share -->
+                            <div class="flex items-center gap-space-xs justify-center shrink-0">
+                                <button class="w-11 h-11 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-secondary hover:bg-surface-container-high transition-colors shadow-sm focus:outline-none" id="wishlist-btn" title="Save to Wishlist">
+                                    <span class="material-symbols-outlined text-xl">favorite</span>
+                                </button>
+                                <button class="w-11 h-11 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors shadow-sm focus:outline-none" id="share-btn" title="Share Product">
+                                    <span class="material-symbols-outlined text-xl">share</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Local Ghana Logistics & Fulfillment Box -->
+                        <div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-sm mt-space-xs">
+                            <div class="flex items-start gap-space-sm">
+                                <span class="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5">two_wheeler</span>
+                                <div class="flex flex-col">
+                                    <span class="font-label-md text-label-md text-on-surface font-semibold">Express Delivery available today in Accra</span>
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Order within 2 hrs 45 mins to receive by 5:30 PM today.</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-space-sm">
+                                <span class="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5">account_balance_wallet</span>
+                                <div class="flex flex-col">
+                                    <span class="font-label-md text-label-md text-on-surface font-semibold">Flexible Local Payment Methods</span>
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Pay safely via MTN MoMo, Telecel Cash, Debit Cards or Cash on Delivery.</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-space-sm">
+                                <span class="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5">published_with_changes</span>
+                                <div class="flex flex-col">
+                                    <span class="font-label-md text-label-md text-on-surface font-semibold">7-Day Hassle-Free Replacement</span>
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Easy returns and swift replacements handled at our Ridge customer hub.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3. Tabbed Information Section -->
+                <div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg md:p-space-xl mb-space-xl">
+                    <!-- Tab Header Strip -->
+                    <div class="flex items-center gap-space-md overflow-x-auto pb-space-sm mb-space-lg">
+                        <button class="tab-btn font-title-md text-title-md font-bold text-primary bg-surface-container px-space-md py-space-xs rounded-lg transition-colors whitespace-nowrap focus:outline-none" data-tab="tab-description">Description</button>
+                        <button class="tab-btn font-title-md text-title-md font-medium text-outline hover:text-on-surface px-space-md py-space-xs rounded-lg transition-colors whitespace-nowrap focus:outline-none" data-tab="tab-specs">Technical Specifications</button>
+                        <button class="tab-btn font-title-md text-title-md font-medium text-outline hover:text-on-surface px-space-md py-space-xs rounded-lg transition-colors whitespace-nowrap focus:outline-none" data-tab="tab-reviews">Customer Reviews (312)</button>
+                        <button class="tab-btn font-title-md text-title-md font-medium text-outline hover:text-on-surface px-space-md py-space-xs rounded-lg transition-colors whitespace-nowrap focus:outline-none" data-tab="tab-shipping">Shipping &amp; Returns</button>
+                    </div>
+                    <!-- Tab 1: Description Pane -->
+                    <div class="tab-pane flex flex-col gap-space-xl" id="tab-description">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+                            <!-- Featurette 1 -->
+                            <div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-space-sm">
+                                <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-space-xs">
+                                    <span class="material-symbols-outlined text-2xl">graphic_eq</span>
+                                </div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Hybrid ANC Technology</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Quad microphones sample ambient noise 48,000 times per second to filter out up to 98% of low-frequency ambient sounds, from traffic to noisy cafes.</p>
+                            </div>
+                            <!-- Featurette 2 -->
+                            <div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-space-sm">
+                                <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-space-xs">
+                                    <span class="material-symbols-outlined text-2xl">battery_charging_full</span>
+                                </div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">40-Hour Extended Battery</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Enjoy non-stop listening for nearly two full days on a single charge. Rapid Charge gives you 4 full hours of playback from a quick 10-minute USB-C boost.</p>
+                            </div>
+                            <!-- Featurette 3 -->
+                            <div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-space-sm">
+                                <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-space-xs">
+                                    <span class="material-symbols-outlined text-2xl">spatial_audio</span>
+                                </div>
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Studio Precision Drivers</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Custom-calibrated 40mm titanium diaphragm dynamic drivers deliver punchy deep sub-bass, crystal-clear vocal clarity, and detailed highs up to 40kHz.</p>
+                            </div>
+                        </div>
+                        <!-- Visual Acoustic Banner -->
+                        <div class="bg-surface-container rounded-xl p-space-lg md:p-space-xl flex flex-col lg:flex-row items-center justify-between gap-space-lg">
+                            <div class="flex flex-col gap-space-xs max-w-xl">
+                                <span class="font-label-md text-label-md font-bold text-primary tracking-wider uppercase">Engineered for Comfort</span>
+                                <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Zero-fatigue wear with cloud-cushion architecture</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant">Weighing only 245 grams with an ergonomic reinforced headband, the SonicFlow sits comfortably without pinching, whether you are coding in Osu or commuting on the motorway.</p>
+                            </div>
+                            <!-- Inline Acoustic Frequency SVG Visualizer -->
+                            <div class="w-full lg:w-72 bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-label-sm text-label-sm text-outline font-semibold">Sound Profile Curve</span>
+                                    <span class="font-label-sm text-label-sm text-tertiary font-bold">Balanced Studio</span>
+                                </div>
+                                <svg class="w-full h-20 text-primary" fill="none" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 60 Q 30 20, 60 45 T 120 30 T 180 50 T 240 25" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+                                    <path d="M0 60 Q 30 20, 60 45 T 120 30 T 180 50 T 240 25 L 240 80 L 0 80 Z" fill="currentColor" fill-opacity="0.08"></path>
+                                </svg>
+                                <div class="flex justify-between font-label-sm text-label-sm text-outline pt-1">
+                                    <span class="">20 Hz</span>
+                                    <span class="">1 kHz</span>
+                                    <span class="">40 kHz</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab 2: Specs Pane -->
+                    <div class="tab-pane hidden flex flex-col gap-space-md" id="tab-specs">
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mb-space-xs">Technical Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Acoustic Driver</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">40mm Custom Titanium Diaphragm</span>
+                            </div>
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Bluetooth Connectivity</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">v5.3 (Multi-point 2 Devices)</span>
+                            </div>
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Active Noise Cancellation</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">Hybrid Dual-Mic Feedforward + Feedback</span>
+                            </div>
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Total Battery Life</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">40 Hours (ANC On) / 55 Hours (ANC Off)</span>
+                            </div>
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Fast Charging</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">10 mins = 4 hours playback (USB-C)</span>
+                            </div>
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Net Weight</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">245 grams (Ultra-lightweight)</span>
+                            </div>
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Microphones</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">4x Beamforming with AI Noise Suppression</span>
+                            </div>
+                            <div class="flex items-center justify-between p-space-sm rounded bg-surface-container-low">
+                                <span class="font-body-sm text-body-sm text-outline font-medium">Audio Codecs</span>
+                                <span class="font-body-sm text-body-sm text-on-surface font-semibold">AAC, SBC, LDAC High-Res Ready</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab 3: Reviews Pane -->
+                    <div class="tab-pane hidden flex flex-col gap-space-lg" id="tab-reviews">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-center bg-surface-container-low p-space-lg rounded-xl">
+                            <div class="md:col-span-4 flex flex-col items-center justify-center text-center">
+                                <span class="font-display text-display font-bold text-primary">4.9</span>
+                                <div class="flex items-center text-amber-500 my-1">
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                                </div>
+                                <span class="font-body-sm text-body-sm text-outline">Based on 312 customer reviews</span>
+                            </div>
+                            <div class="md:col-span-8 flex flex-col gap-2">
+                                <div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+                                    <span class="w-12 text-on-surface">5 star</span>
+                                    <div class="flex-1 h-2 rounded-full bg-surface-container overflow-hidden">
+                                        <div class="h-full bg-primary rounded-full" style="width: 88%"></div>
+                                    </div>
+                                    <span class="w-8 text-right text-outline">88%</span>
+                                </div>
+                                <div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+                                    <span class="w-12 text-on-surface">4 star</span>
+                                    <div class="flex-1 h-2 rounded-full bg-surface-container overflow-hidden">
+                                        <div class="h-full bg-primary rounded-full" style="width: 9%"></div>
+                                    </div>
+                                    <span class="w-8 text-right text-outline">9%</span>
+                                </div>
+                                <div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+                                    <span class="w-12 text-on-surface">3 star</span>
+                                    <div class="flex-1 h-2 rounded-full bg-surface-container overflow-hidden">
+                                        <div class="h-full bg-primary rounded-full" style="width: 2%"></div>
+                                    </div>
+                                    <span class="w-8 text-right text-outline">2%</span>
+                                </div>
+                                <div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+                                    <span class="w-12 text-on-surface">2 star</span>
+                                    <div class="flex-1 h-2 rounded-full bg-surface-container overflow-hidden">
+                                        <div class="h-full bg-primary rounded-full" style="width: 1%"></div>
+                                    </div>
+                                    <span class="w-8 text-right text-outline">1%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab 4: Shipping Pane -->
+                    <div class="tab-pane hidden flex flex-col gap-space-md" id="tab-shipping">
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Ghana Nationwide Shipping &amp; Returns</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">All orders are dispatched from our central fulfillment hub in Accra Industrial Area. Orders placed before 1:00 PM qualify for same-day dispatch.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+                            <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+                                <span class="font-title-md text-title-md text-on-surface font-semibold">Greater Accra Region</span>
+                                <span class="font-body-sm text-body-sm text-outline">Same day or next business morning • Free for orders above GH₵ 250</span>
+                            </div>
+                            <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+                                <span class="font-title-md text-title-md text-on-surface font-semibold">Kumasi, Takoradi &amp; Tamale</span>
+                                <span class="font-body-sm text-body-sm text-outline">1–2 business days via VIP Parcel Logistics / Express Couriers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4. Verified Customer Reviews Snippet (Always Visible) -->
+                <div class="flex flex-col gap-space-md mb-space-xl" id="reviews">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-space-sm">
+                            <h2 class="font-headline-md text-headline-md text-on-surface font-bold">Verified Customer Stories</h2>
+                            <span class="bg-surface-container text-primary font-label-sm text-label-sm font-bold px-space-xs py-0.5 rounded">92% Highly Recommend</span>
+                        </div>
+                        <a class="font-label-lg text-label-lg text-primary hover:underline font-semibold flex items-center gap-1" href="#">
+                            <span class="">Read all 312 reviews</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                        <!-- Review 1 -->
+                        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-space-sm">
+                                    <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-title-md text-title-md font-bold text-primary">KO</div>
+                                    <div class="flex flex-col">
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">Kwame O.</span>
+                                        <span class="font-label-sm text-label-sm text-outline">Kumasi, Ashanti • 3 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-amber-500">
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 text-tertiary font-label-sm text-label-sm font-semibold">
+                                <span class="material-symbols-outlined text-xs">verified</span>
+                                <span class="">Verified Purchaser (Accra Warehouse Dispatch)</span>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">"Noise cancellation is genuinely remarkable. I use it during my daily trotro commute and while working remote at cafes. Bass is punchy without distorting vocals. Delivered in Kumasi within 24 hours of ordering!"</p>
+                        </div>
+                        <!-- Review 2 -->
+                        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-space-sm">
+                                    <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-title-md text-title-md font-bold text-primary">AD</div>
+                                    <div class="flex flex-col">
+                                        <span class="font-label-md text-label-md text-on-surface font-bold">Akosua D.</span>
+                                        <span class="font-label-sm text-label-sm text-outline">East Legon, Accra • 1 week ago</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-amber-500">
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 text-tertiary font-label-sm text-label-sm font-semibold">
+                                <span class="material-symbols-outlined text-xs">verified</span>
+                                <span class="">Verified Purchaser</span>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">"Comfort 10/10. I wear glasses and normally headphones press into the frame, but the memory foam here is cloud soft. Battery life holds up to the 40-hour claim. Paid on delivery with MTN MoMo smoothly."</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5. Related / 'You May Also Like' Grid -->
+                <div class="flex flex-col gap-space-md mb-space-xl">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-headline-md text-headline-md text-on-surface font-bold">You May Also Like</h2>
+                        <div class="flex items-center gap-space-xs">
+                            <button aria-label="Previous suggestions" class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none">
+                                <span class="material-symbols-outlined text-base">chevron_left</span>
+                            </button>
+                            <button aria-label="Next suggestions" class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none">
+                                <span class="material-symbols-outlined text-base">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-space-md">
+                        <!-- Related Card 1 -->
+                        <div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md transition-all group">
+                            <div class="flex flex-col gap-space-xs">
+                                <div class="aspect-square bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center relative p-space-sm">
+                                    <img alt="CloudStep Runner Sneakers" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Modern lightweight minimalist running sneakers in cool teal and white colorway on crisp clean studio surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMcvki7QoE7-tmxcuOwmKKFRHKVmDJjo_QI3g386VEBwT0COl04WIH1ejoiEf6W_7b-JPVCRJklR_XGkXULbBmOoWaJ6_rKycxUJC1TmsxsJQkEDEO1TPeOSOucUZm0XxHQU0GkWJ6C9StaoJeO_qrztrY7rYz7OEjByEHFuOAHmAH0TmJGn1E92i1DMl1f3lcXZpMIOVqqdpLOpX90diwJ4vUuAGvt4z7uuyXlxuJVX9ep0LdEtGYpg" />
+                                    <button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-surface-container-lowest/80 flex items-center justify-center text-on-surface-variant hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity" title="Wishlist">
+                                        <span class="material-symbols-outlined text-sm">favorite</span>
+                                    </button>
+                                </div>
+                                <span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider pt-space-xs">FOOTWEAR</span>
+                                <h3 class="font-title-md text-title-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">CloudStep Runner Sneakers</h3>
+                                <div class="flex items-center gap-1 text-amber-500">
+                                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-label-sm text-label-sm font-bold text-on-surface">4.8</span>
+                                    <span class="font-label-sm text-label-sm text-outline">(184)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                                <span class="font-title-md text-title-md font-bold text-primary tabular-nums">GH₵ 280.00</span>
+                                <button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-primary flex items-center justify-center transition-colors focus:outline-none" title="Quick Add">
+                                    <span class="material-symbols-outlined text-base">add</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Related Card 2 -->
+                        <div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md transition-all group">
+                            <div class="flex flex-col gap-space-xs">
+                                <div class="aspect-square bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center relative p-space-sm">
+                                    <img alt="FastCharge 20000mAh Power Bank" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="High capacity slim 20000mAh external battery power bank in matte charcoal finish with digital LED percentage display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2PuPVWOqFnlHs5UU7-19f3W-McuXAXQjnn45Z7B8L2gQoG_kTNVD8BbfyVh4PhHUc_hV7n3_DaAwlrYuE_M68lKUeFbjslC2jGMRSGWxyYJ8Tl-1Y0RBH9SPjwXkc5XUkcTM2HOYp2D40h6QYE1oL9bulmdHBF8IpBBzSzHtG3-93ErifsTyECd8nSmkuJiuHfqHfj1lb-m8NVeRpqypwLjskA-yqpEfGFzgHJFQOV24AwVkhl7Hw6g" />
+                                    <button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-surface-container-lowest/80 flex items-center justify-center text-on-surface-variant hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity" title="Wishlist">
+                                        <span class="material-symbols-outlined text-sm">favorite</span>
+                                    </button>
+                                </div>
+                                <span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider pt-space-xs">POWER &amp; CABLES</span>
+                                <h3 class="font-title-md text-title-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">FastCharge 20000mAh Power Bank</h3>
+                                <div class="flex items-center gap-1 text-amber-500">
+                                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-label-sm text-label-sm font-bold text-on-surface">4.9</span>
+                                    <span class="font-label-sm text-label-sm text-outline">(420)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                                <span class="font-title-md text-title-md font-bold text-primary tabular-nums">GH₵ 175.00</span>
+                                <button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-primary flex items-center justify-center transition-colors focus:outline-none" title="Quick Add">
+                                    <span class="material-symbols-outlined text-base">add</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Related Card 3 -->
+                        <div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md transition-all group">
+                            <div class="flex flex-col gap-space-xs">
+                                <div class="aspect-square bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center relative p-space-sm">
+                                    <img alt="PulseBass Portable Bluetooth Speaker" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Rugged portable cylindrical Bluetooth speaker in forest teal with water droplets and nylon loop handle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCBKk4zfQHGqmuS8KW_c83XrRGpiqjK6-wy39ZE9dyGqfXicUpWvJ7zdtMRWnZNn_l-JNU0rEnDyL1WmJJARpuHwnb27dlNt61Ny1oVRUwXA4Zjm4-r485CVLME2ci6J9jkggcYvwHjQampMnbuGqsQotRKp4o36eUBVCXOYcor1jHQ9cDRYCK8dR0IWBvNUWvflxjAaAPq2VsbVnbXH-m32RHMMY5jpZqq7IzjtwRuEf8g9ZRA2TI-A" />
+                                    <button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-surface-container-lowest/80 flex items-center justify-center text-on-surface-variant hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity" title="Wishlist">
+                                        <span class="material-symbols-outlined text-sm">favorite</span>
+                                    </button>
+                                </div>
+                                <span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider pt-space-xs">AUDIO</span>
+                                <h3 class="font-title-md text-title-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">PulseBass Portable Speaker</h3>
+                                <div class="flex items-center gap-1 text-amber-500">
+                                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-label-sm text-label-sm font-bold text-on-surface">4.7</span>
+                                    <span class="font-label-sm text-label-sm text-outline">(96)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                                <span class="font-title-md text-title-md font-bold text-primary tabular-nums">GH₵ 220.00</span>
+                                <button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-primary flex items-center justify-center transition-colors focus:outline-none" title="Quick Add">
+                                    <span class="material-symbols-outlined text-base">add</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Related Card 4 -->
+                        <div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md transition-all group">
+                            <div class="flex flex-col gap-space-xs">
+                                <div class="aspect-square bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center relative p-space-sm">
+                                    <img alt="Nomad Waterproof Commuter Backpack" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Modern waterproof rolltop commuter backpack in dark slate fabric with ergonomic straps and laptop compartment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADqCaYrMUsa8zt4jXyR4SYPGCfi2PPQuW9jTaqbID3PffsnwEVKFu8uaQcXox9IAcBFeML6GdbsDM5C9nGkCqgI1NR6DVlcsqSB5eZWTN6AXAfAHwyDX3iYl-fqK3gz0PXyjuMH_j6jeDNuuLqoj-4WK9Pziqx6-zigazAS4PfFs2R33NM_fi4U17jUX1tKgtEcqjcr7NCTVa0DSvWoXXvMaxMGINGOSJlQ_ZsiNkWYK3t1IGn2umuqw" />
+                                    <button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-surface-container-lowest/80 flex items-center justify-center text-on-surface-variant hover:text-secondary opacity-0 group-hover:opacity-100 transition-opacity" title="Wishlist">
+                                        <span class="material-symbols-outlined text-sm">favorite</span>
+                                    </button>
+                                </div>
+                                <span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider pt-space-xs">BAGS &amp; TRAVEL</span>
+                                <h3 class="font-title-md text-title-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Nomad Waterproof Backpack</h3>
+                                <div class="flex items-center gap-1 text-amber-500">
+                                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-label-sm text-label-sm font-bold text-on-surface">4.9</span>
+                                    <span class="font-label-sm text-label-sm text-outline">(150)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                                <span class="font-title-md text-title-md font-bold text-primary tabular-nums">GH₵ 195.00</span>
+                                <button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-primary flex items-center justify-center transition-colors focus:outline-none" title="Quick Add">
+                                    <span class="material-symbols-outlined text-base">add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    <footer class="w-full bg-surface-container-lowest border-t border-surface-container mt-space-xl">
+        <div class="max-w-[1280px] mx-auto px-margin pt-space-xl pb-space-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl mb-space-xl">
+                <div class="flex flex-col gap-space-md">
+                    <div class="flex items-center gap-space-xs">
+                        <img alt="Gelo &amp; Co. Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfRJfv_eS2qiJ9SJiiBLeASjMLG77uxyIJ_mZRmi78_KHnlup_n9E8i7GQ_pZaEYAfvRUD6GR8-JFqo3mQgsDGuZpLHX8YGAv2KbbGl53BHA5WIbfNPemctFK0yHQ3ufvWl8wPy_KK8GmZMBEwoEFP-0KiuTE5RwmipPEr4p_7GATI2YR6flb4-1C0aSTmCp2BMFluXQgdPPhmeSEM8uyngT29rx5KQvpPDHoSIGJCUXYxYzAePcucIBKPuNCe-ZhOX8sJ45nocNaO7AE" />
+                        <span class="font-headline-sm text-headline-sm text-primary font-bold">Gelo &amp; Co.</span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Gelo &amp; Co. brings quality everyday lifestyle goods, tech and apparel right to your doorstep across Ghana with seamless payments and fast delivery.</p>
+                </div>
+                <div class="flex flex-col gap-space-sm">
+                    <h3 class="font-title-md text-title-md text-on-surface font-semibold">Quick Links</h3>
+                    <div class="flex flex-col gap-space-xs">
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="all-products" href="#">Shop All</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="new-arrivals" href="#">New Arrivals</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="order-tracking" href="#">Order Tracking</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="faqs" href="#">FAQs</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-space-sm">
+                    <h3 class="font-title-md text-title-md text-on-surface font-semibold">Customer Care &amp; Policies</h3>
+                    <div class="flex flex-col gap-space-xs">
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="contact-us" href="#">Contact Us</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="shipping-and-delivery" href="#">Shipping &amp; Delivery</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="return-policy" href="#">Return Policy</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a>
+                        <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-space-sm">
+                    <h3 class="font-title-md text-title-md text-on-surface font-semibold">Contact &amp; Social</h3>
+                    <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-base text-primary">call</span>
+                            <span class="">+233 24 555 0199</span>
+                        </div>
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-base text-primary">mail</span>
+                            <span class="">support@geloandco.com.gh</span>
+                        </div>
+                        <div class="flex items-center gap-space-xs">
+                            <span class="material-symbols-outlined text-base text-primary">location_on</span>
+                            <span class="">Accra, Ghana</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-space-sm mt-space-xs">
+                        <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                            <span class="material-symbols-outlined text-lg">alternate_email</span>
+                        </a>
+                        <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                            <span class="material-symbols-outlined text-lg">photo_camera</span>
+                        </a>
+                        <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                            <span class="material-symbols-outlined text-lg">public</span>
+                        </a>
+                        <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                            <span class="material-symbols-outlined text-lg">work</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-surface-container pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-md">
+                <p class="font-body-sm text-body-sm text-outline">© 2026 Gelo &amp; Co. All rights reserved.</p>
+                <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                    <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cards (Visa / MC)</span>
+                    <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">MTN Mobile Money</span>
+                    <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Telecel Cash</span>
+                    <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cash on Delivery</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+      // Quantity Selector Micro-interaction
+      const qtyInput = document.getElementById('qty-input');
+      const qtyMinus = document.getElementById('qty-minus');
+      const qtyPlus = document.getElementById('qty-plus');
+
+      if (qtyMinus && qtyPlus && qtyInput) {
+          qtyMinus.addEventListener('click', () => {
+              let val = parseInt(qtyInput.value, 10);
+              if (val > 1) qtyInput.value = val - 1;
+          });
+
+          qtyPlus.addEventListener('click', () => {
+              let val = parseInt(qtyInput.value, 10);
+              const max = parseInt(qtyInput.getAttribute('max') || '18', 10);
+              if (val < max) qtyInput.value = val + 1;
+          });
+      }
+
+      // Gallery Thumbnails Switching
+      const thumbs = document.querySelectorAll('.gallery-thumb');
+      const mainImg = document.getElementById('main-product-img');
+
+      thumbs.forEach(thumb => {
+          thumb.addEventListener('click', () => {
+              thumbs.forEach(t => {
+                  t.classList.remove('opacity-100');
+                  t.classList.add('opacity-80');
+                  t.style.boxShadow = 'none';
+              });
+              thumb.classList.remove('opacity-80');
+              thumb.classList.add('opacity-100');
+              thumb.style.boxShadow = '0 0 0 2px #005c55';
+
+              const thumbImg = thumb.querySelector('img');
+              if (thumbImg && mainImg) {
+                  mainImg.src = thumbImg.src;
+                  mainImg.setAttribute('data-alt', thumbImg.getAttribute('data-alt') || '');
+              }
+          });
+      });
+
+      // Color Swatch Selection
+      const colorBtns = document.querySelectorAll('.color-choice');
+      const colorLabel = document.getElementById('selected-color-label');
+
+      colorBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+              colorBtns.forEach(b => {
+                  b.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-surface-container-lowest');
+                  const checkIcon = b.querySelector('.material-symbols-outlined');
+                  if (checkIcon) checkIcon.classList.add('opacity-0');
+              });
+              btn.classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-surface-container-lowest');
+              const checkIcon = btn.querySelector('.material-symbols-outlined');
+              if (checkIcon) checkIcon.classList.remove('opacity-0');
+              if (colorLabel) {
+                  colorLabel.textContent = btn.getAttribute('data-color') || '';
+              }
+          });
+      });
+
+      // Edition Selection
+      const editionBtns = document.querySelectorAll('.edition-option');
+      editionBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+              editionBtns.forEach(b => {
+                  b.classList.remove('bg-surface-container', 'text-primary');
+                  b.classList.add('bg-surface-container-low', 'text-on-surface');
+              });
+              btn.classList.remove('bg-surface-container-low', 'text-on-surface');
+              btn.classList.add('bg-surface-container', 'text-primary');
+          });
+      });
+
+      // Tabs Switching
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+
+      tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+              const targetId = btn.getAttribute('data-tab');
+
+              tabBtns.forEach(b => {
+                  b.classList.remove('text-primary', 'bg-surface-container', 'font-bold');
+                  b.classList.add('text-outline', 'font-medium');
+              });
+              btn.classList.add('text-primary', 'bg-surface-container', 'font-bold');
+              btn.classList.remove('text-outline', 'font-medium');
+
+              tabPanes.forEach(pane => {
+                  if (pane.id === targetId) {
+                      pane.classList.remove('hidden');
+                  } else {
+                      pane.classList.add('hidden');
+                  }
+              });
+          });
+      });
+
+      // Wishlist Button Feedback
+      const wishlistBtn = document.getElementById('wishlist-btn');
+      if (wishlistBtn) {
+          wishlistBtn.addEventListener('click', () => {
+              const icon = wishlistBtn.querySelector('.material-symbols-outlined');
+              if (icon) {
+                  const isFilled = icon.style.fontVariationSettings?.includes("'FILL' 1");
+                  if (isFilled) {
+                      icon.style.fontVariationSettings = "'FILL' 0";
+                      wishlistBtn.classList.remove('text-secondary');
+                  } else {
+                      icon.style.fontVariationSettings = "'FILL' 1";
+                      wishlistBtn.classList.add('text-secondary');
+                  }
+              }
+          });
+      }
+
+      // Add to Cart Micro-feedback
+      const addToCartBtn = document.getElementById('add-to-cart-btn');
+      if (addToCartBtn) {
+          addToCartBtn.addEventListener('click', () => {
+              const originalHtml = addToCartBtn.innerHTML;
+              addToCartBtn.innerHTML = '<span class="material-symbols-outlined text-xl">check</span><span>Added to Cart!</span>';
+              addToCartBtn.classList.add('bg-tertiary');
+              setTimeout(() => {
+                  addToCartBtn.innerHTML = originalHtml;
+                  addToCartBtn.classList.remove('bg-tertiary');
+              }, 1800);
+          });
+      }
+    </script>
+  </body>
+</html>
