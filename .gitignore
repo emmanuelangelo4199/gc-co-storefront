@@ -2,9 +2,8 @@
 node_modules/
 
 # turbo & other
-dist/
-.output
-**/static/
+app/static/app/dist/output.css
+staticfiles/
 
 
 # local env files
