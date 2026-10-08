@@ -1,5 +1,7 @@
 # dependencies
 node_modules/
+*.pyc
+__pycache__/
 
 # turbo & other
 app/static/app/dist/output.css
@@ -11,6 +13,6 @@ staticfiles/
 
 # misc
 .vscode
-
+venv/
 
 db.sqlite3
