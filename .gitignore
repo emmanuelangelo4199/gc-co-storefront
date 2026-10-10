@@ -6,6 +6,8 @@ __pycache__/
 # turbo & other
 app/static/app/dist/output.css
 staticfiles/
+media/
+app/static/app/image
 
 
 # local env files
