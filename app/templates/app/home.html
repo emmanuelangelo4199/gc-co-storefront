@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" style="">
     <head>
@@ -12,7 +13,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-        {% load static %}
+        <link rel="stylesheet" href="{% static 'app/src/input.css' %}">
+        <link rel="icon" type="image/png" href="{% static 'app/image/Gelo& Co.png' %}">
         <!-- Global Base Styles -->
         <style>
             @layer base {
@@ -246,612 +248,253 @@
 
         <!-- MAIN CONTENT AREA -->
         <main class="w-full pt-28 bg-surface min-h-[calc(100vh-112px)]">
-            <div class="flex flex-col w-full">
+                <div class="flex flex-col w-full">
 
-                <!-- Toast Notification Container -->
-                <div
-                    id="toast"
-                    class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-xl translate-y-24 opacity-0">
-                    <span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                    <span id="toast-message" class="font-body-sm text-body-sm font-medium">Updated: Showing all 48 inventory items</span>
-                </div>
-
-                <!-- HERO SECTION -->
-                <section class="w-full bg-surface-container-low relative overflow-hidden py-space-xl">
-                    <div class="max-w-[1280px] mx-auto px-margin">
-                        <div class="grid grid-cols-12 gap-gutter items-center">
-                            
-                            <!-- Text Column -->
-                            <div class="col-span-12 lg:col-span-7 flex flex-col items-start gap-space-md z-10">
-                                <h1 class="font-display text-display text-on-surface tracking-tight">
-                                    Everyday Essentials &amp; Modern Lifestyle, <span class="text-primary">Delivered with Ease</span>
-                                </h1>
-                                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-                                    Discover top-rated electronics, fashion, home essentials, and accessories with fast nationwide delivery in Ghana. Curated for authentic everyday comfort.
-                                </p>
-                                <div class="flex flex-wrap items-center gap-space-md pt-space-xs">
-                                    <a class="inline-flex items-center justify-center gap-space-xs px-space-lg h-12 bg-primary hover:bg-tertiary text-on-primary font-label-lg text-label-lg rounded-lg shadow-sm hover:shadow-md transition-all active:scale-[0.99]" href="#product-grid">
-                                        <span class="material-symbols-outlined text-xl">shopping_cart</span>
-                                        Shop Now
-                                    </a>
-                                    <a class="inline-flex items-center justify-center gap-space-xs px-space-lg h-12 bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg rounded-lg shadow-sm transition-all" href="#product-grid">
-                                        <span class="material-symbols-outlined text-xl text-secondary">local_fire_department</span>
-                                        Explore Deals
-                                    </a>
-                                </div>
-
-                                <!-- Trust Badges Inline -->
-                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md w-full pt-space-lg mt-space-sm border-t-0">
-                                    <div class="flex items-center gap-space-xs">
-                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
-                                            <span class="material-symbols-outlined text-lg">local_shipping</span>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span class="font-label-md text-label-md text-on-surface font-semibold">Free Delivery</span>
-                                            <span class="font-label-sm text-label-sm text-outline">Orders over GH₵300</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-space-xs">
-                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
-                                            <span class="material-symbols-outlined text-lg">shield</span>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span class="font-label-md text-label-md text-on-surface font-semibold">Secure Payment</span>
-                                            <span class="font-label-sm text-label-sm text-outline">Momo &amp; Cash on delivery</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-space-xs">
-                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
-                                            <span class="material-symbols-outlined text-lg">published_with_changes</span>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span class="font-label-md text-label-md text-on-surface font-semibold">7-Day Returns</span>
-                                            <span class="font-label-sm text-label-sm text-outline">Hassle-free guarantee</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-space-xs">
-                                        <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
-                                            <span class="material-symbols-outlined text-lg">support_agent</span>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span class="font-label-md text-label-md text-on-surface font-semibold">24/7 Support</span>
-                                            <span class="font-label-sm text-label-sm text-outline">Direct Accra hotline</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Visual Mosaic Column -->
-                            <div class="col-span-12 lg:col-span-5 relative mt-space-md lg:mt-0">
-                                <div class="relative w-full h-[400px] rounded-xl overflow-hidden bg-surface-container-high shadow-lg">
-                                    <img
-                                        class="w-full h-full object-cover"
-                                        data-alt="High-end editorial studio lifestyle composition displaying wireless headphones, premium leather wristwatch, running shoes, and sunglasses arranged neatly on soft architectural stone surfaces, soft natural window light, muted teal and warm amber undertones."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_pjCHZYUYTn6OcDwyth5E2fJgvVNItj1znShOzSh8P0idrU37zJA04pOm6SuuJ59otbV23XedzRBVHdDesALAhJK8MIQsoIJ6p0uscH5uaHoU61-IyH-otDzG-pLCavzeOQsHWBNmkcjyMW3JyQC1diXA1ATU3ONN5ysZiQZhpD1fDwSuDNQi5Bl4SVW17h3FTi2xCCbMgd2VGO4aH0pLvl0KHSjEFlzNqkw7RbUbJNPEe-M4CTP70A" />
-                                    <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/70 via-transparent to-transparent flex flex-col justify-end p-space-lg text-on-secondary">
-                                        <span class="font-label-sm text-label-sm tracking-wider uppercase text-primary-fixed font-semibold">Special Weekly Selection</span>
-                                        <h3 class="font-headline-md text-headline-md text-on-secondary font-bold">Smart Audio &amp; Tech Gear</h3>
-                                        <p class="font-body-sm text-body-sm text-surface-container-highest max-w-xs mt-1">
-                                            Save up to 35% on verified wireless acoustic accessories today.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                    <!-- Toast Notification Container -->
+                    <div
+                        id="toast"
+                        class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-xl translate-y-24 opacity-0">
+                        <span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <span id="toast-message" class="font-body-sm text-body-sm font-medium">Updated: Showing all 48 inventory items</span>
                     </div>
-                </section>
 
-                <!-- FILTER & TOOLBAR BAR -->
-                <section class="w-full bg-surface-container-lowest sticky top-28 z-30 shadow-sm">
-                    <div class="max-w-[1280px] mx-auto px-margin py-space-sm">
-                        <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
-                            
-                            <!-- Category Pill Chips -->
-                            <div id="category-filter" class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0">
-                                <button class="category-chip px-space-md h-9 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm transition-colors" data-cat="all">
-                                    All Products
-                                </button>
-                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Electronics">
-                                    Electronics
-                                </button>
-                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Fashion">
-                                    Fashion
-                                </button>
-                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Home">
-                                    Home &amp; Living
-                                </button>
-                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Accessories">
-                                    Accessories
-                                </button>
-                                <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="sale">
-                                    Special Deals
-                                </button>
-                            </div>
-
-                            <!-- Controls: Price Filter, Sort, View Toggle, Result Counter -->
-                            <div class="flex flex-wrap items-center gap-space-sm justify-between lg:justify-end">
+                    <!-- HERO SECTION -->
+                    <section class="w-full bg-surface-container-low relative overflow-hidden py-space-xl">
+                        <div class="max-w-[1280px] mx-auto px-margin">
+                            <div class="grid grid-cols-12 gap-gutter items-center">
                                 
-                                <!-- Price Range Filter Dropdown -->
-                                <div class="relative">
-                                    <select id="price-filter" class="h-10 pl-space-sm pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer">
-                                        <option value="all">All Prices</option>
-                                        <option value="under100">Under GH₵100</option>
-                                        <option value="100to300">GH₵100 - GH₵300</option>
-                                        <option value="300plus">GH₵300+</option>
-                                    </select>
-                                    <span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-outline text-lg">arrow_drop_down</span>
+                                <!-- Text Column -->
+                                <div class="col-span-12 lg:col-span-7 flex flex-col items-start gap-space-md z-10">
+                                    <h1 class="font-display text-display text-on-surface tracking-tight">
+                                        Everyday Essentials &amp; Modern Lifestyle, <span class="text-primary">Delivered with Ease</span>
+                                    </h1>
+                                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                                        Discover top-rated electronics, fashion, home essentials, and accessories with fast nationwide delivery in Ghana. Curated for authentic everyday comfort.
+                                    </p>
+                                    <div class="flex flex-wrap items-center gap-space-md pt-space-xs">
+                                        <a class="inline-flex items-center justify-center gap-space-xs px-space-lg h-12 bg-primary hover:bg-tertiary text-on-primary font-label-lg text-label-lg rounded-lg shadow-sm hover:shadow-md transition-all active:scale-[0.99]" href="#product-grid">
+                                            <span class="material-symbols-outlined text-xl">shopping_cart</span>
+                                            Shop Now
+                                        </a>
+                                        <a class="inline-flex items-center justify-center gap-space-xs px-space-lg h-12 bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg rounded-lg shadow-sm transition-all" href="#product-grid">
+                                            <span class="material-symbols-outlined text-xl text-secondary">local_fire_department</span>
+                                            Explore Deals
+                                        </a>
+                                    </div>
+
+                                    <!-- Trust Badges Inline -->
+                                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md w-full pt-space-lg mt-space-sm border-t-0">
+                                        <div class="flex items-center gap-space-xs">
+                                            <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                                <span class="material-symbols-outlined text-lg">local_shipping</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="font-label-md text-label-md text-on-surface font-semibold">Free Delivery</span>
+                                                <span class="font-label-sm text-label-sm text-outline">Orders over GH₵300</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-space-xs">
+                                            <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                                <span class="material-symbols-outlined text-lg">shield</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="font-label-md text-label-md text-on-surface font-semibold">Secure Payment</span>
+                                                <span class="font-label-sm text-label-sm text-outline">Momo &amp; Cash on delivery</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-space-xs">
+                                            <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                                <span class="material-symbols-outlined text-lg">published_with_changes</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="font-label-md text-label-md text-on-surface font-semibold">7-Day Returns</span>
+                                                <span class="font-label-sm text-label-sm text-outline">Hassle-free guarantee</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-space-xs">
+                                            <div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+                                                <span class="material-symbols-outlined text-lg">support_agent</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="font-label-md text-label-md text-on-surface font-semibold">24/7 Support</span>
+                                                <span class="font-label-sm text-label-sm text-outline">Direct Accra hotline</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <!-- Sort Dropdown -->
-                                <div class="relative">
-                                    <select id="sort-select" class="h-10 pl-space-sm pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer">
-                                        <option value="featured">Newest Arrivals</option>
-                                        <option value="price-low">Price: Low to High</option>
-                                        <option value="price-high">Price: High to Low</option>
-                                        <option value="rating">Top Rated</option>
-                                    </select>
-                                    <span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-outline text-lg">sort</span>
-                                </div>
-
-                                <!-- View Mode Toggles -->
-                                <div class="flex items-center bg-surface-container-low rounded-lg p-0.5">
-                                    <button id="view-grid-btn" class="w-9 h-9 rounded flex items-center justify-center bg-surface-container-lowest text-primary shadow-sm" title="Grid View">
-                                        <span class="material-symbols-outlined text-lg">grid_view</span>
-                                    </button>
-                                    <button id="view-list-btn" class="w-9 h-9 rounded flex items-center justify-center text-outline hover:text-on-surface" title="List View">
-                                        <span class="material-symbols-outlined text-lg">view_list</span>
-                                    </button>
-                                </div>
-
-                                <!-- Result Counter -->
-                                <div class="font-body-sm text-body-sm text-on-surface-variant font-medium pl-space-xs">
-                                    Showing <span id="counter-current" class="text-on-surface font-bold">48</span> of <span class="text-on-surface font-bold">48</span> products
+                                <!-- Visual Mosaic Column -->
+                                <div class="col-span-12 lg:col-span-5 relative mt-space-md lg:mt-0">
+                                    <div class="relative w-full h-[400px] rounded-xl overflow-hidden bg-surface-container-high shadow-lg">
+                                        <img
+                                            class="w-full h-full object-cover"
+                                            data-alt="High-end editorial studio lifestyle composition displaying wireless headphones, premium leather wristwatch, running shoes, and sunglasses arranged neatly on soft architectural stone surfaces, soft natural window light, muted teal and warm amber undertones."
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_pjCHZYUYTn6OcDwyth5E2fJgvVNItj1znShOzSh8P0idrU37zJA04pOm6SuuJ59otbV23XedzRBVHdDesALAhJK8MIQsoIJ6p0uscH5uaHoU61-IyH-otDzG-pLCavzeOQsHWBNmkcjyMW3JyQC1diXA1ATU3ONN5ysZiQZhpD1fDwSuDNQi5Bl4SVW17h3FTi2xCCbMgd2VGO4aH0pLvl0KHSjEFlzNqkw7RbUbJNPEe-M4CTP70A" />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/70 via-transparent to-transparent flex flex-col justify-end p-space-lg text-on-secondary">
+                                            <span class="font-label-sm text-label-sm tracking-wider uppercase text-primary-fixed font-semibold">Special Weekly Selection</span>
+                                            <h3 class="font-headline-md text-headline-md text-on-secondary font-bold">Smart Audio &amp; Tech Gear</h3>
+                                            <p class="font-body-sm text-body-sm text-surface-container-highest max-w-xs mt-1">
+                                                Save up to 35% on verified wireless acoustic accessories today.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
-                <!-- PRODUCT LISTING GRID SECTION -->
-                <section id="product-grid" class="w-full py-space-xl">
-                    <div class="max-w-[1280px] mx-auto px-margin">
-                        
-                        <!-- Products Grid Container -->
-                        <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                    <!-- FILTER & TOOLBAR BAR -->
+                    <section class="w-full bg-surface-container-lowest sticky top-28 z-30 shadow-sm">
+                        <div class="max-w-[1280px] mx-auto px-margin py-space-sm">
+                            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+                                
+                                <!-- Category Pill Chips -->
+                                <div id="category-filter" class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0">
+                                    <button class="category-chip px-space-md h-9 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm transition-colors" data-cat="all">
+                                        All Products
+                                    </button>
+                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Electronics">
+                                        Electronics
+                                    </button>
+                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Fashion">
+                                        Fashion
+                                    </button>
+                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Home">
+                                        Home &amp; Living
+                                    </button>
+                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Accessories">
+                                        Accessories
+                                    </button>
+                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="sale">
+                                        Special Deals
+                                    </button>
+                                </div>
+
+                                <!-- Controls: Price Filter, Sort, View Toggle, Result Counter -->
+                                <div class="flex flex-wrap items-center gap-space-sm justify-between lg:justify-end">
+                                    
+                                    <!-- Price Range Filter Dropdown -->
+                                    <div class="relative">
+                                        <select id="price-filter" class="h-10 pl-space-sm pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer">
+                                            <option value="all">All Prices</option>
+                                            <option value="under100">Under GH₵100</option>
+                                            <option value="100to300">GH₵100 - GH₵300</option>
+                                            <option value="300plus">GH₵300+</option>
+                                        </select>
+                                        <span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-outline text-lg">arrow_drop_down</span>
+                                    </div>
+
+                                    <!-- Sort Dropdown -->
+                                    <div class="relative">
+                                        <select id="sort-select" class="h-10 pl-space-sm pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md appearance-none focus:outline-none focus:bg-surface-container-high transition-colors cursor-pointer">
+                                            <option value="featured">Newest Arrivals</option>
+                                            <option value="price-low">Price: Low to High</option>
+                                            <option value="price-high">Price: High to Low</option>
+                                            <option value="rating">Top Rated</option>
+                                        </select>
+                                        <span class="material-symbols-outlined absolute right-2 top-2.5 pointer-events-none text-outline text-lg">sort</span>
+                                    </div>
+
+                                    <!-- View Mode Toggles -->
+                                    <div class="flex items-center bg-surface-container-low rounded-lg p-0.5">
+                                        <button id="view-grid-btn" class="w-9 h-9 rounded flex items-center justify-center bg-surface-container-lowest text-primary shadow-sm" title="Grid View">
+                                            <span class="material-symbols-outlined text-lg">grid_view</span>
+                                        </button>
+                                        <button id="view-list-btn" class="w-9 h-9 rounded flex items-center justify-center text-outline hover:text-on-surface" title="List View">
+                                            <span class="material-symbols-outlined text-lg">view_list</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- Result Counter -->
+                                    <div class="font-body-sm text-body-sm text-on-surface-variant font-medium pl-space-xs">
+                                        Showing <span id="counter-current" class="text-on-surface font-bold">{{product_count}}</span> of <span class="text-on-surface font-bold">{{product_count}}</span> products
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- PRODUCT LISTING GRID SECTION -->
+                    <section id="product-grid" class="w-full py-space-xl">
+                        <div class="max-w-[1280px] mx-auto px-margin">
                             
-                            <!-- Product Card 1 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="280" data-rating="4.9" data-sale="true">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Lightweight breathable ergonomic running sneakers in crisp modern chalk white and deep teal accents, floating dynamic product photography against warm neutral background."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-qlmR64wHg3_BUSKOPKen4hBsSSW81vKqCihJf0AALtVeMZFgeD5c6zgbE2lqn3ZDwYksKY5JiMJUaarGXfnQeqrFBjuv_CfaIzAccGt2xYLxqsqlcmgV0Ge4TevKp0l4eMGDJ2Sw5gTxASqrM4tD1_LnZd0JIlqJu9_M70IHTG8PT9NFESIP6hqlf54wSrvI4aks3k8bK0kvC5ik15WO7OnViz-vXejN0NbY31kjtLvMf7WSAOFObg" />
-                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                        SALE -20%
-                                    </span>
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">CloudStep Runner Sneakers</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(124 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵280.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵350.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="CloudStep Runner Sneakers" data-price="280.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
+                            <!-- Products Grid Container -->
+                            <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                                <!-- Product Card 1 -->
+                                {% for products in product %}
+                                <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="280" data-rating="4.9" data-sale="true">
+                                    <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
+                                        <img
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            data-alt="Lightweight breathable ergonomic running sneakers in crisp modern chalk white and deep teal accents, floating dynamic product photography against warm neutral background."
+                                            src="{{products.image.url}}" />
+                                        {% if products.discount_percent  %}
+                                        <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                            SALE -{{products.discount_percent}}%
+                                        </span>
+                                        {% elif products.is_bestseller %}
+                                        <span class="absolute top-2 left-2 bg-primary-container text-on-primary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
+                                            BESTSELLER
+                                        </span>
+
+                                        {% endif %}
+                                        <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
+                                            <span class="material-symbols-outlined text-lg">favorite</span>
                                         </button>
                                     </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 2 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Accessories" data-price="195" data-rating="4.8" data-sale="false">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Minimalist waterproof commuter laptop backpack in matte charcoal grey, magnetic roll-top closure, studio lighting on soft architectural pedestal."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3t9D7PodpsJ84I-x71QGOqdMdepy4R4maXyKqKutYj4Emt7_8lzNi5dE9B0IhPSxw5_AFBSrp9ZISRQ9dlXme60Tcc-sYCWYqMnpku3ELEmwqN_ALb7dNh_4GrqFWe3u5Sv9TqYHw7s9bYdmya0bU7ANJp4KUNfPdixsw967yw56y3GBWbNmR1tT2BrkYza4XJF9nuMkCzGQO2hkald064Nckipzl4VJ0PbSnKTfWoT59Q5sZww-iVA" />
-                                    <span class="absolute top-2 left-2 bg-primary-container text-on-primary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                        BESTSELLER
-                                    </span>
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Accessories</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Nomad Waterproof Commuter Backpack</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.8</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(89 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵195.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
+                                    <div class="flex flex-col flex-1">
+                                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
+                                        <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">{{products.name}}</h3>
+                                        <div class="flex items-center gap-1 mt-1 mb-space-sm">
+                                            <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+                                            <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
+                                            <span class="font-label-sm text-label-sm text-outline">(124 reviews)</span>
                                         </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Nomad Waterproof Commuter Backpack" data-price="195.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 3 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Accessories" data-price="420" data-rating="4.9" data-sale="true">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Brushed stainless steel chronograph wristwatch with genuine dark tan leather strap, clean minimalist white dial, dramatic angled editorial studio lighting."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcG6x4GWXMrZFMmS-xHa8EA_IDI1q7OmI0wRJIDP9xnEzS8yZ7zAw9aowVQ0nGGtZDDw1d8gVEmK5Erko-AXgXY-3wrKVIenoYD0ALh8llGO_qsfygJSZRq7TpD92m0exZApSMXhlfsn3NIwcnyiKJj__ny87u6PtUw29LGOg1c1F9hmQDRBCbxdVPPAfpfILkbTY-FRO1WMt4HxtrzZh0Mx61kwaL1hDXp9X_PBU_1q8gySyaiGCKcA" />
-                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                        SALE -19%
-                                    </span>
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Accessories</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Apex Chronograph Minimalist Wristwatch</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(205 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵420.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵520.00</span>
+                                        <div class="mt-auto flex items-center justify-between pt-space-xs">
+                                            <div class="flex flex-col">
+                                                {% if not products.discount_price %}
+                                                <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵{{products.price}}</span>
+                                                {% else %}
+                                                <span class="ont-headline-sm text-headline-sm text-on-surface font-bold">GH₵{{products.discount_price}}</span>
+                                                <span class="font-label-sm text-label-sm text-outline line-through">GH₵{{products.price}}</span>
+                                                {% endif %}
+                                            </div>
+                                            <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="CloudStep Runner Sneakers" data-price="280.00">
+                                                <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                                Add
+                                            </button>
                                         </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Apex Chronograph Minimalist Wristwatch" data-price="420.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
                                     </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 4 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Electronics" data-price="550" data-rating="4.9" data-sale="false">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Over-ear matte black wireless headphones with cushioned ear cups, sleek modern industrial design, soft shadow on clean ivory backdrop."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHlB1KDxbSgwk66YtLSkuQo0ByhAL6rn-yPjUZAABfht0k8_vNAVVDi0pzBxKhCaX01kN2VoZaqwAdvxOe5Hoq41Ein3NE5IusMvGCyo0WhArvqfT5AFbotDaA_lN6DhgYRO93_WVzQtSGBOT6Kj7qo7i-oEeHELxn_iLPXm20-gi4Vsp7KKkrVv6Q5IsZmwJ_B66IPq7MTbTYpyYQk8jy_pIHpjQ4jL0cUJgsexGo1RgmwFw0lOiefw" />
-                                    <span class="absolute top-2 left-2 bg-primary-container text-on-primary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                        BESTSELLER
-                                    </span>
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Electronics</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">SonicFlow Noise-Cancelling Headphones</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(312 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵550.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="SonicFlow Noise-Cancelling Headphones" data-price="550.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 5 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Accessories" data-price="120" data-rating="4.7" data-sale="true">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Classic tortoise-shell acetate sunglasses with dark green polarized lenses lying on warm polished travertine marble, sunlit high-contrast luxury aesthetic."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIZ4XybJBuutpBWg4Zq7YYo5kouvwVYGfpAEGZvWkWJ6h9l6SRwgcHSNwim3TO-JA4VHFtzk3WdDjLIWwdieMRghtCYHUDFsSnzL15neu7CS8t4v0glPGb6LUCBSu0LoFn7z-fGG1tZ7iqR7JyLiw5zOtsZS03i_7NrQHtSeCT9w5JROhQsBbD0pwdeOffeWmzwn0Dxl50ISGeQ14YTDBC6H7Lk1KA2Qi6Jc8M7VkFMYAWS-NBhw0Edw" />
-                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                        SALE -20%
-                                    </span>
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Accessories</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Havana Polarized Classic Sunglasses</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.7</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(64 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵120.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵150.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Havana Polarized Classic Sunglasses" data-price="120.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 6 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Home" data-price="165" data-rating="4.8" data-sale="false">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Architectural modern aluminum LED desk lamp with dimming touch sensor, emitting soft warm ambient glow in Scandinavian home workspace setting."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-dJo-hal4EVpdFRxbjFitrh5MYfTZRcGpS8uUMp7zufSXBg0jV-3fmUkdzIG4XAFF6-LSCyet3ZXM9L-K0IQXs2kvXc5Tt8fyn0xmLwGJpsm6wZYxyHoEKmMmOYncvP3iHHT_sBqiM0xy3A0pm-0x6GbjJbzAJAwvfRURqWluo50GKis74liRJC2Iz0jSFCknU0Jvt13XHfaqdFu6BhT98LZZcto2-HBH7MkXAX65NsMJleDzF9cmtg" />
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Home</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Aura Touch Dimming LED Desk Lamp</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.8</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(52 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵165.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Aura Touch Dimming LED Desk Lamp" data-price="165.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 7 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Home" data-price="85" data-rating="4.6" data-sale="false">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Sleek powder-coated forest green stainless steel insulated water bottle 750ml standing proudly on polished granite stone surface with water droplets."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaensK6oxMZfdjqbZfLFpc9qOYbticeMgOCeDXoNSp__WYLcXIS4ZaN1uuXkvlTLiPRzFy2ODcl5FQMjA4i5pdKZnpPRTeu5j2DqwEzQ0EVlg52xG9cpJhAztZfInuTw715i_1-x_KShJHxIr6rEn8fd3-4GOatfZjFCDZihHXHbeyI5onnbwK2hhG0f5hbc6EA0Mj43rA6PLFbPiyG4oCoEOvZt_DosEiaW9asNqazwSsveig_boggw" />
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Home</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">HydroPeak Insulated Bottle 750ml</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.6</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(78 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵85.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="HydroPeak Insulated Bottle 750ml" data-price="85.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 8 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="95" data-rating="4.7" data-sale="true">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Neatly folded heavy organic cotton crewneck t-shirt in rich emerald pine color against structured cream paper texture background, clean luxury garment photography."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRCBr1ybonSXcfGguS0VfbHwJfS5co2Ro9WGUDSJITKm3uesWkfg5Sof6lZdLoeRpIv6knZaowPB1LxpNJHHiZNb3jY7vEu2e3d7hleZEEGscsdxGUe2Xnp9E6UdAo5Kmq8zOeUnTfEkoV9BFCpzXdXOmdjKnXIN4GdJf01HOg5gEESc8JlSstT__vI1JHztjAmjZ0R5WKf29U1E1O8GrMU3EfZE-1x1Td2zEolz7XVmgGkHsiY8bMgA" />
-                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                        SALE -20%
-                                    </span>
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Heavyweight Cotton Crewneck T-Shirt</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.7</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(110 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵95.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵120.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Heavyweight Cotton Crewneck T-Shirt" data-price="95.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 9 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Electronics" data-price="220" data-rating="4.8" data-sale="false">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Compact waterproof bluetooth speaker with fabric grill exterior in slate teal standing on outdoor teak wood bench, warm natural evening sunlight."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9krFHOnBYGX7y-1AU0icnusPSAZLxLwNv8z2gmmJUappea-DMPW8x5bgfntaBW6gwT9nj3uQcOyQYg7CnZgppkSlWidiSnaZib1jSCYd34Ks53QoL6374Tr2zm08RXkLN1ypevzmpzfQ_JEEAq5rgMJe0YHVW0Nr3rj1fAP7ydwjs05MGnHbWor6-yRvhcqgeDMOdKeCOaxPI58BJijdWaPahp51IZgMqghP2SVpm7EwaAy8QyoFAPw" />
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Electronics</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">PulseBass Portable Bluetooth Speaker</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.8</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(187 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵220.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="PulseBass Portable Bluetooth Speaker" data-price="220.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 10 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Home" data-price="140" data-rating="4.5" data-sale="false">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Ergonomic contoured memory foam lumbar back cushion with dark breathable mesh cover resting comfortably on modern office task chair."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5LxyKoQxjLvTyiAJJmG_5aveldI9s007C_ccJBnbqOGf8P65hTt5n_D8_00h-PAk9X_Choib_q5MPN-9v4CU5tEMYth4MpCyxGMhnsmkYudV3MeTHc7wK7IHA6D7O6UO8gx0SeCnJ9Amj1ykLhi-gvinVhVW2KU3E-qiCrsARG8om-D8hnyqZNOdRZhiTF0zqbUbrHYu7URDjET5olIrqiO6sg0uz3C3e57WdatwV91hr7ojBrhHsJQ" />
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Home</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Ergonomic Memory Foam Cushion</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.5</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(45 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵140.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Ergonomic Memory Foam Cushion" data-price="140.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 11 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Electronics" data-price="175" data-rating="4.9" data-sale="true">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Ultra-slim magnetic fast charging power bank with digital LED battery percentage readout lying next to high-end smartphone on textured concrete surface."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuARVwWKHh8rLR5lk-4HMixAeEEo_ldHwYFDCQUivy2dH7wVJb7Fi1LAcczPztTAm3IiM7QidZXglk658wlkB-yCwPquYXDgLUU5Sayl-ifLcDDj31X6FXypOOfAkWfkcrKt-0CJCx_7SAecZk1otyu4077a5Rb9g2aIDtrN8riL7kvgH8u0V6Qo7dcpg-ZRsYePOuSbTIqpdyZ-EE-OM_7JNGcQddFSkD8q1wS8pI5BP2EAHlpS7R3MfQ" />
-                                    <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                        SALE -16%
-                                    </span>
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Electronics</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">FastCharge 20000mAh Power Bank</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(220 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵175.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline line-through">GH₵210.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="FastCharge 20000mAh Power Bank" data-price="175.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                            <!-- Product Card 12 -->
-                            <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="190" data-rating="4.6" data-sale="false">
-                                <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
-                                    <img
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        data-alt="Handcrafted neutral beige canvas slip-on loafers with natural jute rope espadrille sole resting on sun-drenched terracotta tile."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALFRtp2LVy3ll4silhK3IgARuR38JbOitleIwpJGiASRWH2M7rHZj0whqDlaFN56EHZ_Ih8p6osyGtlt6hj3ln6QgqAFeUyz3pKA3LYBovqkgudUNolATZymN5LukSIrcKDDmNxkOxcz44qhdxAyaDehe3glAr-HpCJq3Ch6KWDjqMduPV3dupbMkvGYRM42T_zd-mfnN4EyoNgkSqjNFYFRgTUfWmY8oQKMS5Tl73RM0McQF_LVY9jA" />
-                                    <button class="favorite-btn absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container-lowest/90 text-on-surface-variant hover:text-secondary flex items-center justify-center shadow-sm transition-colors" title="Save to Wishlist">
-                                        <span class="material-symbols-outlined text-lg">favorite</span>
-                                    </button>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
-                                    <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">Everyday Canvas Slip-On Loafers</h3>
-                                    <div class="flex items-center gap-1 mt-1 mb-space-sm">
-                                        <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
-                                        <span class="font-label-md text-label-md text-on-surface font-bold">4.6</span>
-                                        <span class="font-label-sm text-label-sm text-outline">(67 reviews)</span>
-                                    </div>
-                                    <div class="mt-auto flex items-center justify-between pt-space-xs">
-                                        <div class="flex flex-col">
-                                            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵190.00</span>
-                                            <span class="font-label-sm text-label-sm text-outline invisible">GH₵00.00</span>
-                                        </div>
-                                        <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="Everyday Canvas Slip-On Loafers" data-price="190.00">
-                                            <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-
-                        </div>
-
-                        <!-- Pagination / Load More Block -->
-                        <div class="mt-space-xl flex flex-col items-center justify-center gap-space-md">
-                            <div class="w-full max-w-xs flex flex-col items-center gap-space-xs">
-                                <div class="flex justify-between w-full font-label-sm text-label-sm text-outline">
-                                    <span>Showing 12 products</span>
-                                    <span>48 Total</span>
-                                </div>
-                                <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
-                                    <div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 25%;"></div>
-                                </div>
+                                </article>
+                                {% endfor %}
                             </div>
-                            <button
-                                id="load-more-btn"
-                                disabled=""
-                                class="inline-flex items-center justify-center gap-space-sm px-space-xl h-12 bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-lg text-label-lg font-semibold rounded-lg shadow-sm transition-all active:scale-[0.99] opacity-50 pointer-events-none">
-                                <span id="load-spinner" class="material-symbols-outlined text-xl animate-spin hidden">progress_activity</span>
-                                <span id="load-text">All 48 Products Loaded</span>
-                                <span class="material-symbols-outlined text-lg">expand_more</span>
-                            </button>
-                        </div>
 
-                    </div>
-                </section>
-            </div>
+                            <!-- Pagination / Load More Block -->
+                            <div class="mt-space-xl flex flex-col items-center justify-center gap-space-md">
+                                <div class="w-full max-w-xs flex flex-col items-center gap-space-xs">
+                                    <div class="flex justify-between w-full font-label-sm text-label-sm text-outline">
+                                        <span>Showing {{product_count}} products</span>
+                                        <span>{{product_count}} Total</span>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+                                        <div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 25%;"></div>
+                                    </div>
+                                </div>
+                                <button
+                                    id="load-more-btn"
+                                    disabled=""
+                                    class="inline-flex items-center justify-center gap-space-sm px-space-xl h-12 bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-lg text-label-lg font-semibold rounded-lg shadow-sm transition-all active:scale-[0.99] opacity-50 pointer-events-none">
+                                    <span id="load-spinner" class="material-symbols-outlined text-xl animate-spin hidden">progress_activity</span>
+                                    <span id="load-text">All {{product_count}} Products Loaded</span>
+                                    <span class="material-symbols-outlined text-lg">expand_more</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            
         </main>
 
         <!-- FOOTER SECTION-->
@@ -933,7 +576,7 @@
 
                 <!-- Copyright & Payment Methods Bar -->
                 <div class="border-t border-surface-container pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-md">
-                    <p class="font-body-sm text-body-sm text-outline">© 2025 Gelo &amp; Co. Ltd. All rights reserved.</p>
+                    <p class="font-body-sm text-body-sm text-outline">© 2026 Gelo &amp; Co. Ltd. All rights reserved.</p>
                     <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
                         <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cards (Visa / MC)</span>
                         <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">MTN Mobile Money</span>
@@ -945,7 +588,7 @@
             </div>
         </footer>
 
-        <!-- CLIENT-SIDE JAVASCRIPT BEHAVIOR -->
+        <!-- JAVASCRIPT BEHAVIOR -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const categoryChips = document.querySelectorAll('.category-chip');
