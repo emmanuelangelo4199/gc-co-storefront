@@ -26,6 +26,15 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=150, unique=True)
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='category/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class userAccount(AbstractUser):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, unique=True)
