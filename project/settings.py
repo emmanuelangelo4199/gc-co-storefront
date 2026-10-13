@@ -32,6 +32,10 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'app.UserAccount'
 
+
+CSRF_COOKIE_NAME = "gelo_csrftoken"
+SESSION_COOKIE_NAME = "gelo_sessionid"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
