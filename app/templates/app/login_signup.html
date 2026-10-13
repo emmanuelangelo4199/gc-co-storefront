@@ -216,12 +216,13 @@
                                         <h1 class="font-headline-md text-headline-md text-on-surface">Welcome back to Gelo &amp; Co.</h1>
                                         <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Enter your credentials to access your account, track orders, and wishlist.</p>
                                     </div>
-                                    <form class="space-y-space-md" id="login-form" onsubmit="event.preventDefault();">
+                                    <form method="POST" action="" class="space-y-space-md" id="login-form">
+                                        {% csrf_token %}
                                         <div>
                                             <label class="block font-label-lg text-label-lg text-on-surface mb-1.5" for="login-email">Email Address</label>
                                             <div class="relative flex items-center bg-surface-container-lowest rounded-lg shadow-sm">
                                                 <span class="material-symbols-outlined absolute left-3.5 text-outline text-headline-sm pointer-events-none">mail</span>
-                                                <input class="w-full h-11 pl-11 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="login-email" placeholder="emmanuel.angelo@example.com" type="email">
+                                                <input class="w-full h-11 pl-11 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="login-email" name="email" placeholder="emmanuel.angelo@example.com" type="email">
                                                 <span class="material-symbols-outlined absolute right-3 text-tertiary-container text-title-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                             </div>
                                         </div>
@@ -229,7 +230,7 @@
                                             <label class="block font-label-lg text-label-lg text-on-surface mb-1.5" for="login-password">Password</label>
                                             <div class="relative flex items-center bg-surface-container-lowest rounded-lg shadow-sm">
                                                 <span class="material-symbols-outlined absolute left-3.5 text-outline text-headline-sm pointer-events-none">lock</span>
-                                                <input class="w-full h-11 pl-11 pr-11 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="login-password" placeholder="••••••••••••" type="password">
+                                                <input class="w-full h-11 pl-11 pr-11 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="login-password" name="password" placeholder="••••••••••••" type="password">
                                                 <button class="password-toggle-btn absolute right-3 text-outline hover:text-on-surface p-1 rounded transition-colors focus:outline-none" id="password-toggle" type="button">
                                                     <span class="material-symbols-outlined text-title-md" id="login-eye-icon">visibility</span>
                                                 </button>
@@ -250,7 +251,7 @@
                                             <div class="w-full bg-surface-variant h-px"></div>
                                             <span class="absolute bg-surface-container-lowest px-space-sm font-label-sm text-label-sm text-outline uppercase tracking-wider">or continue with</span>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-space-md">
+                                        <div class="grid grid-cols-1 gap-space-md">
                                             <button class="h-11 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-lg text-label-lg flex items-center justify-center gap-space-sm transition-colors shadow-sm" type="button">
                                                 <svg class="w-4 h-4" viewBox="0 0 24 24">
                                                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
@@ -260,12 +261,6 @@
                                                 </svg>
                                                 <span class="">Google</span>
                                             </button>
-                                            <button class="h-11 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-lg text-label-lg flex items-center justify-center gap-space-sm transition-colors shadow-sm" type="button">
-                                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                                                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.66-1.09 1.73-.95 2.76 1.01.08 2.05-.51 2.68-1.26z"></path>
-                                                </svg>
-                                                <span class="">Apple</span>
-                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -274,11 +269,12 @@
                                         <h1 class="font-headline-md text-headline-md text-on-surface">Create your Gelo &amp; Co. account</h1>
                                         <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">Join thousands of shoppers enjoying everyday essentials with fast local delivery.</p>
                                     </div>
-                                    <form class="space-y-space-sm" id="register-form" onsubmit="event.preventDefault();">
+                                    <form action="" class="space-y-space-sm" id="register-form" method="POST">
+                                        {% csrf_token %}
                                         <div>
                                             <label class="block font-label-md text-label-md text-on-surface mb-1" for="reg-fullname">Full Name</label>
                                             <div class="relative flex items-center">
-                                                <input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-fullname" placeholder="Emmanuel Angelo" type="text">
+                                                <input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-fullname" name="fullname" placeholder="Emmanuel Angelo" type="text">
                                                 <span class="material-symbols-outlined absolute right-3 text-tertiary-container text-body-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                             </div>
                                         </div>
@@ -290,14 +286,14 @@
                                                         <span class="">🇬🇭</span>
                                                         <span class="">+233</span>
                                                     </div>
-                                                    <input class="w-full h-10 pl-20 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-phone" placeholder="XX XXX XXXX" type="tel">
+                                                    <input class="w-full h-10 pl-20 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-phone" name="phone" placeholder="XX XXX XXXX" type="tel">
                                                     <span class="material-symbols-outlined absolute right-2 text-tertiary-container text-body-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                                 </div>
                                             </div>
                                             <div>
                                                 <label class="block font-label-md text-label-md text-on-surface mb-1" for="reg-email">Email Address</label>
                                                 <div class="relative flex items-center">
-                                                    <input class="w-full h-10 px-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-email" placeholder="emmanuel.angelo@example.com" type="email">
+                                                    <input class="w-full h-10 px-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-email" name="email" placeholder="emmanuel.angelo@example.com" type="email">
                                                     <span class="material-symbols-outlined absolute right-2 text-tertiary-container text-body-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                                 </div>
                                             </div>
@@ -308,7 +304,7 @@
                                                 <span class="font-label-sm text-label-sm text-tertiary font-semibold">Strong Password</span>
                                             </div>
                                             <div class="relative flex items-center">
-                                                <input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-password" placeholder="At least 8 characters" type="password">
+                                                <input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-password" name="password" placeholder="At least 8 characters" type="password">
                                                 <button class="password-toggle-btn absolute right-3 text-outline hover:text-on-surface focus:outline-none" onclick="toggleRegPassword()" type="button">
                                                     <span class="material-symbols-outlined text-body-md" id="reg-eye-icon">visibility</span>
                                                 </button>
@@ -322,7 +318,7 @@
                                         <div>
                                             <label class="block font-label-md text-label-md text-on-surface mb-1" for="reg-password-confirm">Confirm Password</label>
                                             <div class="relative flex items-center">
-                                                <input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-password-confirm" placeholder="Repeat your password" type="password">
+                                                <input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-md transition-all" id="reg-password-confirm" name="confirm_password" placeholder="Repeat your password" type="password">
                                                 <span class="material-symbols-outlined absolute right-3 text-tertiary-container text-body-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                             </div>
                                         </div>
