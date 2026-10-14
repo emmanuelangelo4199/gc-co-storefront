@@ -4,7 +4,22 @@ from django.db import models
 
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=150, unique=True)
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='category/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='products', null=True, blank=True)
     name = models.CharField(max_length=100, null=False, blank=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
@@ -27,25 +42,25 @@ class Product(models.Model):
         return self.name
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=150, unique=True)
-    description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='category/', blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
 class userAccount(AbstractUser):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, unique=True)
+    image = models.ImageField(upload_to='user/', blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'phone_number']
+
+    @property
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        return 'static/app/image/placeholder.jpg'
 
     def __str__(self):
         return self.email
 
 class Order(models.Model):
+
     class Status(models.TextChoices):
         ORDER_CONFIRMED  = 'order confirmed', 'Order Confirmed'
         PROCESSING_PACKAGING = 'processing packaging', 'Processing Package'
@@ -79,11 +94,22 @@ class Order(models.Model):
     phone_number = models.CharField(max_length=15)
 
 
+    def __str__(self):
+    # Using order_number since primary_key is a UUID
+        return (
+            f"Order #{str(self.order_number)[:8]} -"
+            f" {self.user.email if self.user else 'Guest'}"
+        )
+
+
 class Order_Items(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name} (Order #{self.order.order_number})"
 
 
 class Cart(models.Model):
@@ -92,7 +118,13 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"Cart ({self.user.email})"
+
 class cart_Items(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product.name}"
