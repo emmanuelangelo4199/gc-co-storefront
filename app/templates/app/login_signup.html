@@ -211,6 +211,20 @@
                                         Create Account
                                     </button>
                                 </div>
+                                
+                                {% if messages %}
+                                <div class="mb-space-md space-y-space-sm">
+                                    {% for message in messages %}
+                                    <div class="rounded-lg px-4 py-3 font-body-sm text-body-sm
+                                        {% if message.tags == 'error' %}bg-error-container text-on-error-container
+                                        {% elif message.tags == 'success' %}bg-tertiary-fixed text-on-tertiary-fixed
+                                        {% else %}bg-surface-container text-on-surface{% endif %}">
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+
                                 <div class="transition-opacity duration-300 hidden" id="signin-panel">
                                     <div class="mb-space-lg">
                                         <h1 class="font-headline-md text-headline-md text-on-surface">Welcome back to Gelo &amp; Co.</h1>

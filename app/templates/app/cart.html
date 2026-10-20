@@ -1,0 +1,695 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="web_standard" name="shell-type">
+        <title>Gelo &amp; Co.</title>
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'app/src/input.css' %}">
+        <link type="image/png" href="{% static 'app/image/Gelo& Co.png' %}" rel="icon">
+        <style>
+            @layer base {
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                }
+                body {
+                    overscroll-behavior: none;
+                }
+                main>:first-child {
+                    margin-top: 0 !important;
+                }
+                main>:last-child {
+                    margin-bottom: 0 !important;
+                }
+            }
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "surface-dim": "#d0dbed",
+                            "on-secondary-fixed": "#410002",
+                            "inverse-surface": "#27313f",
+                            "surface-container-high": "#dee9fc",
+                            "surface-container-low": "#eff4ff",
+                            "on-secondary-fixed-variant": "#93000b",
+                            "surface-container": "#e6eeff",
+                            "on-secondary-container": "#fffbff",
+                            "inverse-primary": "#80d5cb",
+                            "tertiary": "#005e40",
+                            "tertiary-container": "#007954",
+                            "inverse-on-surface": "#eaf1ff",
+                            "surface-container-lowest": "#ffffff",
+                            "primary-fixed-dim": "#80d5cb",
+                            "surface-bright": "#f8f9ff",
+                            "on-surface-variant": "#3e4947",
+                            "on-secondary": "#ffffff",
+                            "tertiary-fixed-dim": "#68dba9",
+                            "primary-fixed": "#9cf2e8",
+                            "on-primary-fixed-variant": "#00504a",
+                            "on-tertiary-fixed-variant": "#005137",
+                            "error": "#ba1a1a",
+                            "on-tertiary": "#ffffff",
+                            "outline-variant": "#bdc9c6",
+                            "on-primary": "#ffffff",
+                            "on-surface": "#121c2a",
+                            "primary-container": "#0f766e",
+                            "surface-tint": "#006a63",
+                            "on-primary-container": "#a3faef",
+                            "on-error-container": "#93000a",
+                            "on-background": "#121c2a",
+                            "on-error": "#ffffff",
+                            "background": "#f8f9ff",
+                            "surface": "#f8f9ff",
+                            "on-tertiary-fixed": "#002114",
+                            "secondary-fixed-dim": "#ffb4ab",
+                            "on-primary-fixed": "#00201d",
+                            "primary": "#005c55",
+                            "outline": "#6e7977",
+                            "secondary-fixed": "#ffdad6",
+                            "secondary-container": "#e02928",
+                            "error-container": "#ffdad6",
+                            "surface-variant": "#d9e3f6",
+                            "secondary": "#bb0112",
+                            "tertiary-fixed": "#85f8c4",
+                            "surface-container-highest": "#d9e3f6",
+                            "on-tertiary-container": "#99ffce"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "space-lg": "1.5rem",
+                            "margin": "2rem",
+                            "gutter": "1.5rem",
+                            "gutter-mobile": "1rem",
+                            "space-md": "1rem",
+                            "space-xl": "2rem",
+                            "space-xs": "0.25rem",
+                            "space-sm": "0.5rem",
+                            "margin-mobile": "1rem"
+                        },
+                        "fontFamily": {
+                            "display": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "headline-lg-mobile": ["Inter"],
+                            "title-md": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-md": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "headline-sm": ["Inter"],
+                            "display-mobile": ["Inter"],
+                            "body-sm": ["Inter"]
+                        },
+                        "fontSize": {
+                            "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+                            "title-md": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                            "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500"}],
+                            "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+                            "display-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+                            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                        }
+                    }
+                }
+            };
+        </script>
+    </head>
+    <body class="bg-surface font-body-md text-on-surface antialiased">
+        <header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+            <div class="h-28 w-full">
+                <div class="h-16 max-w-[1280px] mx-auto px-margin flex items-center justify-between gap-space-md">
+                    <div class="flex items-center gap-space-sm shrink-0">
+                        <a class="flex items-center gap-space-xs" data-path="home" href="{% url "app:home" %}">
+                            <img class="h-9 w-9 object-contain rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1MhBtaPbZ43_0ccOp0qDwYJ3zRG5BpDUQIaOjYOjLrD5zmfNBE-s2dpkoJ_5QWTueOxRMTdko1Bky7dHYQRkXV2EgRP2pbB_LZi-c8Zgg7taOeGxMoWU-6r1_ANjQZecDb5zdpAt5aP3YX1olcY8G00PWqI1X7inKJhrtZBBACqY__sRysCR2TaVceET7FNfFkj3_OSkdqhFaSbU2Ud3yUcXjagv84tM_RZp86HYaRg0h06nQtYl0BZrZ97ILaGozBes" alt="Gelo &amp; Co. Logo">
+                            <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Gelo &amp; Co.</span>
+                        </a>
+                    </div>
+                    <div class="flex-1 max-w-xl mx-space-md">
+                        <div class="relative flex items-center w-full">
+                            <span class="material-symbols-outlined absolute left-3 text-outline text-xl pointer-events-none">search</span>
+                            <input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest border border-outline-variant font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary transition-all duration-150" placeholder="Search products, brands and categories..." type="text">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-space-md shrink-0">
+                        <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="#">
+                            <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                            <span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">3</span>
+                        </a>
+                        <div class="flex items-center gap-space-sm pl-space-sm border-l border-outline-variant">
+                            <div class="flex items-center gap-space-xs">
+                                <img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="{{user.image_url}}">
+                                <div class="flex flex-col text-left">
+                                    <span class="font-label-md text-label-md text-on-surface font-semibold">{{user.username}}</span>
+                                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="#">My Orders</a>
+                                </div>
+                            </div>
+                            <a class="p-space-xs text-on-surface-variant hover:text-secondary transition-colors flex items-center" data-path="login" href="#" title="Sign out">
+                                <span class="material-symbols-outlined text-xl">logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-12 border-t border-surface-container bg-surface-container-lowest/90 backdrop-blur-md">
+                    <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
+                        <nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary">
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="all-products" href="#">All Products</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="electronics" href="#">Electronics</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="fashion" href="#">Fashion</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="home-lifestyle" href="#">Home</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="accessories" href="#">Accessories</a>
+                            <a class="h-full flex items-center text-on-secondary-fixed-variant hover:text-secondary font-label-lg text-label-lg transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                        </nav>
+                        <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                            <span class="material-symbols-outlined text-base text-tertiary">local_shipping</span>
+                            <span class="">Free delivery over GH₵ 250 in Accra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="w-full pt-28 bg-surface min-h-[calc(100vh-112px)]">
+            <div class="flex flex-col w-full">
+                <div class="max-w-[1280px] w-full mx-auto px-margin py-space-lg flex flex-col gap-space-lg">
+                    <div class="flex flex-col gap-space-md">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+                            <div class="flex items-center gap-space-sm">
+                                <h1 class="font-headline-lg text-headline-lg text-on-surface">Your Shopping Cart</h1>
+                                <span class="px-3 py-1 bg-surface-container rounded-full font-label-md text-label-md text-primary font-bold shadow-sm">3 Items</span>
+                            </div>
+                            <div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-base text-primary">verified_user</span>
+                                <span class="">Guaranteed Authentic &amp; Protected</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-on-surface">
+                                <div class="flex items-center gap-space-xs font-body-sm text-body-sm font-medium">
+                                    <span class="text-lg">🎉</span>
+                                    <span class="">You are only <strong class="text-primary font-bold">GH₵35.00</strong> away from <strong class="text-tertiary font-bold">FREE Shipping!</strong></span>
+                                </div>
+                                <span class="font-label-sm text-label-sm text-outline">Free shipping on orders over GH₵300</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden">
+                                <div class="h-full bg-primary-container rounded-full transition-all duration-500 ease-out" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+                        <div class="lg:col-span-8 flex flex-col gap-space-lg">
+                            <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+                                <div class="hidden md:grid grid-cols-12 px-space-md py-3.5 bg-surface-container-low font-label-md text-label-md text-outline uppercase tracking-wider">
+                                    <div class="col-span-6">Product</div>
+                                    <div class="col-span-2 text-right">Unit Price</div>
+                                    <div class="col-span-2 text-center">Quantity</div>
+                                    <div class="col-span-2 text-right">Line Total</div>
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="cart-item-row p-space-md flex flex-col md:grid md:grid-cols-12 gap-space-md items-center transition-colors hover:bg-surface-bright" data-item-id="1" data-price="550">
+                                        <div class="col-span-6 w-full flex items-center gap-space-md min-w-0">
+                                            <div class="w-20 h-20 shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
+                                                <img class="w-full h-full object-cover" data-alt="Studio quality shot of premium matte black noise cancelling wireless over ear headphones on a soft muted background with clean lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXJaxt-ckTXik7fDAZ4sB_5Mu3pDgaPOKfuFL3rgNNYMtirCeZ8v1ZmDowJwR1pfDsPVgGE-Aps_KnCpTPQldHUh2PfEeenNpwcAIW3NNYw4ccrij9YtSvs8xah7lL3RjLMaop8TYbywss_dCgg_NSxz7yHRq5e2ofcJq7b3W_j7a0CKsSUEJeEo3iSPyJLICfi5e88cTlk0XT_I8qsMBgV9NKmsSjvox3Q_R6ulxzU1uUqP_1QoCvnQ">
+                                            </div>
+                                            <div class="flex flex-col min-w-0">
+                                                <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Audio &amp; Tech</span>
+                                                <a class="font-title-md text-title-md text-on-surface hover:text-primary transition-colors truncate" href="#">SonicFlow Noise-Cancelling Wireless Headphones</a>
+                                                <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                                                    <span class="">Color: Matte Black</span>
+                                                    <span class="text-outline-variant">•</span>
+                                                    <span class="">Edition: Standard</span>
+                                                </div>
+                                                <div class="md:hidden flex items-center gap-space-sm mt-2">
+                                                    <span class="font-body-md text-body-md font-bold text-on-surface">GH₵550.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hidden md:block col-span-2 text-right font-body-md text-body-md text-on-surface tabular-nums">
+                                            GH₵550.00
+                                        </div>
+                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-center">
+                                            <span class="md:hidden font-body-sm text-body-sm text-outline">Qty:</span>
+                                            <div class="qty-stepper flex items-center bg-surface-container rounded-lg p-0.5">
+                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button">
+                                                    <span class="material-symbols-outlined text-base">remove</span>
+                                                </button>
+                                                <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly="" type="text" value="1">
+                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button">
+                                                    <span class="material-symbols-outlined text-base">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-end gap-space-sm">
+                                            <div class="line-total font-title-md text-title-md font-bold text-on-surface tabular-nums text-right">
+                                                GH₵550.00
+                                            </div>
+                                            <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button">
+                                                <span class="material-symbols-outlined text-xl">delete</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="h-px bg-surface-container mx-space-md"></div>
+                                    <div class="cart-item-row p-space-md flex flex-col md:grid md:grid-cols-12 gap-space-md items-center transition-colors hover:bg-surface-bright" data-item-id="2" data-price="280">
+                                        <div class="col-span-6 w-full flex items-center gap-space-md min-w-0">
+                                            <div class="w-20 h-20 shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
+                                                <img class="w-full h-full object-cover" data-alt="Modern athletic running sneakers in slate white and light gray mesh sitting on an architectural concrete pedestal in clean natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNVMSCfqEplRCp7RmAtzSGrRn_TpQ-Ir5gEvQSNafR3qZvQgiDYtFlLLghnaXs8nRRtnW1IGTg1hBb4rgK3NU3-kcKDrw_z8eaNyGERl35yfcdFu0H_VQlHo88ftO-AafraPLdmUssGgWM_LJILf08dCDLCDbB96a6XNZJxNfbhmwkpZ95QEWBJzu_NSbbSkycKyoZX-38Dqb-NO8M6hbbR24r2ip-XQQz5ebE0DbmgqN6E_rO2RLVOQ">
+                                            </div>
+                                            <div class="flex flex-col min-w-0">
+                                                <div class="flex items-center gap-1.5">
+                                                    <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Footwear</span>
+                                                    <span class="px-1.5 py-0.5 bg-error-container text-on-error-container rounded font-label-sm text-label-sm font-bold">20% OFF</span>
+                                                </div>
+                                                <a class="font-title-md text-title-md text-on-surface hover:text-primary transition-colors truncate" href="#">CloudStep Runner Sneakers</a>
+                                                <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                                                    <span class="">Size: 42 EU / 9 US</span>
+                                                    <span class="text-outline-variant">•</span>
+                                                    <span class="">Color: Slate White</span>
+                                                </div>
+                                                <div class="md:hidden flex items-center gap-space-xs mt-2">
+                                                    <span class="font-body-md text-body-md font-bold text-on-surface">GH₵280.00</span>
+                                                    <span class="font-body-sm text-body-sm text-outline line-through">GH₵350.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hidden md:flex col-span-2 flex-col items-end justify-center font-body-md text-body-md tabular-nums">
+                                            <span class="font-semibold text-on-surface">GH₵280.00</span>
+                                            <span class="font-body-sm text-body-sm text-outline line-through">GH₵350.00</span>
+                                        </div>
+                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-center">
+                                            <span class="md:hidden font-body-sm text-body-sm text-outline">Qty:</span>
+                                            <div class="qty-stepper flex items-center bg-surface-container rounded-lg p-0.5">
+                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button">
+                                                    <span class="material-symbols-outlined text-base">remove</span>
+                                                </button>
+                                                <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly="" type="text" value="1">
+                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button">
+                                                    <span class="material-symbols-outlined text-base">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-end gap-space-sm">
+                                            <div class="line-total font-title-md text-title-md font-bold text-on-surface tabular-nums text-right">
+                                                GH₵280.00
+                                            </div>
+                                            <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button">
+                                                <span class="material-symbols-outlined text-xl">delete</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="h-px bg-surface-container mx-space-md"></div>
+                                    <div class="cart-item-row p-space-md flex flex-col md:grid md:grid-cols-12 gap-space-md items-center transition-colors hover:bg-surface-bright" data-item-id="3" data-price="195">
+                                        <div class="col-span-6 w-full flex items-center gap-space-md min-w-0">
+                                            <div class="w-20 h-20 shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
+                                                <img class="w-full h-full object-cover" data-alt="Minimalist waterproof commuter everyday backpack in heather grey fabric with magnetic buckles arranged neatly in a bright modern studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoDvJxQlf9SN2fNsIBJQcI-GLi2o4-kOP_JbkPj_rHIZfa4YiZocqktT45A9UdZtKN7s9s-NZVgS_-ODfsvwHg9No2v1BhHc48oPQ66M3NrWoN40DjqsA3Sx8ig1ADxVz2AWGKJ68Na0euJyDyNBPGSqvvd0svj4dfePivyvqMgcY0G8dEW92RNZSfL0diCWqKhvJQ8R_5zrSuKVKeSLyOO25bMIYzdrYhMWeRJeilE2HNT6yOtpb0Dw">
+                                            </div>
+                                            <div class="flex flex-col min-w-0">
+                                                <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Travel &amp; Bags</span>
+                                                <a class="font-title-md text-title-md text-on-surface hover:text-primary transition-colors truncate" href="#">Nomad Waterproof Commuter Backpack</a>
+                                                <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                                                    <span class="">Color: Heather Grey</span>
+                                                </div>
+                                                <div class="md:hidden flex items-center gap-space-sm mt-2">
+                                                    <span class="font-body-md text-body-md font-bold text-on-surface">GH₵195.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hidden md:block col-span-2 text-right font-body-md text-body-md text-on-surface tabular-nums">
+                                            GH₵195.00
+                                        </div>
+                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-center">
+                                            <span class="md:hidden font-body-sm text-body-sm text-outline">Qty:</span>
+                                            <div class="qty-stepper flex items-center bg-surface-container rounded-lg p-0.5">
+                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button">
+                                                    <span class="material-symbols-outlined text-base">remove</span>
+                                                </button>
+                                                <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly="" type="text" value="1">
+                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button">
+                                                    <span class="material-symbols-outlined text-base">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-end gap-space-sm">
+                                            <div class="line-total font-title-md text-title-md font-bold text-on-surface tabular-nums text-right">
+                                                GH₵195.00
+                                            </div>
+                                            <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button">
+                                                <span class="material-symbols-outlined text-xl">delete</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-space-md bg-surface-container-low flex items-center justify-between gap-space-md">
+                                    <a class="flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:underline font-semibold" href="#" id="continue-shopping-link">
+                                        <span class="material-symbols-outlined text-lg">arrow_back</span>
+                                        <span class="">Continue Shopping</span>
+                                    </a>
+                                    <button class="font-label-md text-label-md text-outline hover:text-error transition-colors flex items-center gap-1" id="clear-cart-btn" type="button">
+                                        <span class="material-symbols-outlined text-base">delete_sweep</span>
+                                        <span class="">Clear Cart</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-space-sm">
+                                        <h2 class="font-headline-sm text-headline-sm text-on-surface">Saved for Later</h2>
+                                        <span class="px-2.5 py-0.5 bg-surface-container rounded-full font-label-sm text-label-sm text-on-surface-variant">1 Item</span>
+                                    </div>
+                                    <button class="text-outline hover:text-primary transition-colors flex items-center" id="toggle-saved-items" type="button">
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md bg-surface-container-low rounded-lg p-space-md" id="saved-items-container">
+                                    <div class="flex items-center gap-space-md w-full sm:w-auto">
+                                        <div class="w-16 h-16 shrink-0 bg-surface-container rounded-md overflow-hidden flex items-center justify-center">
+                                            <img class="w-full h-full object-cover" data-alt="Minimalist stainless steel insulated thermal flask bottle in forest green on a clean wooden desk surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzYYThg0g0V84VA1rkfyz5YtqDyPrO_B5bZAKpi3TdW7egn2EtOGzO9KQ2m3mopuX_cncZuF4ehwxdgpcI7zlRT05SL5qastUL9ewl0WOdvN2Xpo8PduBKeFCkdT4xAbbOLrAkHILOlSQ8JdrOyZuHjXW4LjLlNVyAHnq1mIN2v6weGDXE8FOo9R5dzi3aI-7krTDzqvopE8eoMF22x-iSi4Eav1jaHv0X4eA-AAkrZCxyWyrpnn9X_Q">
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <h3 class="font-title-md text-title-md text-on-surface font-semibold">HydroPeak Insulated Flask 750ml</h3>
+                                            <span class="font-body-sm text-body-sm text-on-surface-variant">Color: Forest Green</span>
+                                            <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵110.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+                                        <button class="px-4 py-2 bg-surface-container-lowest text-primary hover:bg-surface font-label-md text-label-md rounded-lg shadow-sm font-semibold transition-colors flex items-center gap-1" type="button">
+                                            <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+                                            <span class="">Move to Cart</span>
+                                        </button>
+                                        <button class="p-2 text-outline hover:text-error transition-colors" title="Remove from saved" type="button">
+                                            <span class="material-symbols-outlined text-lg">close</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-space-md">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface">Frequently Bought Together</h2>
+                                    <span class="font-label-sm text-label-sm text-outline">Exclusive cart additions</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                                    <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between gap-space-md group transition-all hover:shadow-md">
+                                        <div class="flex items-center gap-space-md min-w-0">
+                                            <div class="w-16 h-16 shrink-0 bg-surface-container rounded-lg overflow-hidden">
+                                                <img class="w-full h-full object-cover" data-alt="Eco-friendly thermal insulated sports water bottle with leak proof lid presented on a light studio surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6-FKzh29mMSFr3X-GA41WqId0EwtQ3kPV0h4OX_tcKzTenm0XMsigqFgpUPjEoYNB3yDBu9qRDwln39X2GhTotUPiNtP_fDuB_Wn-MCyVlqtpwkr-WqUYniZJbo815yUElPRP8bstcs4nh2uD7CVpnQUDhfQNd8hCQPTlvmzNLr_sc360TcAyFD9vhITGQ56Cx6MuDehkCvhHin_5eK1HSWpERKTif3XiDRH3lnLTKA0NDeWsDdLAdw">
+                                            </div>
+                                            <div class="flex flex-col min-w-0">
+                                                <h4 class="font-title-md text-title-md text-on-surface font-semibold truncate">HydroPeak Water Bottle</h4>
+                                                <span class="font-label-sm text-label-sm text-tertiary font-bold">Free Shipping Eligible</span>
+                                                <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵85.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="shrink-0 p-2.5 bg-primary-container text-on-primary rounded-lg hover:bg-primary transition-all shadow-sm flex items-center justify-center" title="Add to cart" type="button">
+                                            <span class="material-symbols-outlined text-lg">add</span>
+                                        </button>
+                                    </div>
+                                    <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between gap-space-md group transition-all hover:shadow-md">
+                                        <div class="flex items-center gap-space-md min-w-0">
+                                            <div class="w-16 h-16 shrink-0 bg-surface-container rounded-lg overflow-hidden">
+                                                <img class="w-full h-full object-cover" data-alt="Compact sleek portable 20000mAh external battery power bank with digital LED battery percentage readout on desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Ji3TdYYI7pIxYEW-vufUs2KvaeIo5k7GukcuR09-t1r-MzbSIrmo57TYieV7s9p4i4_5CH9G4qU5w034LOVBD3R38RxuYbGX5O-TOY2AiOb_FMxHF-GIFFm9_2sr2ILtK8oysy8BwLnsRC22HEO0lL-x1ylXicALAt_tR8YdMpP5_jKCnl1lUS2i3uZ4dUKE3nAKUVNvqmmu7AeGKkDFmWsda60dmqvHKdvd9VEMhfHp9pK73qELUA">
+                                            </div>
+                                            <div class="flex flex-col min-w-0">
+                                                <h4 class="font-title-md text-title-md text-on-surface font-semibold truncate">FastCharge Power Bank</h4>
+                                                <span class="font-label-sm text-label-sm text-outline">20,000mAh PD 22.5W</span>
+                                                <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵175.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="shrink-0 p-2.5 bg-primary-container text-on-primary rounded-lg hover:bg-primary transition-all shadow-sm flex items-center justify-center" title="Add to cart" type="button">
+                                            <span class="material-symbols-outlined text-lg">add</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-4 sticky top-32">
+                            <div class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col gap-space-lg">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="font-headline-md text-headline-md text-on-surface">Order Summary</h2>
+                                    <span class="font-label-sm text-label-sm text-outline">Accra &amp; Nationwide</span>
+                                </div>
+                                <div class="flex flex-col gap-space-sm font-body-md text-body-md">
+                                    <div class="flex items-center justify-between text-on-surface-variant">
+                                        <span class="">Subtotal (3 items)</span>
+                                        <span class="font-semibold text-on-surface tabular-nums" id="order-subtotal">GH₵1,025.00</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-on-surface-variant">
+                                        <div class="flex items-center gap-1">
+                                            <span class="">Estimated Delivery</span>
+                                            <span class="material-symbols-outlined text-sm text-outline cursor-help" title="Standard dispatch across Greater Accra">info</span>
+                                        </div>
+                                        <span class="font-bold text-tertiary">FREE</span>
+                                    </div>
+                                    <div class="text-right -mt-1">
+                                        <span class="font-label-sm text-label-sm text-tertiary">Qualified for Free Delivery in Ghana</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-on-surface-variant">
+                                        <div class="flex items-center gap-1">
+                                            <span class="">Estimated VAT / Tax</span>
+                                            <span class="material-symbols-outlined text-sm text-outline cursor-help" title="3% NHIL/GETFund inclusive">info</span>
+                                        </div>
+                                        <span class="font-semibold text-on-surface tabular-nums">GH₵30.75</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-2.5 bg-tertiary-container/10 rounded-lg text-tertiary" id="voucher-row">
+                                        <div class="flex items-center gap-space-xs">
+                                            <span class="material-symbols-outlined text-lg">sell</span>
+                                            <div class="flex flex-col">
+                                                <span class="font-label-md text-label-md font-bold">EASE10 Applied</span>
+                                                <span class="font-label-sm text-label-sm">Promotional discount</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-space-xs">
+                                            <span class="font-bold tabular-nums">-GH₵50.00</span>
+                                            <button class="p-1 text-tertiary hover:text-error transition-colors" id="remove-voucher-btn" title="Remove voucher" type="button">
+                                                <span class="material-symbols-outlined text-base">close</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="h-px bg-surface-container my-space-xs"></div>
+                                    <div class="flex items-baseline justify-between">
+                                        <span class="font-title-md text-title-md font-bold text-on-surface">Total</span>
+                                        <div class="flex flex-col items-end">
+                                            <span class="font-headline-md text-headline-md font-bold text-on-surface tabular-nums" id="order-total">GH₵1,005.75</span>
+                                            <span class="font-label-sm text-label-sm text-outline">Inclusive of all local duties &amp; levies</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-space-xs">
+                                    <label class="font-label-md text-label-md text-on-surface font-semibold" for="promo-input">Have a coupon code?</label>
+                                    <div class="flex items-center gap-space-xs">
+                                        <input class="flex-1 h-11 px-3.5 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-all" id="promo-input" placeholder="Enter promo code" type="text">
+                                        <button class="h-11 px-4 bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg rounded-lg font-semibold transition-colors" id="apply-promo-btn" type="button">Apply</button>
+                                    </div>
+                                </div>
+                                <a class="w-full h-12 bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg rounded-lg font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-sm group" href="#" id="proceed-checkout-btn">
+                                    <span class="">Proceed to Checkout</span>
+                                    <span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
+                                </a>
+                                <div class="flex flex-col gap-space-sm pt-space-xs">
+                                    <div class="flex items-center gap-space-xs font-label-md text-label-md text-outline">
+                                        <span class="material-symbols-outlined text-base text-tertiary">lock</span>
+                                        <span class="">256-bit SSL Secure Checkout</span>
+                                    </div>
+                                    <div class="flex items-start gap-space-xs font-label-sm text-label-sm text-on-surface-variant leading-relaxed">
+                                        <span class="material-symbols-outlined text-base text-primary shrink-0 mt-0.5">account_balance_wallet</span>
+                                        <span class="">Pay with Mobile Money (MTN MoMo, Telecel, AT), Debit Cards, or Cash on Delivery</span>
+                                    </div>
+                                    <div class="flex items-start gap-space-xs font-label-sm text-label-sm text-on-surface-variant leading-relaxed">
+                                        <span class="material-symbols-outlined text-base text-tertiary shrink-0 mt-0.5">shield</span>
+                                        <span class="">7-day buyer protection &amp; easy replacement returns</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="w-full bg-surface-container-lowest border-t border-surface-container mt-space-xl">
+            <div class="max-w-[1280px] mx-auto px-margin pt-space-xl pb-space-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl mb-space-xl">
+                    <div class="flex flex-col gap-space-md">
+                        <div class="flex items-center gap-space-xs">
+                            <img class="h-8 w-8 object-contain rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb90weSxo_uQPR-Joxlh3DQcvY52k1FBjSZFl3hEPioc1sxPH1WxDXd7RqOO19bMZuBK9kyDGfbgZ_-k1zeUKpTdw8VqliGvqy_8nJnMLs3L4f6g2QoXefuDUiTha9b-D2GNaou5SNMG_IdsfUqPiSkGAL-eKdidmANt5TE6UjI1OP6YAnbwgIMMTf5v03qx2JQIqB2gY60kW-dLk6pHnvMYR8CIAt8_A8Udo33L56yExBXnHhT4Bq1-CM78cxdHsGKUs" alt="Gelo &amp; Co. Logo">
+                            <span class="font-headline-sm text-headline-sm text-primary font-bold">Gelo &amp; Co.</span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Gelo &amp; Co. brings quality everyday lifestyle goods, tech and apparel right to your doorstep across Ghana with seamless payments and fast delivery.</p>
+                    </div>
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Quick Links</h3>
+                        <div class="flex flex-col gap-space-xs">
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="all-products" href="#">Shop All</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="new-arrivals" href="#">New Arrivals</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="order-tracking" href="#">Order Tracking</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="faqs" href="#">FAQs</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Customer Care &amp; Policies</h3>
+                        <div class="flex flex-col gap-space-xs">
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="contact-us" href="#">Contact Us</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="shipping-and-delivery" href="#">Shipping &amp; Delivery</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="return-policy" href="#">Return Policy</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Contact &amp; Social</h3>
+                        <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">call</span>
+                                <span class="">+233 24 555 0199</span>
+                            </div>
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">mail</span>
+                                <span class="">support@geloandco.com.gh</span>
+                            </div>
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">location_on</span>
+                                <span class="">Accra, Ghana</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-space-sm mt-space-xs">
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">alternate_email</span>
+                            </a>
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">photo_camera</span>
+                            </a>
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">public</span>
+                            </a>
+                            <a class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary transition-all" href="#">
+                                <span class="material-symbols-outlined text-lg">work</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-surface-container pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-md">
+                    <p class="font-body-sm text-body-sm text-outline">© 2025 Gelo &amp; Co. Ltd. All rights reserved.</p>
+                    <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cards (Visa / MC)</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">MTN Mobile Money</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Telecel Cash</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cash on Delivery</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+            (function() {
+                function calculateCart() {
+                    var rows = document.querySelectorAll('.cart-item-row');
+                    var subtotal = 0;
+                    rows.forEach(function(row) {
+                        var price = parseFloat(row.getAttribute('data-price')) || 0;
+                        var qtyInput = row.querySelector('.qty-input');
+                        var qty = parseInt(qtyInput ? qtyInput.value : 1, 10);
+                        var lineTotal = price * qty;
+                        var lineTotalEl = row.querySelector('.line-total');
+                        if (lineTotalEl) {
+                            lineTotalEl.textContent = 'GH₵' + lineTotal.toFixed(2);
+                        }
+                        subtotal += lineTotal;
+                    });
+
+                    var subtotalEl = document.getElementById('order-subtotal');
+                    if (subtotalEl) {
+                        subtotalEl.textContent = 'GH₵' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    }
+
+                    var voucherRow = document.getElementById('voucher-row');
+                    var voucherDiscount = (voucherRow && !voucherRow.classList.contains('hidden')) ? 50 : 0;
+                    var tax = subtotal * 0.03;
+                    var total = Math.max(0, subtotal - voucherDiscount + tax);
+
+                    var totalEl = document.getElementById('order-total');
+                    if (totalEl) {
+                        totalEl.textContent = 'GH₵' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    }
+                }
+
+                document.querySelectorAll('.qty-plus').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var input = this.parentElement.querySelector('.qty-input');
+                        var val = parseInt(input.value, 10) || 1;
+                        input.value = val + 1;
+                        calculateCart();
+                    });
+                });
+
+                document.querySelectorAll('.qty-minus').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var input = this.parentElement.querySelector('.qty-input');
+                        var val = parseInt(input.value, 10) || 1;
+                        if (val > 1) {
+                            input.value = val - 1;
+                            calculateCart();
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.remove-item-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var row = this.closest('.cart-item-row');
+                        if (row) {
+                            var divider = row.nextElementSibling;
+                            if (divider && divider.classList.contains('h-px')) {
+                                divider.remove();
+                            }
+                            row.remove();
+                            calculateCart();
+                        }
+                    });
+                });
+
+                var removeVoucherBtn = document.getElementById('remove-voucher-btn');
+                if (removeVoucherBtn) {
+                    removeVoucherBtn.addEventListener('click', function() {
+                        var voucherRow = document.getElementById('voucher-row');
+                        if (voucherRow) {
+                            voucherRow.classList.add('hidden');
+                            calculateCart();
+                        }
+                    });
+                }
+
+                var toggleSavedBtn = document.getElementById('toggle-saved-items');
+                var savedContainer = document.getElementById('saved-items-container');
+                if (toggleSavedBtn && savedContainer) {
+                    toggleSavedBtn.addEventListener('click', function() {
+                        savedContainer.classList.toggle('hidden');
+                        var icon = toggleSavedBtn.querySelector('.material-symbols-outlined');
+                        if (icon) {
+                            icon.textContent = savedContainer.classList.contains('hidden') ? 'expand_less' : 'expand_more';
+                        }
+                    });
+                }
+            })();
+        </script>
+    </body>
+</html>

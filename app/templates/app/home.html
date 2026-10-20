@@ -182,7 +182,7 @@
                 <div class="h-16 max-w-[1280px] mx-auto px-margin flex items-center justify-between gap-space-md">
                     <!-- Logo -->
                     <div class="flex items-center gap-space-sm shrink-0">
-                        <a class="flex items-center gap-space-xs" data-path="home" href="#">
+                        <a class="flex items-center gap-space-xs" data-path="home" href="{% url "app:home" %}">
                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYxciJ9zLZjcQnvCqGg-1xZBaO-U9ZAmaMKz35C5Sx1bd9AIIilAclpG7ocX21K-hguAKKBJPHGaC630RKZu1vYdR-KyRe_J0ggFPXQJOv6_AVnLYcu-AJG7JG5MLLptr5_ecGtfsEewYzBcle7PJPced7G9FF7OfxWpQA5EMSewxMk9SIdbrQ1IbwsnxabLo5U3yMNbgJwhfa750xSSOOmnXrJJ8RLXI5psimNIOpWan4nwdwvOjNelzaEzUu8zzub6I" alt="Gelo &amp; Co. Logo" class="h-11 w-11 object-contain rounded-full" />
                             <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Gelo &amp; Co.</span>
                         </a>
@@ -202,9 +202,12 @@
                     <!-- User Actions & Cart -->
                     <div class="flex items-center gap-space-md shrink-0">
                         <!-- Shopping Bag -->
-                        <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="#">
+                        <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="{% url "app:carts" %}">
                             <span class="material-symbols-outlined text-2xl">shopping_bag</span>
-                            <span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">3</span>
+
+                            {% if cart_total_quantity > 0 %}
+                            <span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">{{cart_total_quantity}}</span>
+                            {% endif %}
                         </a>
 
                         <!-- User Profile & Account -->
@@ -212,7 +215,7 @@
                             <div class="flex items-center gap-space-xs">
                                 {% comment %} {% if user.is_authenticated %}
                                     {% if user.image %} {% endcomment %}
-                                    <img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="{{user.image_url}}" alt="{{user.first_name}} " />
+                                    <img class="w-8 h-8 rounded-full object-cover" src="{{user.image_url}}" alt="{{user.first_name}} "/>
                                     {% comment %} {% else %}
                                         <span class="material-symbols-outlined">account_circle</span>
                                     {% endif %}
@@ -463,14 +466,17 @@
                                                 {% if not products.discount_price %}
                                                 <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵{{products.price}}</span>
                                                 {% else %}
-                                                <span class="ont-headline-sm text-headline-sm text-on-surface font-bold">GH₵{{products.discount_price}}</span>
+                                                <span class="font-headline-sm text-headline-sm text-on-surface font-bold">GH₵{{products.discount_price}}</span>
                                                 <span class="font-label-sm text-label-sm text-outline line-through">GH₵{{products.price}}</span>
                                                 {% endif %}
                                             </div>
-                                            <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="CloudStep Runner Sneakers" data-price="280.00">
-                                                <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                                                Add
-                                            </button>
+                                            <form method="POST" action="{% url 'app:add_to_cart' products.id %}">
+                                                {% csrf_token %}
+                                                <button class="add-to-cart-btn px-space-md h-10 rounded-lg bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors shadow-sm active:scale-95" data-name="CloudStep Runner Sneakers" data-price="280.00">
+                                                    <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                                    Add
+                                                </button>
+                                            </form> 
                                         </div>
                                     </div>
                                 </article>
@@ -631,25 +637,6 @@
                             btn.classList.add('text-secondary');
                             showToast('Saved to your Wishlist');
                         }
-                    });
-                });
-
-                // Add to cart buttons
-                document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const name = btn.getAttribute('data-name');
-                        const price = btn.getAttribute('data-price');
-                        
-                        // Animate button feedback
-                        btn.classList.add('bg-tertiary');
-                        btn.innerHTML = `<span class="material-symbols-outlined text-lg">check</span> Added`;
-                        setTimeout(() => {
-                            btn.classList.remove('bg-tertiary');
-                            btn.innerHTML = `<span class="material-symbols-outlined text-lg">shopping_bag</span> Add`;
-                        }, 1400);
-
-                        showToast(`${name} added to cart (GH₵${price})`);
                     });
                 });
 
