@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect
-from .models import Product, userAccount
+
+from app.context_processors import get_cart
+from .models import Product, cart_Items, Cart
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.db.models import Sum
+
+from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
+from django.db.models import F
+
+from .utils import get_cart
 
 User = get_user_model()
 
@@ -105,4 +114,27 @@ def logout_view(request):
     if request.user.is_authenticated:
         return redirect('app:home')
     return redirect('app:loginPage')
-    
+
+
+def cart_items(request):
+    cart = get_cart(request)
+    items = cart_Items.objects.filter(cart=cart).select_related('product') if cart else []
+
+    context = {
+        'cart': len(items),
+        'cart_item': items
+    }
+    return render(request, 'app/cart.html', context)
+
+
+@require_POST
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id, is_active=True)
+    cart = get_cart(request, create=True)
+    item, created = cart_Items.objects.get_or_create(
+        cart=cart, product=product, defaults={'quantity': 1}
+    )
+    if not created:
+        item.quantity = F('quantity') + 1
+        item.save()
+    return redirect('app:home')
