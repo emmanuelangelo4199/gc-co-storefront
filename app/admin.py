@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cart, Order, Order_Items, Product, cart_Items, userAccount
+from .models import Cart, Category, Order, Order_Items, Product, cart_Items, userAccount
 
 
 @admin.register(Product)
@@ -33,3 +33,8 @@ class cart_Admin(admin.ModelAdmin):
 @admin.register(cart_Items)
 class cart_itemsAdmin(admin.ModelAdmin):
     list_display = ['cart']
+
+@admin.register(Category)
+class categoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    search_fields = ['slug']
