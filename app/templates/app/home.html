@@ -240,9 +240,9 @@
                 <div class="h-12 border-t border-surface-container bg-surface-container-lowest/90 backdrop-blur-md">
                     <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
                         <nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary">
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="all-products" href="#">All Products</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="electronics" href="#">Electronics</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="fashion" href="#">Fashion</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'all' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface {% endif %} " data-path="all-products" href="{% url 'app:category' 'all' %}">All Products</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'electronics' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'electronics' %}">Electronics</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'fashion' %}text-primary font-bold border-b-2 border-primary {% else %} text-on-surface-variant hover:text-on-surface{% endif %} " data-path="fashion" href="{% url 'app:category' 'fashion' %}">Fashion</a>
                             <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="home-lifestyle" href="#">Home</a>
                             <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="accessories" href="#">Accessories</a>
                             <a class="h-full flex items-center text-on-secondary-fixed-variant hover:text-secondary font-label-lg text-label-lg transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
@@ -705,6 +705,26 @@
                     sorted.forEach(card => productsContainer.appendChild(card));
                     counterCurrent.textContent = visibleCount;
                 }
+
+                const nav = document.querySelector('nav[data-active-classes]');
+                const navLinks = nav.querySelectorAll('a[data-path]');
+                const activeClasses = nav.dataset.activeClasses.split(' ');
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();   // remove this if the link should navigate
+
+                        // switch the light off everywhere
+                        navLinks.forEach(l => {
+                            l.classList.remove(...activeClasses);
+                            l.classList.add('text-on-surface-variant');
+                        });
+
+                        // switch it on for the clicked link
+                        link.classList.remove('text-on-surface-variant');
+                        link.classList.add(...activeClasses);
+                    });
+                });
 
                 // View switcher
                 viewGridBtn.addEventListener('click', () => {

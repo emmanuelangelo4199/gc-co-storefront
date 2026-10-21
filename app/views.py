@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from app.context_processors import get_cart
-from .models import Product, cart_Items, Cart
+from .models import Product, cart_Items, Cart, Category
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -138,3 +138,15 @@ def add_to_cart(request, product_id):
         item.quantity = F('quantity') + 1
         item.save()
     return redirect('app:home')
+
+
+def category_view(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    products = Product.objects.filter(category__slug=slug, is_active=True)
+
+    context = {
+        'product': products,
+        'product_count': products.count(),
+        'active_category': slug,
+    }
+    return render(request, 'app/home.html', context)
