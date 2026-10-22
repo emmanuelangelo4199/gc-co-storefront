@@ -35,6 +35,7 @@ class cart_itemsAdmin(admin.ModelAdmin):
     list_display = ['cart']
 
 @admin.register(Category)
-class categoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
-    search_fields = ['slug']
+    search_fields = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
