@@ -20,11 +20,12 @@ User = get_user_model()
 
 
 def my_homeView(request):
-    product = Product.objects.all()
+    product = Product.objects.filter(is_active=True).select_related('category')
     product_count = product.count()
     context = {
         'product': product,
-        'product_count': product_count
+        'product_count': product_count,
+        'active_category': 'all',
     }
 
     return render(request, 'app/home.html', context)
@@ -141,8 +142,15 @@ def add_to_cart(request, product_id):
 
 
 def category_view(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    products = Product.objects.filter(category=category, is_active=True)
+    products = Product.objects.filter(is_active=True).select_related('category')
+
+    if slug == 'all':
+        pass
+    elif slug == 'sale':
+        products = products.filter(discount_price__gt=0)
+    else:
+        get_object_or_404(Category, slug=slug)
+        products = products.filter(category__slug=slug)
 
     context = {
         'product': products,
