@@ -239,13 +239,13 @@
                 <!-- Secondary Categories Navigation -->
                 <div class="h-12 border-t border-surface-container bg-surface-container-lowest/90 backdrop-blur-md">
                     <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
-                        <nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary">
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="all-products" href="#">All Products</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="electronics" href="#">Electronics</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="fashion" href="#">Fashion</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="home-lifestyle" href="#">Home</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="accessories" href="#">Accessories</a>
-                            <a class="h-full flex items-center text-on-secondary-fixed-variant hover:text-secondary font-label-lg text-label-lg transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                        <nav class="flex items-center gap-space-lg h-full">
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'all' or not active_category %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'all' %}">All Products</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'electronic' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'electronic' %}">Electronics</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'fashion' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'fashion' %}">Fashion</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'home-living' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'home-living' %}">Home</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'accessories' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'accessories' %}">Accessories</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'sale' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'sale' %}">Sale &amp; Offers</a>
                         </nav>
                         <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
                             <span class="material-symbols-outlined text-base text-tertiary">local_shipping</span>
@@ -361,24 +361,24 @@
                                 
                                 <!-- Category Pill Chips -->
                                 <div id="category-filter" class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0">
-                                    <button class="category-chip px-space-md h-9 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm transition-colors" data-cat="all">
+                                    <a href="{% url 'app:category' 'all' %}" class="category-chip px-space-md h-9 rounded-full font-label-md text-label-md whitespace-nowrap transition-colors flex items-center {% if active_category == 'all' or not active_category %}bg-primary text-on-primary shadow-sm{% else %}bg-surface-container text-on-surface-variant hover:text-on-surface{% endif %}">
                                         All Products
-                                    </button>
-                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Electronics">
+                                    </a>
+                                    <a href="{% url 'app:category' 'electronic' %}" class="category-chip px-space-md h-9 rounded-full font-label-md text-label-md whitespace-nowrap transition-colors flex items-center {% if active_category == 'electronic' %}bg-primary text-on-primary shadow-sm{% else %}bg-surface-container text-on-surface-variant hover:text-on-surface{% endif %}">
                                         Electronics
-                                    </button>
-                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Fashion">
+                                    </a>
+                                    <a href="{% url 'app:category' 'fashion' %}" class="category-chip px-space-md h-9 rounded-full font-label-md text-label-md whitespace-nowrap transition-colors flex items-center {% if active_category == 'fashion' %}bg-primary text-on-primary shadow-sm{% else %}bg-surface-container text-on-surface-variant hover:text-on-surface{% endif %}">
                                         Fashion
-                                    </button>
-                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Home">
+                                    </a>
+                                    <a href="{% url 'app:category' 'home-living' %}" class="category-chip px-space-md h-9 rounded-full font-label-md text-label-md whitespace-nowrap transition-colors flex items-center {% if active_category == 'home-living' %}bg-primary text-on-primary shadow-sm{% else %}bg-surface-container text-on-surface-variant hover:text-on-surface{% endif %}">
                                         Home &amp; Living
-                                    </button>
-                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="Accessories">
+                                    </a>
+                                    <a href="{% url 'app:category' 'accessories' %}" class="category-chip px-space-md h-9 rounded-full font-label-md text-label-md whitespace-nowrap transition-colors flex items-center {% if active_category == 'accessories' %}bg-primary text-on-primary shadow-sm{% else %}bg-surface-container text-on-surface-variant hover:text-on-surface{% endif %}">
                                         Accessories
-                                    </button>
-                                    <button class="category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors" data-cat="sale">
+                                    </a>
+                                    <a href="{% url 'app:category' 'sale' %}" class="category-chip px-space-md h-9 rounded-full font-label-md text-label-md whitespace-nowrap transition-colors flex items-center {% if active_category == 'sale' %}bg-primary text-on-primary shadow-sm{% else %}bg-surface-container text-on-surface-variant hover:text-on-surface{% endif %}">
                                         Special Deals
-                                    </button>
+                                    </a>
                                 </div>
 
                                 <!-- Controls: Price Filter, Sort, View Toggle, Result Counter -->
@@ -433,12 +433,12 @@
                             <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
                                 <!-- Product Card 1 -->
                                 {% for products in product %}
-                                <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="Fashion" data-price="280" data-rating="4.9" data-sale="true">
+                                <article class="product-card group relative bg-surface-container-lowest rounded-xl p-space-sm flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200" data-category="{{ products.category.slug }}" data-price="{{ products.discount_price|default:products.price }}" data-rating="4.9" data-sale="{% if products.discount_percent %}true{% else %}false{% endif %}">
                                     <div class="relative w-full aspect-square rounded-lg bg-surface-container-low overflow-hidden mb-space-sm">
                                         <img
                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                            data-alt="Lightweight breathable ergonomic running sneakers in crisp modern chalk white and deep teal accents, floating dynamic product photography against warm neutral background."
-                                            src="{{products.image.url}}" />
+                                            alt="{{ products.name }}"
+                                            src="{% if products.image %}{{ products.image.url }}{% endif %}" />
                                         {% if products.discount_percent  %}
                                         <span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">
                                             SALE -{{products.discount_percent}}%
@@ -454,7 +454,7 @@
                                         </button>
                                     </div>
                                     <div class="flex flex-col flex-1">
-                                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Fashion</span>
+                                        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">{% if products.category %}{{ products.category.name }}{% else %}Uncategorized{% endif %}</span>
                                         <h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 mt-0.5">{{products.name}}</h3>
                                         <div class="flex items-center gap-1 mt-1 mb-space-sm">
                                             <span class="material-symbols-outlined text-base text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -604,7 +604,6 @@
         <!-- JAVASCRIPT BEHAVIOR -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                const categoryChips = document.querySelectorAll('.category-chip');
                 const productCards = Array.from(document.querySelectorAll('.product-card'));
                 const sortSelect = document.getElementById('sort-select');
                 const priceFilter = document.getElementById('price-filter');
@@ -617,8 +616,6 @@
                 const loadText = document.getElementById('load-text');
                 const viewGridBtn = document.getElementById('view-grid-btn');
                 const viewListBtn = document.getElementById('view-list-btn');
-
-                let currentCategory = 'all';
 
                 // Wishlist toggle
                 document.querySelectorAll('.favorite-btn').forEach(btn => {
@@ -640,22 +637,8 @@
                     });
                 });
 
-                // Category Filter logic
-                categoryChips.forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        categoryChips.forEach(c => {
-                            c.className = 'category-chip px-space-md h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors';
-                        });
-                        chip.className = 'category-chip px-space-md h-9 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm transition-colors';
-                        currentCategory = chip.getAttribute('data-cat');
-                        applyFiltersAndSort();
-                    });
-                });
-
-                // Price filter change
+                // Price / sort filters (category is handled by server via category_view)
                 priceFilter.addEventListener('change', applyFiltersAndSort);
-
-                // Sort select change
                 sortSelect.addEventListener('change', applyFiltersAndSort);
 
                 function applyFiltersAndSort() {
@@ -664,24 +647,15 @@
                     let visibleCount = 0;
 
                     productCards.forEach(card => {
-                        const cardCat = card.getAttribute('data-category');
-                        const isSale = card.getAttribute('data-sale') === 'true';
                         const cardPrice = parseFloat(card.getAttribute('data-price'));
 
-                        // Category matching
-                        let catMatch = false;
-                        if (currentCategory === 'all') catMatch = true;
-                        else if (currentCategory === 'sale') catMatch = isSale;
-                        else catMatch = (cardCat === currentCategory);
-
-                        // Price matching
                         let priceMatch = false;
                         if (priceVal === 'all') priceMatch = true;
                         else if (priceVal === 'under100') priceMatch = cardPrice < 100;
                         else if (priceVal === '100to300') priceMatch = (cardPrice >= 100 && cardPrice <= 300);
                         else if (priceVal === '300plus') priceMatch = cardPrice > 300;
 
-                        if (catMatch && priceMatch) {
+                        if (priceMatch) {
                             card.classList.remove('hidden');
                             visibleCount++;
                         } else {
@@ -689,7 +663,6 @@
                         }
                     });
 
-                    // Sorting visible cards
                     const sorted = productCards.slice().sort((a, b) => {
                         const priceA = parseFloat(a.getAttribute('data-price'));
                         const priceB = parseFloat(b.getAttribute('data-price'));
@@ -699,7 +672,7 @@
                         if (sortVal === 'price-low') return priceA - priceB;
                         if (sortVal === 'price-high') return priceB - priceA;
                         if (sortVal === 'rating') return ratingB - ratingA;
-                        return 0; // default featured
+                        return 0;
                     });
 
                     sorted.forEach(card => productsContainer.appendChild(card));
