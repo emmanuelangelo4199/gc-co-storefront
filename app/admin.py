@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cart, Category, Order, Order_Items, Product, cart_Items, userAccount
+from .models import Cart, Category, Order, Order_Items, Product, SavedItem, cart_Items, userAccount
 
 
 @admin.register(Product)
@@ -39,3 +39,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     search_fields = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
+
+@admin.register(SavedItem)
+class Saved_Item(admin.ModelAdmin):
+    list_display = ['user', 'product']
+    autocomplete_fields = ['user', 'product']
+    list_filter = ['created_at']
