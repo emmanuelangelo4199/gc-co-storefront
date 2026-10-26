@@ -37,7 +37,12 @@ class Product(models.Model):
         if self.discount_price and self.discount_price < self.price:
             return int((self.price - self.discount_price) / self.price * 100)
         return 0
-    
+
+    @property
+    def unit_price(self):
+        if self.discount_price and self.discount_price > 0:
+            return self.discount_price
+        return self.price
 
     def __str__(self):
         return self.name
@@ -132,3 +137,26 @@ class cart_Items(models.Model):
 
     class Meta:
         unique_together = ('cart', 'product') 
+
+
+class SavedItem(models.Model):
+    user = models.ForeignKey(
+        userAccount,
+        on_delete=models.CASCADE,
+        related_name='saved_items'
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='saved_by'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'product')  # prevent duplicates
+        ordering = ['-created_at']
+        verbose_name = 'Saved Item'
+        verbose_name_plural = 'Saved Items'
+
+    def __str__(self):
+        return f"{self.user.email} saved {self.product.name}"
