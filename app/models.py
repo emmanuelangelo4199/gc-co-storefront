@@ -31,6 +31,11 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
 
+    @property
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        return static('app/image/placeholder.jpg')
 
     @property
     def discount_percent(self):
@@ -85,13 +90,13 @@ class Order(models.Model):
         REFUND = 'refund', 'Refund'
 
     order_number = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(userAccount, on_delete=models.CASCADE)
+    user = models.ForeignKey(userAccount, on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.ORDER_CONFIRMED)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2)
     tax_amount = models.DecimalField(max_digits=10, decimal_places=2)
     shipping_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    shipping_address = models.CharField(max_length=50, null=False)
+    shipping_address = models.CharField(max_length=255, null=False)
     digital_address = models.CharField(max_length=50, null=False)
     payment_method = models.CharField(max_length=20, choices=payment_Method.choices, default=payment_Method.CARD)
     payment_status = models.CharField(max_length=20, choices=payment_Status.choices, default=payment_Status.UNPAID)
