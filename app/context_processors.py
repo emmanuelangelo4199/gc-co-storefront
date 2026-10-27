@@ -1,5 +1,6 @@
 from django.db.models import Sum
 from .utils import get_cart
+from .models import Category
 
 def cart_icon_count(request):
     cart = get_cart(request)
@@ -7,3 +8,6 @@ def cart_icon_count(request):
     if cart:
         total = cart.cart_items_set.aggregate(Sum('quantity'))['quantity__sum'] or 0
     return {'cart_total_quantity': total}
+
+def categories_processor(request):
+    return {'global_categories': Category.objects.all()}
