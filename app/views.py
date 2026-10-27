@@ -7,7 +7,8 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from django.db.models import F
+from django.db import models
+from django.db.models import F, Sum, Q
 from django.views.decorators.http import require_POST
 
 from .models import Product, SavedItem, cart_Items, Cart, Category, Order, Order_Items
@@ -89,20 +90,116 @@ def merge_cart(request, user):
     session_cart.delete()
 
 
+def apply_sorting(queryset, sort_option):
+    if sort_option == 'price-low':
+        return queryset.order_by('price')
+    elif sort_option == 'price-high':
+        return queryset.order_by('-price')
+    elif sort_option == 'bestseller':
+        return queryset.order_by('-is_bestseller', '-created_at')
+    elif sort_option == 'featured':
+        return queryset.order_by('-is_featured', '-created_at')
+    return queryset.order_by('-created_at')
+
+
 def my_homeView(request):
-    product = Product.objects.filter(is_active=True).select_related('category')
-    product_count = product.count()
+    sort = request.GET.get('sort', 'newest')
+    products = Product.objects.filter(is_active=True).select_related('category')
+    products = apply_sorting(products, sort)
+    product_count = products.count()
+
+    saved_product_ids = set()
+    if request.user.is_authenticated:
+        saved_product_ids = set(
+            SavedItem.objects.filter(user=request.user).values_list('product_id', flat=True)
+        )
+
     context = {
-        'product': product,
+        'product': products,
         'product_count': product_count,
         'active_category': 'all',
+        'sort': sort,
+        'saved_product_ids': saved_product_ids,
     }
     return render(request, 'app/home.html', context)
 
 
-def productDetails(request):
-    context = {}
+def search_view(request):
+    query = request.GET.get('q', '').strip()
+    sort = request.GET.get('sort', 'newest')
+    products = Product.objects.filter(is_active=True).select_related('category')
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(category__description__icontains=query)
+        )
+    products = apply_sorting(products, sort)
+
+    saved_product_ids = set()
+    if request.user.is_authenticated:
+        saved_product_ids = set(
+            SavedItem.objects.filter(user=request.user).values_list('product_id', flat=True)
+        )
+
+    context = {
+        'product': products,
+        'product_count': products.count(),
+        'active_category': 'all',
+        'query': query,
+        'sort': sort,
+        'saved_product_ids': saved_product_ids,
+    }
+    return render(request, 'app/home.html', context)
+
+
+def productDetails(request, product_id=None):
+    if product_id is None:
+        first_product = Product.objects.filter(is_active=True).first()
+        if first_product:
+            return redirect('app:product_detail', product_id=first_product.id)
+        return redirect('app:home')
+
+    product = get_object_or_404(Product.objects.select_related('category'), id=product_id, is_active=True)
+    if product.category:
+        related_products = (
+            Product.objects.filter(is_active=True, category=product.category)
+            .exclude(id=product.id)[:4]
+        )
+    else:
+        related_products = Product.objects.filter(is_active=True).exclude(id=product.id)[:4]
+
+    is_wishlisted = False
+    if request.user.is_authenticated:
+        is_wishlisted = SavedItem.objects.filter(user=request.user, product=product).exists()
+
+    context = {
+        'product': product,
+        'related_products': related_products,
+        'is_wishlisted': is_wishlisted,
+    }
     return render(request, 'app/product_detail.html', context)
+
+
+@require_POST
+def toggle_wishlist(request, product_id):
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'error': 'login_required'}, status=401)
+
+    product = get_object_or_404(Product, id=product_id, is_active=True)
+    saved_item = SavedItem.objects.filter(user=request.user, product=product).first()
+    if saved_item:
+        saved_item.delete()
+        saved = False
+    else:
+        SavedItem.objects.create(user=request.user, product=product)
+        saved = True
+
+    return JsonResponse({
+        'success': True,
+        'saved': saved,
+        'product_id': product.id,
+    })
 
 
 def loginFormWithSignup(request):
@@ -204,18 +301,25 @@ def cart_items(request):
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id, is_active=True)
     cart = get_cart(request, create=True)
+    try:
+        qty = int(request.POST.get('quantity', 1))
+        if qty < 1:
+            qty = 1
+    except (ValueError, TypeError):
+        qty = 1
+
     item, created = cart_Items.objects.get_or_create(
-        cart=cart, product=product, defaults={'quantity': 1}
+        cart=cart, product=product, defaults={'quantity': qty}
     )
     if not created:
-        item.quantity = F('quantity') + 1
+        item.quantity = F('quantity') + qty
         item.save()
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         cart_total_quantity = cart.cart_items_set.aggregate(Sum('quantity'))['quantity__sum'] or 0
         return JsonResponse({'success': True, 'cart_total_quantity': cart_total_quantity})
 
-    next_url = request.POST.get('next') or request.META.get('HTTP_REFERER') or 'app:home'
+    next_url = request.POST.get('next') or request.META.get('HTTP_REFERER') or 'app:carts'
     return redirect(next_url)
 
 
@@ -411,13 +515,13 @@ def checkout_view(request):
 
         full_address = f"{address}, {city}, {region}".strip(', ')
 
-        # Map payment method choice
-        valid_methods = {'momo': Order.payment_Method.MOBILE_MONEY,
-                         'card': Order.payment_Method.CARD,
-                         'cash': Order.payment_Method.CASH}
+        valid_methods = {
+            'momo': Order.payment_Method.MOBILE_MONEY,
+            'card': Order.payment_Method.CARD,
+            'cash': Order.payment_Method.CASH,
+        }
         selected_method = valid_methods.get(payment_method, Order.payment_Method.MOBILE_MONEY)
 
-        # Create Order
         order = Order.objects.create(
             user=request.user if request.user.is_authenticated else None,
             total_amount=data['grand_total'],
@@ -431,7 +535,6 @@ def checkout_view(request):
             phone_number=phone,
         )
 
-        # Create Order Items and adjust stock
         for item in data['cart_item']:
             Order_Items.objects.create(
                 order=order,
@@ -443,9 +546,7 @@ def checkout_view(request):
                 item.product.stock_quantity = F('stock_quantity') - item.quantity
                 item.product.save()
 
-        # Clear cart
         cart.cart_items_set.all().delete()
-
         return redirect('app:order_confirmation', order_number=order.order_number)
 
     return render(request, 'app/checkout.html', data)
@@ -466,11 +567,12 @@ def my_orders(request):
         messages.info(request, "Please log in to view your orders.")
         return redirect('app:loginPage')
 
-    orders = Order.objects.filter(user=request.user).order_by('-order_date')
-    return render(request, 'app/home.html', {'orders': orders})
+    orders = Order.objects.filter(user=request.user).order_by('-order_date').prefetch_related('order_items_set__product')
+    return render(request, 'app/orders.html', {'orders': orders})
 
 
 def category_view(request, slug):
+    sort = request.GET.get('sort', 'newest')
     products = Product.objects.filter(is_active=True).select_related('category')
 
     if slug == 'all':
@@ -481,9 +583,19 @@ def category_view(request, slug):
         get_object_or_404(Category, slug=slug)
         products = products.filter(category__slug=slug)
 
+    products = apply_sorting(products, sort)
+
+    saved_product_ids = set()
+    if request.user.is_authenticated:
+        saved_product_ids = set(
+            SavedItem.objects.filter(user=request.user).values_list('product_id', flat=True)
+        )
+
     context = {
         'product': products,
         'product_count': products.count(),
         'active_category': slug,
+        'sort': sort,
+        'saved_product_ids': saved_product_ids,
     }
     return render(request, 'app/home.html', context)
