@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="web_standard" name="shell-type">
-        <title>Gelo &amp; Co.</title>
+        <title>Gelo &amp; Co. - Your Shopping Cart</title>
         <link href="https://fonts.googleapis.com" rel="preconnect">
         <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -157,37 +157,48 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-space-md shrink-0">
-                        <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="#">
+                        <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="{% url "app:carts" %}">
                             <span class="material-symbols-outlined text-2xl">shopping_bag</span>
-                            <span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">3</span>
+                            <span id="header-cart-count" class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none" style="display: {% if cart_total_quantity > 0 %}flex{% else %}none{% endif %};">{{ cart_total_quantity }}</span>
                         </a>
                         <div class="flex items-center gap-space-sm pl-space-sm border-l border-outline-variant">
+                            {% if request.user.is_authenticated %}
                             <div class="flex items-center gap-space-xs">
-                                <img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="{{user.image_url}}">
+                                <img class="w-8 h-8 rounded-full object-cover" src="{{ request.user.image_url }}" alt="{{ request.user.first_name }}"/>
                                 <div class="flex flex-col text-left">
-                                    <span class="font-label-md text-label-md text-on-surface font-semibold">{{user.username}}</span>
-                                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="#">My Orders</a>
+                                    <span class="font-label-md text-label-md text-on-surface font-semibold">{{ request.user.username }}</span>
+                                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="{% url 'app:my_orders' %}">My Orders</a>
                                 </div>
                             </div>
-                            <a class="p-space-xs text-on-surface-variant hover:text-secondary transition-colors flex items-center" data-path="login" href="#" title="Sign out">
-                                <span class="material-symbols-outlined text-xl">logout</span>
+                            <form method="POST" action="{% url 'app:logout' %}" id="logout-form">
+                                {% csrf_token %}
+                                <button class="p-space-xs text-on-surface-variant hover:text-secondary transition-colors flex items-center" data-path="login" title="Sign out" type="submit">
+                                    <span class="material-symbols-outlined text-xl">logout</span>
+                                    <span class="font-label-md text-label-md">Log Out</span>
+                                </button>
+                            </form>
+                            {% else %}
+                            <a href="{% url 'app:loginPage' %}" class="flex items-center gap-space-xs text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-2xl">account_circle</span>
+                                <span class="font-label-md text-label-md font-semibold">Sign In</span>
                             </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="h-12 border-t border-surface-container bg-surface-container-lowest/90 backdrop-blur-md">
                     <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
                         <nav class="flex items-center gap-space-lg h-full" data-active-classes="text-primary font-bold border-b-2 border-primary">
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="all-products" href="#">All Products</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="electronics" href="#">Electronics</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="fashion" href="#">Fashion</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="home-lifestyle" href="#">Home</a>
-                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-path="accessories" href="#">Accessories</a>
-                            <a class="h-full flex items-center text-on-secondary-fixed-variant hover:text-secondary font-label-lg text-label-lg transition-colors" data-path="sale-and-offers" href="#">Sale &amp; Offers</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'all' or not active_category %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'all' %}">All Products</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'electronic' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'electronic' %}">Electronics</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'fashion' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'fashion' %}">Fashion</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'home-living' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'home-living' %}">Home</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'accessories' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'accessories' %}">Accessories</a>
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors {% if active_category == 'sale' %}text-primary font-bold border-b-2 border-primary{% else %}text-on-surface-variant hover:text-on-surface{% endif %}" href="{% url 'app:category' 'sale' %}">Sale &amp; Offers</a>
                         </nav>
                         <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
                             <span class="material-symbols-outlined text-base text-tertiary">local_shipping</span>
-                            <span class="">Free delivery over GH₵ 250 in Accra</span>
+                            <span>Free delivery over GH₵ {{ free_shipping_threshold|floatformat:0 }} in Accra</span>
                         </div>
                     </div>
                 </div>
@@ -200,250 +211,211 @@
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
                             <div class="flex items-center gap-space-sm">
                                 <h1 class="font-headline-lg text-headline-lg text-on-surface">Your Shopping Cart</h1>
-                                <span class="px-3 py-1 bg-surface-container rounded-full font-label-md text-label-md text-primary font-bold shadow-sm">3 Items</span>
+                                <span id="item-count-badge" class="px-3 py-1 bg-surface-container rounded-full font-label-md text-label-md text-primary font-bold shadow-sm">{{ item_count }} item{{ item_count|pluralize }}</span>
                             </div>
                             <div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface-variant">
                                 <span class="material-symbols-outlined text-base text-primary">verified_user</span>
-                                <span class="">Guaranteed Authentic &amp; Protected</span>
+                                <span>Guaranteed Authentic &amp; Protected</span>
                             </div>
                         </div>
                         <div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-on-surface">
-                                <div class="flex items-center gap-space-xs font-body-sm text-body-sm font-medium">
-                                    <span class="text-lg">🎉</span>
-                                    <span class="">You are only <strong class="text-primary font-bold">GH₵35.00</strong> away from <strong class="text-tertiary font-bold">FREE Shipping!</strong></span>
+                                <div id="free-shipping-msg" class="flex items-center gap-space-xs font-body-sm text-body-sm font-medium">
+                                    {% if qualifies_free_shipping %}
+                                    <span class="material-symbols-outlined text-tertiary text-lg">local_shipping</span>
+                                    <span>You've unlocked <strong class="text-tertiary font-bold">FREE Shipping!</strong></span>
+                                    {% else %}
+                                    <span class="material-symbols-outlined text-primary text-lg">local_shipping</span>
+                                    <span>You are only <strong class="text-primary font-bold">GH₵{{ amount_to_free_shipping|floatformat:2 }}</strong> away from <strong class="text-tertiary font-bold">FREE Shipping!</strong></span>
+                                    {% endif %}
                                 </div>
-                                <span class="font-label-sm text-label-sm text-outline">Free shipping on orders over GH₵300</span>
+                                <span class="font-label-sm text-label-sm text-outline">Free shipping on orders over GH₵{{ free_shipping_threshold|floatformat:0 }}</span>
                             </div>
                             <div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden">
-                                <div class="h-full bg-primary-container rounded-full transition-all duration-500 ease-out" style="width: 88%;"></div>
+                                <div id="free-shipping-bar" class="h-full bg-primary-container rounded-full transition-all duration-500 ease-out" style="width: {{ free_shipping_progress|floatformat:0 }}%;"></div>
                             </div>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
                         <div class="lg:col-span-8 flex flex-col gap-space-lg">
-                            <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+                            <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden" id="cart-items-wrapper">
                                 <div class="hidden md:grid grid-cols-12 px-space-md py-3.5 bg-surface-container-low font-label-md text-label-md text-outline uppercase tracking-wider">
                                     <div class="col-span-6">Product</div>
                                     <div class="col-span-2 text-right">Unit Price</div>
                                     <div class="col-span-2 text-center">Quantity</div>
                                     <div class="col-span-2 text-right">Line Total</div>
                                 </div>
-                                <div class="flex flex-col">
-                                    <div class="cart-item-row p-space-md flex flex-col md:grid md:grid-cols-12 gap-space-md items-center transition-colors hover:bg-surface-bright" data-item-id="1" data-price="550">
+                                <div class="flex flex-col" id="cart-rows-container">
+                                    {% for item in cart_item %}
+                                    {% with product=item.product %}
+                                    {% if not forloop.first %}
+                                    <div class="h-px bg-surface-container mx-space-md item-divider"></div>
+                                    {% endif %}
+                                    <div class="cart-item-row p-space-md flex flex-col md:grid md:grid-cols-12 gap-space-md items-center transition-colors hover:bg-surface-bright" data-item-id="{{ item.id }}" data-price="{{ product.unit_price }}">
                                         <div class="col-span-6 w-full flex items-center gap-space-md min-w-0">
                                             <div class="w-20 h-20 shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
-                                                <img class="w-full h-full object-cover" data-alt="Studio quality shot of premium matte black noise cancelling wireless over ear headphones on a soft muted background with clean lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXJaxt-ckTXik7fDAZ4sB_5Mu3pDgaPOKfuFL3rgNNYMtirCeZ8v1ZmDowJwR1pfDsPVgGE-Aps_KnCpTPQldHUh2PfEeenNpwcAIW3NNYw4ccrij9YtSvs8xah7lL3RjLMaop8TYbywss_dCgg_NSxz7yHRq5e2ofcJq7b3W_j7a0CKsSUEJeEo3iSPyJLICfi5e88cTlk0XT_I8qsMBgV9NKmsSjvox3Q_R6ulxzU1uUqP_1QoCvnQ">
-                                            </div>
-                                            <div class="flex flex-col min-w-0">
-                                                <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Audio &amp; Tech</span>
-                                                <a class="font-title-md text-title-md text-on-surface hover:text-primary transition-colors truncate" href="#">SonicFlow Noise-Cancelling Wireless Headphones</a>
-                                                <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                                                    <span class="">Color: Matte Black</span>
-                                                    <span class="text-outline-variant">•</span>
-                                                    <span class="">Edition: Standard</span>
-                                                </div>
-                                                <div class="md:hidden flex items-center gap-space-sm mt-2">
-                                                    <span class="font-body-md text-body-md font-bold text-on-surface">GH₵550.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="hidden md:block col-span-2 text-right font-body-md text-body-md text-on-surface tabular-nums">
-                                            GH₵550.00
-                                        </div>
-                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-center">
-                                            <span class="md:hidden font-body-sm text-body-sm text-outline">Qty:</span>
-                                            <div class="qty-stepper flex items-center bg-surface-container rounded-lg p-0.5">
-                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button">
-                                                    <span class="material-symbols-outlined text-base">remove</span>
-                                                </button>
-                                                <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly="" type="text" value="1">
-                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button">
-                                                    <span class="material-symbols-outlined text-base">add</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-end gap-space-sm">
-                                            <div class="line-total font-title-md text-title-md font-bold text-on-surface tabular-nums text-right">
-                                                GH₵550.00
-                                            </div>
-                                            <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button">
-                                                <span class="material-symbols-outlined text-xl">delete</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="h-px bg-surface-container mx-space-md"></div>
-                                    <div class="cart-item-row p-space-md flex flex-col md:grid md:grid-cols-12 gap-space-md items-center transition-colors hover:bg-surface-bright" data-item-id="2" data-price="280">
-                                        <div class="col-span-6 w-full flex items-center gap-space-md min-w-0">
-                                            <div class="w-20 h-20 shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
-                                                <img class="w-full h-full object-cover" data-alt="Modern athletic running sneakers in slate white and light gray mesh sitting on an architectural concrete pedestal in clean natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNVMSCfqEplRCp7RmAtzSGrRn_TpQ-Ir5gEvQSNafR3qZvQgiDYtFlLLghnaXs8nRRtnW1IGTg1hBb4rgK3NU3-kcKDrw_z8eaNyGERl35yfcdFu0H_VQlHo88ftO-AafraPLdmUssGgWM_LJILf08dCDLCDbB96a6XNZJxNfbhmwkpZ95QEWBJzu_NSbbSkycKyoZX-38Dqb-NO8M6hbbR24r2ip-XQQz5ebE0DbmgqN6E_rO2RLVOQ">
+                                                <img class="w-full h-full object-cover" alt="{{ product.name }}" src="{{ product.image_url }}">
                                             </div>
                                             <div class="flex flex-col min-w-0">
                                                 <div class="flex items-center gap-1.5">
-                                                    <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Footwear</span>
-                                                    <span class="px-1.5 py-0.5 bg-error-container text-on-error-container rounded font-label-sm text-label-sm font-bold">20% OFF</span>
+                                                    <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">{% if product.category %}{{ product.category.name }}{% else %}Uncategorized{% endif %}</span>
+                                                    {% if product.discount_percent %}
+                                                    <span class="px-1.5 py-0.5 bg-error-container text-on-error-container rounded font-label-sm text-label-sm font-bold">{{ product.discount_percent }}% OFF</span>
+                                                    {% endif %}
                                                 </div>
-                                                <a class="font-title-md text-title-md text-on-surface hover:text-primary transition-colors truncate" href="#">CloudStep Runner Sneakers</a>
+                                                <a class="font-title-md text-title-md text-on-surface hover:text-primary transition-colors truncate" href="#">{{ product.name }}</a>
+                                                {% if product.stock_quantity %}
                                                 <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                                                    <span class="">Size: 42 EU / 9 US</span>
-                                                    <span class="text-outline-variant">•</span>
-                                                    <span class="">Color: Slate White</span>
+                                                    <span>{{ product.stock_quantity }} in stock</span>
                                                 </div>
+                                                {% endif %}
                                                 <div class="md:hidden flex items-center gap-space-xs mt-2">
-                                                    <span class="font-body-md text-body-md font-bold text-on-surface">GH₵280.00</span>
-                                                    <span class="font-body-sm text-body-sm text-outline line-through">GH₵350.00</span>
+                                                    <span class="font-body-md text-body-md font-bold text-on-surface">GH₵{{ product.unit_price|floatformat:2 }}</span>
+                                                    {% if product.discount_percent %}
+                                                    <span class="font-body-sm text-body-sm text-outline line-through">GH₵{{ product.price|floatformat:2 }}</span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="hidden md:flex col-span-2 flex-col items-end justify-center font-body-md text-body-md tabular-nums">
-                                            <span class="font-semibold text-on-surface">GH₵280.00</span>
-                                            <span class="font-body-sm text-body-sm text-outline line-through">GH₵350.00</span>
+                                            <span class="font-semibold text-on-surface">GH₵{{ product.unit_price|floatformat:2 }}</span>
+                                            {% if product.discount_percent %}
+                                            <span class="font-body-sm text-body-sm text-outline line-through">GH₵{{ product.price|floatformat:2 }}</span>
+                                            {% endif %}
                                         </div>
                                         <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-center">
                                             <span class="md:hidden font-body-sm text-body-sm text-outline">Qty:</span>
                                             <div class="qty-stepper flex items-center bg-surface-container rounded-lg p-0.5">
-                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button">
+                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button" data-item-id="{{ item.id }}">
                                                     <span class="material-symbols-outlined text-base">remove</span>
                                                 </button>
-                                                <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly="" type="text" value="1">
-                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button">
+                                                <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly type="text" value="{{ item.quantity }}" data-max="{{ product.stock_quantity|default:99 }}">
+                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button" data-item-id="{{ item.id }}">
                                                     <span class="material-symbols-outlined text-base">add</span>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-end gap-space-sm">
-                                            <div class="line-total font-title-md text-title-md font-bold text-on-surface tabular-nums text-right">
-                                                GH₵280.00
+                                            <div class="line-total font-title-md text-title-md font-bold text-on-surface tabular-nums text-right" id="line-total-{{ item.id }}">
+                                                GH₵{{ item.line_total|floatformat:2 }}
                                             </div>
-                                            <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button">
-                                                <span class="material-symbols-outlined text-xl">delete</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="h-px bg-surface-container mx-space-md"></div>
-                                    <div class="cart-item-row p-space-md flex flex-col md:grid md:grid-cols-12 gap-space-md items-center transition-colors hover:bg-surface-bright" data-item-id="3" data-price="195">
-                                        <div class="col-span-6 w-full flex items-center gap-space-md min-w-0">
-                                            <div class="w-20 h-20 shrink-0 bg-surface-container rounded-lg overflow-hidden flex items-center justify-center">
-                                                <img class="w-full h-full object-cover" data-alt="Minimalist waterproof commuter everyday backpack in heather grey fabric with magnetic buckles arranged neatly in a bright modern studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoDvJxQlf9SN2fNsIBJQcI-GLi2o4-kOP_JbkPj_rHIZfa4YiZocqktT45A9UdZtKN7s9s-NZVgS_-ODfsvwHg9No2v1BhHc48oPQ66M3NrWoN40DjqsA3Sx8ig1ADxVz2AWGKJ68Na0euJyDyNBPGSqvvd0svj4dfePivyvqMgcY0G8dEW92RNZSfL0diCWqKhvJQ8R_5zrSuKVKeSLyOO25bMIYzdrYhMWeRJeilE2HNT6yOtpb0Dw">
-                                            </div>
-                                            <div class="flex flex-col min-w-0">
-                                                <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Travel &amp; Bags</span>
-                                                <a class="font-title-md text-title-md text-on-surface hover:text-primary transition-colors truncate" href="#">Nomad Waterproof Commuter Backpack</a>
-                                                <div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                                                    <span class="">Color: Heather Grey</span>
-                                                </div>
-                                                <div class="md:hidden flex items-center gap-space-sm mt-2">
-                                                    <span class="font-body-md text-body-md font-bold text-on-surface">GH₵195.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="hidden md:block col-span-2 text-right font-body-md text-body-md text-on-surface tabular-nums">
-                                            GH₵195.00
-                                        </div>
-                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-center">
-                                            <span class="md:hidden font-body-sm text-body-sm text-outline">Qty:</span>
-                                            <div class="qty-stepper flex items-center bg-surface-container rounded-lg p-0.5">
-                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button">
-                                                    <span class="material-symbols-outlined text-base">remove</span>
+                                            <div class="flex items-center gap-0.5">
+                                                <button class="save-later-btn p-1.5 rounded-lg text-outline hover:text-primary transition-colors" title="Save for later" type="button" data-item-id="{{ item.id }}">
+                                                    <span class="material-symbols-outlined text-xl">bookmark_add</span>
                                                 </button>
-                                                <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly="" type="text" value="1">
-                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button">
-                                                    <span class="material-symbols-outlined text-base">add</span>
+                                                <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button" data-item-id="{{ item.id }}">
+                                                    <span class="material-symbols-outlined text-xl">delete</span>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-end gap-space-sm">
-                                            <div class="line-total font-title-md text-title-md font-bold text-on-surface tabular-nums text-right">
-                                                GH₵195.00
-                                            </div>
-                                            <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button">
-                                                <span class="material-symbols-outlined text-xl">delete</span>
-                                            </button>
-                                        </div>
                                     </div>
+                                    {% endwith %}
+                                    {% empty %}
+                                    <div class="p-space-xl flex flex-col items-center justify-center gap-space-sm text-center" id="empty-cart-state">
+                                        <span class="material-symbols-outlined text-5xl text-outline">shopping_bag</span>
+                                        <p class="font-title-md text-title-md text-on-surface font-semibold">Your cart is empty</p>
+                                        <p class="font-body-sm text-body-sm text-on-surface-variant">Browse products and add something you like.</p>
+                                        <a class="mt-space-sm inline-flex items-center gap-space-xs px-space-lg h-11 bg-primary text-on-primary rounded-lg font-label-md text-label-md font-semibold" href="{% url 'app:home' %}">Continue Shopping</a>
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                <div class="p-space-md bg-surface-container-low flex items-center justify-between gap-space-md">
-                                    <a class="flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:underline font-semibold" href="#" id="continue-shopping-link">
+                                {% if item_count %}
+                                <div class="p-space-md bg-surface-container-low flex items-center justify-between gap-space-md" id="cart-actions-bar">
+                                    <a class="flex items-center gap-space-xs font-label-lg text-label-lg text-primary hover:underline font-semibold" href="{% url 'app:home' %}" id="continue-shopping-link">
                                         <span class="material-symbols-outlined text-lg">arrow_back</span>
-                                        <span class="">Continue Shopping</span>
+                                        <span>Continue Shopping</span>
                                     </a>
-                                    <button class="font-label-md text-label-md text-outline hover:text-error transition-colors flex items-center gap-1" id="clear-cart-btn" type="button">
+                                    <button class="font-label-md text-label-md text-outline hover:text-error transition-colors flex items-center gap-1 cursor-pointer" id="clear-cart-btn" type="button">
                                         <span class="material-symbols-outlined text-base">delete_sweep</span>
-                                        <span class="">Clear Cart</span>
+                                        <span>Clear Cart</span>
                                     </button>
                                 </div>
+                                {% endif %}
                             </div>
+
+                            <!-- Saved for Later Section -->
                             <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-space-sm">
                                         <h2 class="font-headline-sm text-headline-sm text-on-surface">Saved for Later</h2>
-                                        <span class="px-2.5 py-0.5 bg-surface-container rounded-full font-label-sm text-label-sm text-on-surface-variant">1 Item</span>
+                                        {% if saved_items %}
+                                        <span class="px-2.5 py-0.5 bg-surface-container rounded-full font-label-sm text-label-sm text-on-surface-variant">{{ saved_items|length }} Item{{ saved_items|length|pluralize }}</span>
+                                        {% endif %}
                                     </div>
-                                    <button class="text-outline hover:text-primary transition-colors flex items-center" id="toggle-saved-items" type="button">
+                                    <button class="text-outline hover:text-primary transition-colors flex items-center cursor-pointer" id="toggle-saved-items" type="button">
                                         <span class="material-symbols-outlined">expand_more</span>
                                     </button>
                                 </div>
-                                <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md bg-surface-container-low rounded-lg p-space-md" id="saved-items-container">
-                                    <div class="flex items-center gap-space-md w-full sm:w-auto">
-                                        <div class="w-16 h-16 shrink-0 bg-surface-container rounded-md overflow-hidden flex items-center justify-center">
-                                            <img class="w-full h-full object-cover" data-alt="Minimalist stainless steel insulated thermal flask bottle in forest green on a clean wooden desk surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzYYThg0g0V84VA1rkfyz5YtqDyPrO_B5bZAKpi3TdW7egn2EtOGzO9KQ2m3mopuX_cncZuF4ehwxdgpcI7zlRT05SL5qastUL9ewl0WOdvN2Xpo8PduBKeFCkdT4xAbbOLrAkHILOlSQ8JdrOyZuHjXW4LjLlNVyAHnq1mIN2v6weGDXE8FOo9R5dzi3aI-7krTDzqvopE8eoMF22x-iSi4Eav1jaHv0X4eA-AAkrZCxyWyrpnn9X_Q">
+                                <div class="flex flex-col gap-space-md" id="saved-items-container">
+                                    {% for item in saved_items %}
+                                    {% with product=item.product %}
+                                    <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md bg-surface-container-low rounded-lg p-space-md saved-item-row" data-saved-id="{{ item.id }}">
+                                        <div class="flex items-center gap-space-md w-full sm:w-auto">
+                                            <div class="w-16 h-16 shrink-0 bg-surface-container rounded-md overflow-hidden flex items-center justify-center">
+                                                <img class="w-full h-full object-cover" alt="{{ product.name }}" src="{{ product.image_url }}">
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <h3 class="font-title-md text-title-md text-on-surface font-semibold">{{ product.name }}</h3>
+                                                {% if product.category %}
+                                                <span class="font-body-sm text-body-sm text-on-surface-variant">{{ product.category.name }}</span>
+                                                {% endif %}
+                                                <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵{{ product.unit_price|floatformat:2 }}</span>
+                                            </div>
                                         </div>
-                                        <div class="flex flex-col">
-                                            <h3 class="font-title-md text-title-md text-on-surface font-semibold">HydroPeak Insulated Flask 750ml</h3>
-                                            <span class="font-body-sm text-body-sm text-on-surface-variant">Color: Forest Green</span>
-                                            <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵110.00</span>
+                                        <div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+                                            <button class="move-saved-btn px-4 py-2 bg-surface-container-lowest text-primary hover:bg-surface font-label-md text-label-md rounded-lg shadow-sm font-semibold transition-colors flex items-center gap-1 cursor-pointer" type="button" data-item-id="{{ item.id }}">
+                                                <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+                                                <span>Move to Cart</span>
+                                            </button>
+                                            <button class="remove-saved-btn p-2 text-outline hover:text-error transition-colors cursor-pointer" title="Remove from saved" type="button" data-item-id="{{ item.id }}">
+                                                <span class="material-symbols-outlined text-lg">close</span>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
-                                        <button class="px-4 py-2 bg-surface-container-lowest text-primary hover:bg-surface font-label-md text-label-md rounded-lg shadow-sm font-semibold transition-colors flex items-center gap-1" type="button">
-                                            <span class="material-symbols-outlined text-base">add_shopping_cart</span>
-                                            <span class="">Move to Cart</span>
-                                        </button>
-                                        <button class="p-2 text-outline hover:text-error transition-colors" title="Remove from saved" type="button">
-                                            <span class="material-symbols-outlined text-lg">close</span>
-                                        </button>
+                                    {% endwith %}
+                                    {% empty %}
+                                    <div class="py-space-md text-center bg-surface-container-low rounded-lg p-space-md">
+                                        <p class="font-body-sm text-body-sm text-on-surface-variant">No items saved for later.</p>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
+
+                            <!-- Frequently Bought Together / Recommendations -->
                             <div class="flex flex-col gap-space-md">
                                 <div class="flex items-center justify-between">
                                     <h2 class="font-headline-sm text-headline-sm text-on-surface">Frequently Bought Together</h2>
                                     <span class="font-label-sm text-label-sm text-outline">Exclusive cart additions</span>
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                                    {% for rec in recommended_products %}
                                     <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between gap-space-md group transition-all hover:shadow-md">
                                         <div class="flex items-center gap-space-md min-w-0">
                                             <div class="w-16 h-16 shrink-0 bg-surface-container rounded-lg overflow-hidden">
-                                                <img class="w-full h-full object-cover" data-alt="Eco-friendly thermal insulated sports water bottle with leak proof lid presented on a light studio surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6-FKzh29mMSFr3X-GA41WqId0EwtQ3kPV0h4OX_tcKzTenm0XMsigqFgpUPjEoYNB3yDBu9qRDwln39X2GhTotUPiNtP_fDuB_Wn-MCyVlqtpwkr-WqUYniZJbo815yUElPRP8bstcs4nh2uD7CVpnQUDhfQNd8hCQPTlvmzNLr_sc360TcAyFD9vhITGQ56Cx6MuDehkCvhHin_5eK1HSWpERKTif3XiDRH3lnLTKA0NDeWsDdLAdw">
+                                                <img class="w-full h-full object-cover" alt="{{ rec.name }}" src="{{ rec.image_url }}">
                                             </div>
                                             <div class="flex flex-col min-w-0">
-                                                <h4 class="font-title-md text-title-md text-on-surface font-semibold truncate">HydroPeak Water Bottle</h4>
-                                                <span class="font-label-sm text-label-sm text-tertiary font-bold">Free Shipping Eligible</span>
-                                                <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵85.00</span>
+                                                <h4 class="font-title-md text-title-md text-on-surface font-semibold truncate">{{ rec.name }}</h4>
+                                                <span class="font-label-sm text-label-sm text-tertiary font-bold">{% if rec.category %}{{ rec.category.name }}{% else %}Free Shipping Eligible{% endif %}</span>
+                                                <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵{{ rec.unit_price|floatformat:2 }}</span>
                                             </div>
                                         </div>
-                                        <button class="shrink-0 p-2.5 bg-primary-container text-on-primary rounded-lg hover:bg-primary transition-all shadow-sm flex items-center justify-center" title="Add to cart" type="button">
-                                            <span class="material-symbols-outlined text-lg">add</span>
-                                        </button>
+                                        <form method="POST" action="{% url 'app:add_to_cart' rec.id %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="next" value="{% url 'app:carts' %}">
+                                            <button class="shrink-0 p-2.5 bg-primary-container text-on-primary rounded-lg hover:bg-primary transition-all shadow-sm flex items-center justify-center cursor-pointer" title="Add to cart" type="submit">
+                                                <span class="material-symbols-outlined text-lg">add</span>
+                                            </button>
+                                        </form>
                                     </div>
-                                    <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center justify-between gap-space-md group transition-all hover:shadow-md">
-                                        <div class="flex items-center gap-space-md min-w-0">
-                                            <div class="w-16 h-16 shrink-0 bg-surface-container rounded-lg overflow-hidden">
-                                                <img class="w-full h-full object-cover" data-alt="Compact sleek portable 20000mAh external battery power bank with digital LED battery percentage readout on desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Ji3TdYYI7pIxYEW-vufUs2KvaeIo5k7GukcuR09-t1r-MzbSIrmo57TYieV7s9p4i4_5CH9G4qU5w034LOVBD3R38RxuYbGX5O-TOY2AiOb_FMxHF-GIFFm9_2sr2ILtK8oysy8BwLnsRC22HEO0lL-x1ylXicALAt_tR8YdMpP5_jKCnl1lUS2i3uZ4dUKE3nAKUVNvqmmu7AeGKkDFmWsda60dmqvHKdvd9VEMhfHp9pK73qELUA">
-                                            </div>
-                                            <div class="flex flex-col min-w-0">
-                                                <h4 class="font-title-md text-title-md text-on-surface font-semibold truncate">FastCharge Power Bank</h4>
-                                                <span class="font-label-sm text-label-sm text-outline">20,000mAh PD 22.5W</span>
-                                                <span class="font-body-md text-body-md font-bold text-on-surface mt-1">GH₵175.00</span>
-                                            </div>
-                                        </div>
-                                        <button class="shrink-0 p-2.5 bg-primary-container text-on-primary rounded-lg hover:bg-primary transition-all shadow-sm flex items-center justify-center" title="Add to cart" type="button">
-                                            <span class="material-symbols-outlined text-lg">add</span>
-                                        </button>
-                                    </div>
+                                    {% empty %}
+                                    <div class="col-span-2 text-center py-4 text-on-surface-variant font-body-sm">Check our store catalog for more exciting additions!</div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Sticky Order Summary Sidebar -->
                         <div class="lg:col-span-4 sticky top-32">
                             <div class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col gap-space-lg">
                                 <div class="flex items-center justify-between">
@@ -452,73 +424,68 @@
                                 </div>
                                 <div class="flex flex-col gap-space-sm font-body-md text-body-md">
                                     <div class="flex items-center justify-between text-on-surface-variant">
-                                        <span class="">Subtotal (3 items)</span>
-                                        <span class="font-semibold text-on-surface tabular-nums" id="order-subtotal">GH₵1,025.00</span>
+                                        <span>Subtotal (<span id="summary-item-count">{{ item_count }}</span> item{{ item_count|pluralize }})</span>
+                                        <span class="font-semibold text-on-surface tabular-nums" id="order-subtotal">GH₵{{ subtotal|floatformat:2 }}</span>
                                     </div>
                                     <div class="flex items-center justify-between text-on-surface-variant">
                                         <div class="flex items-center gap-1">
-                                            <span class="">Estimated Delivery</span>
+                                            <span>Estimated Delivery</span>
                                             <span class="material-symbols-outlined text-sm text-outline cursor-help" title="Standard dispatch across Greater Accra">info</span>
                                         </div>
-                                        <span class="font-bold text-tertiary">FREE</span>
+                                        {% if qualifies_free_shipping %}
+                                        <span class="font-bold text-tertiary" id="order-shipping">FREE</span>
+                                        {% else %}
+                                        <span class="font-semibold text-on-surface tabular-nums" id="order-shipping">GH₵{{ shipping|floatformat:2 }}</span>
+                                        {% endif %}
                                     </div>
-                                    <div class="text-right -mt-1">
+                                    <div class="text-right -mt-1" id="shipping-qualified-badge" style="display: {% if qualifies_free_shipping %}block{% else %}none{% endif %};">
                                         <span class="font-label-sm text-label-sm text-tertiary">Qualified for Free Delivery in Ghana</span>
                                     </div>
                                     <div class="flex items-center justify-between text-on-surface-variant">
                                         <div class="flex items-center gap-1">
-                                            <span class="">Estimated VAT / Tax</span>
+                                            <span>Estimated VAT / Tax</span>
                                             <span class="material-symbols-outlined text-sm text-outline cursor-help" title="3% NHIL/GETFund inclusive">info</span>
                                         </div>
-                                        <span class="font-semibold text-on-surface tabular-nums">GH₵30.75</span>
-                                    </div>
-                                    <div class="flex items-center justify-between p-2.5 bg-tertiary-container/10 rounded-lg text-tertiary" id="voucher-row">
-                                        <div class="flex items-center gap-space-xs">
-                                            <span class="material-symbols-outlined text-lg">sell</span>
-                                            <div class="flex flex-col">
-                                                <span class="font-label-md text-label-md font-bold">EASE10 Applied</span>
-                                                <span class="font-label-sm text-label-sm">Promotional discount</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-space-xs">
-                                            <span class="font-bold tabular-nums">-GH₵50.00</span>
-                                            <button class="p-1 text-tertiary hover:text-error transition-colors" id="remove-voucher-btn" title="Remove voucher" type="button">
-                                                <span class="material-symbols-outlined text-base">close</span>
-                                            </button>
-                                        </div>
+                                        <span class="font-semibold text-on-surface tabular-nums" id="order-tax">GH₵{{ tax|floatformat:2 }}</span>
                                     </div>
                                     <div class="h-px bg-surface-container my-space-xs"></div>
                                     <div class="flex items-baseline justify-between">
                                         <span class="font-title-md text-title-md font-bold text-on-surface">Total</span>
                                         <div class="flex flex-col items-end">
-                                            <span class="font-headline-md text-headline-md font-bold text-on-surface tabular-nums" id="order-total">GH₵1,005.75</span>
+                                            <span class="font-headline-md text-headline-md font-bold text-on-surface tabular-nums" id="order-total">GH₵{{ grand_total|floatformat:2 }}</span>
                                             <span class="font-label-sm text-label-sm text-outline">Inclusive of all local duties &amp; levies</span>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="flex flex-col gap-space-xs">
                                     <label class="font-label-md text-label-md text-on-surface font-semibold" for="promo-input">Have a coupon code?</label>
                                     <div class="flex items-center gap-space-xs">
                                         <input class="flex-1 h-11 px-3.5 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-all" id="promo-input" placeholder="Enter promo code" type="text">
-                                        <button class="h-11 px-4 bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg rounded-lg font-semibold transition-colors" id="apply-promo-btn" type="button">Apply</button>
+                                        <button class="h-11 px-4 bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-lg text-label-lg rounded-lg font-semibold transition-colors cursor-pointer" id="apply-promo-btn" type="button">Apply</button>
                                     </div>
                                 </div>
-                                <a class="w-full h-12 bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg rounded-lg font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-sm group" href="#" id="proceed-checkout-btn">
-                                    <span class="">Proceed to Checkout</span>
+
+                                {% if item_count > 0 %}
+                                <a class="w-full h-12 bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg rounded-lg font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-sm group cursor-pointer" href="{% url 'app:checkout' %}" id="proceed-checkout-btn">
+                                    <span>Proceed to Checkout</span>
                                     <span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
                                 </a>
+                                {% else %}
+                                <button class="w-full h-12 bg-surface-container text-outline font-label-lg text-label-lg rounded-lg font-semibold cursor-not-allowed flex items-center justify-center gap-space-sm" disabled id="proceed-checkout-btn">
+                                    <span>Proceed to Checkout</span>
+                                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                                </button>
+                                {% endif %}
+
                                 <div class="flex flex-col gap-space-sm pt-space-xs">
                                     <div class="flex items-center gap-space-xs font-label-md text-label-md text-outline">
                                         <span class="material-symbols-outlined text-base text-tertiary">lock</span>
-                                        <span class="">256-bit SSL Secure Checkout</span>
+                                        <span>256-bit SSL Secure Checkout</span>
                                     </div>
                                     <div class="flex items-start gap-space-xs font-label-sm text-label-sm text-on-surface-variant leading-relaxed">
                                         <span class="material-symbols-outlined text-base text-primary shrink-0 mt-0.5">account_balance_wallet</span>
-                                        <span class="">Pay with Mobile Money (MTN MoMo, Telecel, AT), Debit Cards, or Cash on Delivery</span>
-                                    </div>
-                                    <div class="flex items-start gap-space-xs font-label-sm text-label-sm text-on-surface-variant leading-relaxed">
-                                        <span class="material-symbols-outlined text-base text-tertiary shrink-0 mt-0.5">shield</span>
-                                        <span class="">7-day buyer protection &amp; easy replacement returns</span>
+                                        <span>Pay with Mobile Money (MTN MoMo, Telecel, AT), Debit Cards, or Cash on Delivery</span>
                                     </div>
                                 </div>
                             </div>
@@ -562,15 +529,15 @@
                         <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
                             <div class="flex items-center gap-space-xs">
                                 <span class="material-symbols-outlined text-base text-primary">call</span>
-                                <span class="">+233 24 555 0199</span>
+                                <span>+233 24 555 0199</span>
                             </div>
                             <div class="flex items-center gap-space-xs">
                                 <span class="material-symbols-outlined text-base text-primary">mail</span>
-                                <span class="">support@geloandco.com.gh</span>
+                                <span>support@geloandco.com.gh</span>
                             </div>
                             <div class="flex items-center gap-space-xs">
                                 <span class="material-symbols-outlined text-base text-primary">location_on</span>
-                                <span class="">Accra, Ghana</span>
+                                <span>Accra, Ghana</span>
                             </div>
                         </div>
                         <div class="flex items-center gap-space-sm mt-space-xs">
@@ -602,88 +569,206 @@
         </footer>
         <script>
             (function() {
-                function calculateCart() {
-                    var rows = document.querySelectorAll('.cart-item-row');
-                    var subtotal = 0;
-                    rows.forEach(function(row) {
-                        var price = parseFloat(row.getAttribute('data-price')) || 0;
-                        var qtyInput = row.querySelector('.qty-input');
-                        var qty = parseInt(qtyInput ? qtyInput.value : 1, 10);
-                        var lineTotal = price * qty;
-                        var lineTotalEl = row.querySelector('.line-total');
-                        if (lineTotalEl) {
-                            lineTotalEl.textContent = 'GH₵' + lineTotal.toFixed(2);
-                        }
-                        subtotal += lineTotal;
-                    });
-
-                    var subtotalEl = document.getElementById('order-subtotal');
-                    if (subtotalEl) {
-                        subtotalEl.textContent = 'GH₵' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    }
-
-                    var voucherRow = document.getElementById('voucher-row');
-                    var voucherDiscount = (voucherRow && !voucherRow.classList.contains('hidden')) ? 50 : 0;
-                    var tax = subtotal * 0.03;
-                    var total = Math.max(0, subtotal - voucherDiscount + tax);
-
-                    var totalEl = document.getElementById('order-total');
-                    if (totalEl) {
-                        totalEl.textContent = 'GH₵' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    }
-                }
-
-                document.querySelectorAll('.qty-plus').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        var input = this.parentElement.querySelector('.qty-input');
-                        var val = parseInt(input.value, 10) || 1;
-                        input.value = val + 1;
-                        calculateCart();
-                    });
-                });
-
-                document.querySelectorAll('.qty-minus').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        var input = this.parentElement.querySelector('.qty-input');
-                        var val = parseInt(input.value, 10) || 1;
-                        if (val > 1) {
-                            input.value = val - 1;
-                            calculateCart();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.remove-item-btn').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        var row = this.closest('.cart-item-row');
-                        if (row) {
-                            var divider = row.nextElementSibling;
-                            if (divider && divider.classList.contains('h-px')) {
-                                divider.remove();
+                function getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
                             }
-                            row.remove();
-                            calculateCart();
+                        }
+                    }
+                    return cookieValue;
+                }
+                const csrftoken = getCookie('csrftoken');
+
+                function updateSummary(data) {
+                    if (data.subtotal !== undefined) {
+                        const el = document.getElementById('order-subtotal');
+                        if (el) el.textContent = 'GH₵' + data.subtotal;
+                    }
+                    if (data.tax !== undefined) {
+                        const el = document.getElementById('order-tax');
+                        if (el) el.textContent = 'GH₵' + data.tax;
+                    }
+                    if (data.grand_total !== undefined) {
+                        const el = document.getElementById('order-total');
+                        if (el) el.textContent = 'GH₵' + data.grand_total;
+                    }
+                    if (data.shipping !== undefined) {
+                        const el = document.getElementById('order-shipping');
+                        if (el) {
+                            if (data.qualifies_free_shipping) {
+                                el.textContent = 'FREE';
+                                el.className = 'font-bold text-tertiary';
+                            } else {
+                                el.textContent = 'GH₵' + data.shipping;
+                                el.className = 'font-semibold text-on-surface tabular-nums';
+                            }
+                        }
+                    }
+                    const badge = document.getElementById('shipping-qualified-badge');
+                    if (badge) {
+                        badge.style.display = data.qualifies_free_shipping ? 'block' : 'none';
+                    }
+                    const bar = document.getElementById('free-shipping-bar');
+                    if (bar && data.free_shipping_progress !== undefined) {
+                        bar.style.width = data.free_shipping_progress + '%';
+                    }
+                    const msg = document.getElementById('free-shipping-msg');
+                    if (msg) {
+                        if (data.qualifies_free_shipping) {
+                            msg.innerHTML = '<span class="material-symbols-outlined text-tertiary text-lg">local_shipping</span><span>You\'ve unlocked <strong class="text-tertiary font-bold">FREE Shipping!</strong></span>';
+                        } else {
+                            msg.innerHTML = '<span class="material-symbols-outlined text-primary text-lg">local_shipping</span><span>You are only <strong class="text-primary font-bold">GH₵' + data.amount_to_free_shipping + '</strong> away from <strong class="text-tertiary font-bold">FREE Shipping!</strong></span>';
+                        }
+                    }
+                    const headerCount = document.getElementById('header-cart-count');
+                    if (headerCount) {
+                        headerCount.textContent = data.cart_total_quantity;
+                        headerCount.style.display = data.cart_total_quantity > 0 ? 'flex' : 'none';
+                    }
+                    const badgeCount = document.getElementById('item-count-badge');
+                    if (badgeCount) {
+                        badgeCount.textContent = data.item_count + (data.item_count === 1 ? ' item' : ' items');
+                    }
+                    const summaryCount = document.getElementById('summary-item-count');
+                    if (summaryCount) {
+                        summaryCount.textContent = data.item_count;
+                    }
+                    if (data.item_count === 0) {
+                        window.location.reload();
+                    }
+                }
+
+                function postJSON(url, body) {
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrftoken,
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify(body || {})
+                    }).then(res => res.json());
+                }
+
+                document.querySelectorAll('.qty-plus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const itemId = this.dataset.itemId;
+                        const input = this.parentElement.querySelector('.qty-input');
+                        const max = parseInt(input.dataset.max || 99, 10);
+                        let val = parseInt(input.value, 10) || 1;
+                        if (val < max) {
+                            val += 1;
+                            input.value = val;
+                            postJSON(`/cart/update/${itemId}/`, { quantity: val }).then(data => {
+                                if (data.success) {
+                                    const lineEl = document.getElementById(`line-total-${itemId}`);
+                                    if (lineEl) lineEl.textContent = 'GH₵' + data.line_total;
+                                    updateSummary(data);
+                                }
+                            });
                         }
                     });
                 });
 
-                var removeVoucherBtn = document.getElementById('remove-voucher-btn');
-                if (removeVoucherBtn) {
-                    removeVoucherBtn.addEventListener('click', function() {
-                        var voucherRow = document.getElementById('voucher-row');
-                        if (voucherRow) {
-                            voucherRow.classList.add('hidden');
-                            calculateCart();
+                document.querySelectorAll('.qty-minus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const itemId = this.dataset.itemId;
+                        const input = this.parentElement.querySelector('.qty-input');
+                        let val = parseInt(input.value, 10) || 1;
+                        if (val > 1) {
+                            val -= 1;
+                            input.value = val;
+                            postJSON(`/cart/update/${itemId}/`, { quantity: val }).then(data => {
+                                if (data.success) {
+                                    const lineEl = document.getElementById(`line-total-${itemId}`);
+                                    if (lineEl) lineEl.textContent = 'GH₵' + data.line_total;
+                                    updateSummary(data);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.remove-item-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const itemId = this.dataset.itemId;
+                        const row = this.closest('.cart-item-row');
+                        postJSON(`/cart/remove/${itemId}/`).then(data => {
+                            if (data.success) {
+                                if (row) {
+                                    const divider = row.nextElementSibling;
+                                    if (divider && divider.classList.contains('item-divider')) {
+                                        divider.remove();
+                                    }
+                                    row.remove();
+                                }
+                                updateSummary(data);
+                            }
+                        });
+                    });
+                });
+
+                document.querySelectorAll('.save-later-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const itemId = this.dataset.itemId;
+                        postJSON(`/cart/save/${itemId}/`).then(data => {
+                            if (data.success) {
+                                window.location.reload();
+                            } else if (data.error === 'login_required') {
+                                window.location.href = '{% url "app:loginPage" %}';
+                            }
+                        });
+                    });
+                });
+
+                document.querySelectorAll('.move-saved-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const itemId = this.dataset.itemId;
+                        postJSON(`/cart/saved/move/${itemId}/`).then(data => {
+                            if (data.success) {
+                                window.location.reload();
+                            }
+                        });
+                    });
+                });
+
+                document.querySelectorAll('.remove-saved-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const itemId = this.dataset.itemId;
+                        postJSON(`/cart/saved/remove/${itemId}/`).then(data => {
+                            if (data.success) {
+                                const row = this.closest('.saved-item-row');
+                                if (row) row.remove();
+                            }
+                        });
+                    });
+                });
+
+                const clearBtn = document.getElementById('clear-cart-btn');
+                if (clearBtn) {
+                    clearBtn.addEventListener('click', function() {
+                        if (confirm('Are you sure you want to clear your cart?')) {
+                            postJSON('/cart/clear/').then(data => {
+                                if (data.success) {
+                                    window.location.reload();
+                                }
+                            });
                         }
                     });
                 }
 
-                var toggleSavedBtn = document.getElementById('toggle-saved-items');
-                var savedContainer = document.getElementById('saved-items-container');
+                const toggleSavedBtn = document.getElementById('toggle-saved-items');
+                const savedContainer = document.getElementById('saved-items-container');
                 if (toggleSavedBtn && savedContainer) {
                     toggleSavedBtn.addEventListener('click', function() {
                         savedContainer.classList.toggle('hidden');
-                        var icon = toggleSavedBtn.querySelector('.material-symbols-outlined');
+                        const icon = toggleSavedBtn.querySelector('.material-symbols-outlined');
                         if (icon) {
                             icon.textContent = savedContainer.classList.contains('hidden') ? 'expand_less' : 'expand_more';
                         }

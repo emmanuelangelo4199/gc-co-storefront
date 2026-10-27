@@ -1,0 +1,690 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="web_standard" name="shell-type">
+        <title>Gelo &amp; Co. - Secure Checkout</title>
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'app/src/input.css' %}">
+        <link type="image/png" href="{% static 'app/image/Gelo& Co.png' %}" rel="icon">
+        <style>
+            @layer base {
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                }
+                body {
+                    overscroll-behavior: none;
+                }
+                main>:first-child {
+                    margin-top: 0 !important;
+                }
+                main>:last-child {
+                    margin-bottom: 0 !important;
+                }
+            }
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "surface-dim": "#d0dbed",
+                            "on-secondary-fixed": "#410002",
+                            "inverse-surface": "#27313f",
+                            "surface-container-high": "#dee9fc",
+                            "surface-container-low": "#eff4ff",
+                            "on-secondary-fixed-variant": "#93000b",
+                            "surface-container": "#e6eeff",
+                            "on-secondary-container": "#fffbff",
+                            "inverse-primary": "#80d5cb",
+                            "tertiary": "#005e40",
+                            "tertiary-container": "#007954",
+                            "inverse-on-surface": "#eaf1ff",
+                            "surface-container-lowest": "#ffffff",
+                            "primary-fixed-dim": "#80d5cb",
+                            "surface-bright": "#f8f9ff",
+                            "on-surface-variant": "#3e4947",
+                            "on-secondary": "#ffffff",
+                            "tertiary-fixed-dim": "#68dba9",
+                            "primary-fixed": "#9cf2e8",
+                            "on-primary-fixed-variant": "#00504a",
+                            "on-tertiary-fixed-variant": "#005137",
+                            "error": "#ba1a1a",
+                            "on-tertiary": "#ffffff",
+                            "outline-variant": "#bdc9c6",
+                            "on-primary": "#ffffff",
+                            "on-surface": "#121c2a",
+                            "primary-container": "#0f766e",
+                            "surface-tint": "#006a63",
+                            "on-primary-container": "#a3faef",
+                            "on-error-container": "#93000a",
+                            "on-background": "#121c2a",
+                            "on-error": "#ffffff",
+                            "background": "#f8f9ff",
+                            "surface": "#f8f9ff",
+                            "on-tertiary-fixed": "#002114",
+                            "secondary-fixed-dim": "#ffb4ab",
+                            "on-primary-fixed": "#00201d",
+                            "primary": "#005c55",
+                            "outline": "#6e7977",
+                            "secondary-fixed": "#ffdad6",
+                            "secondary-container": "#e02928",
+                            "error-container": "#ffdad6",
+                            "surface-variant": "#d9e3f6",
+                            "secondary": "#bb0112",
+                            "tertiary-fixed": "#85f8c4",
+                            "surface-container-highest": "#d9e3f6",
+                            "on-tertiary-container": "#99ffce"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "space-lg": "1.5rem",
+                            "margin": "2rem",
+                            "gutter": "1.5rem",
+                            "gutter-mobile": "1rem",
+                            "space-md": "1rem",
+                            "space-xl": "2rem",
+                            "space-xs": "0.25rem",
+                            "space-sm": "0.5rem",
+                            "margin-mobile": "1rem"
+                        },
+                        "fontFamily": {
+                            "display": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "headline-lg-mobile": ["Inter"],
+                            "title-md": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-md": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "headline-sm": ["Inter"],
+                            "display-mobile": ["Inter"],
+                            "body-sm": ["Inter"]
+                        },
+                        "fontSize": {
+                            "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+                            "title-md": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                            "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500"}],
+                            "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+                            "display-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+                            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                        }
+                    }
+                }
+            };
+        </script>
+    </head>
+    <body class="bg-surface font-body-md text-on-surface antialiased">
+        <header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+            <div class="h-28 w-full">
+                <div class="h-16 max-w-[1280px] mx-auto px-margin flex items-center justify-between gap-space-md">
+                    <div class="flex items-center gap-space-sm shrink-0">
+                        <a class="flex items-center gap-space-xs" data-path="home" href="{% url 'app:home' %}">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtN4oixghnaN93VBeC4z15TCQFXIfVlE_QTLJyYswAFv__NgOwl_QJE1c4FoAX33h-gVDDST7hh52iMzzuuDjBi4MsT8DHuB7X8lWwzhReYQ-Pn5JP8V8S-7U5yuP__q0K9MlhqXRplG9ZG12idZQBWteR20lOkWCaFEoa8m0n5ybHhs5ZSmCvJWqLHHZKSmnFc_2gvfOAw_aNO6TUHlRubS0XzgrowocyTGKabeENCIus4ZHewV1S4zKuwK8Xxipwg3M" alt="Gelo &amp; Co. Logo" class="h-9 w-9 object-contain rounded-full mr-2">
+                            <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Gelo &amp; Co.</span>
+                        </a>
+                    </div>
+                    <div class="flex-1 max-w-xl mx-space-md">
+                        <div class="relative flex items-center w-full">
+                            <span class="material-symbols-outlined absolute left-3 text-outline text-xl pointer-events-none">search</span>
+                            <input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest border border-outline-variant font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary transition-all duration-150" placeholder="Search products, brands and categories..." type="text">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-space-md shrink-0">
+                        <a class="relative p-space-xs flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="cart" href="{% url 'app:carts' %}">
+                            <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                            {% if cart_total_quantity > 0 %}
+                            <span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">{{ cart_total_quantity }}</span>
+                            {% endif %}
+                        </a>
+                        <div class="flex items-center gap-space-sm pl-space-sm border-l border-outline-variant">
+                            {% if request.user.is_authenticated %}
+                            <div class="flex items-center gap-space-xs">
+                                <img alt="{{ request.user.username }}" class="w-8 h-8 rounded-full object-cover" src="{{ request.user.image_url }}">
+                                <div class="flex flex-col text-left">
+                                    <span class="font-label-md text-label-md text-on-surface font-semibold">{{ request.user.username }}</span>
+                                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="{% url 'app:my_orders' %}">My Orders</a>
+                                </div>
+                            </div>
+                            <form method="POST" action="{% url 'app:logout' %}">
+                                {% csrf_token %}
+                                <button class="p-space-xs text-on-surface-variant hover:text-secondary transition-colors flex items-center cursor-pointer" title="Sign out" type="submit">
+                                    <span class="material-symbols-outlined text-xl">logout</span>
+                                </button>
+                            </form>
+                            {% else %}
+                            <a href="{% url 'app:loginPage' %}" class="flex items-center gap-space-xs text-on-surface-variant hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-2xl">account_circle</span>
+                                <span class="font-label-md text-label-md font-semibold">Sign In</span>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="h-12 border-t border-surface-container bg-surface-container-lowest/90 backdrop-blur-md">
+                    <div class="max-w-[1280px] mx-auto px-margin h-full flex items-center justify-between">
+                        <nav class="flex items-center gap-space-lg h-full">
+                            <a class="h-full flex items-center font-label-lg text-label-lg transition-colors text-primary font-bold border-b-2 border-primary" href="{% url 'app:home' %}">Store</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" href="{% url 'app:category' 'electronic' %}">Electronics</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" href="{% url 'app:category' 'fashion' %}">Fashion</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" href="{% url 'app:category' 'home-living' %}">Home</a>
+                            <a class="h-full flex items-center text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" href="{% url 'app:category' 'sale' %}">Sale &amp; Offers</a>
+                        </nav>
+                        <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                            <span class="material-symbols-outlined text-base text-tertiary">local_shipping</span>
+                            <span>Free delivery over GH₵ {{ free_shipping_threshold|floatformat:0 }} in Accra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="w-full pt-28 bg-surface min-h-[calc(100vh-112px)]">
+            <div class="flex flex-col w-full">
+                <!-- Stepper Breadcrumb Header -->
+                <div class="w-full bg-surface-container-lowest shadow-sm py-space-lg mb-space-xl">
+                    <div class="max-w-[1280px] mx-auto px-margin">
+                        <div class="flex items-center justify-center max-w-2xl mx-auto">
+                            <!-- Step 1 -->
+                            <div class="flex items-center gap-space-sm">
+                                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-label-md text-label-md">
+                                    <span class="material-symbols-outlined text-base">check</span>
+                                </div>
+                                <span class="font-label-lg text-label-lg text-primary font-semibold">1. Cart</span>
+                            </div>
+                            <div class="flex-1 h-0.5 bg-primary mx-space-md"></div>
+
+                            <!-- Step 2 -->
+                            <div class="flex items-center gap-space-sm">
+                                <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-label-md font-bold ring-2 ring-primary">
+                                    2
+                                </div>
+                                <span class="font-label-lg text-label-lg text-on-surface font-bold">Shipping &amp; Payment</span>
+                            </div>
+                            <div class="flex-1 h-0.5 bg-surface-variant mx-space-md"></div>
+
+                            <!-- Step 3 -->
+                            <div class="flex items-center gap-space-sm opacity-60">
+                                <div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-md text-label-md">
+                                    3
+                                </div>
+                                <span class="font-label-lg text-label-lg text-outline">Confirmation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Checkout Container -->
+                <div class="max-w-[1280px] mx-auto px-margin pb-space-xl w-full">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+                        <!-- Left Column: Shipping & Payment Form (8 Columns) -->
+                        <form class="checkout-form lg:col-span-8 flex flex-col gap-space-xl" id="checkout-form" method="POST" action="{% url 'app:checkout' %}">
+                            {% csrf_token %}
+
+                            {% if messages %}
+                            <div class="flex flex-col gap-2">
+                                {% for message in messages %}
+                                <div class="p-4 rounded-lg bg-error-container text-on-error-container text-body-sm font-medium">
+                                    {{ message }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <!-- SECTION 1: Delivery & Contact Details -->
+                            <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+                                <div class="flex items-center justify-between pb-space-md mb-space-lg">
+                                    <div class="flex items-center gap-space-sm">
+                                        <span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-label-md">1</span>
+                                        <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Delivery &amp; Contact Details</h2>
+                                    </div>
+                                    <span class="font-label-sm text-label-sm text-tertiary bg-surface-container-low px-space-sm py-1 rounded-full font-medium">Standard Dispatch Active</span>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                                    <!-- Row 1 -->
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-fullname">Full Name *</label>
+                                        <input class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline transition-all" id="shipping-fullname" name="shipping_fullname" placeholder="Kwame Mensah" required type="text" value="{% if request.user.is_authenticated %}{{ request.user.first_name|default:request.user.username }}{% endif %}">
+                                    </div>
+
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-phone">Phone Number (WhatsApp Preferred) *</label>
+                                        <input class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline transition-all" id="shipping-phone" name="shipping_phone" placeholder="+233 24 123 4567" required type="tel" value="{% if request.user.is_authenticated %}{{ request.user.phone_number }}{% endif %}">
+                                    </div>
+
+                                    <!-- Row 2 -->
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-email">Email Address (Order Tracking) *</label>
+                                        <input class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline transition-all" id="shipping-email" name="shipping_email" placeholder="user@domain.com" required type="email" value="{% if request.user.is_authenticated %}{{ request.user.email }}{% endif %}">
+                                    </div>
+
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-alt-phone">Alternative Recipient Phone</label>
+                                        <input class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline transition-all" id="shipping-alt-phone" name="shipping_alt_phone" placeholder="+233 20 000 0000" type="tel">
+                                    </div>
+
+                                    <!-- Row 3: Street Address spanning full width -->
+                                    <div class="flex flex-col gap-space-xs md:col-span-2">
+                                        <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-address">Street Address / Landmark descriptor *</label>
+                                        <input class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline transition-all" id="shipping-address" name="shipping_address" placeholder="House number, Street, Landmark descriptor" required type="text">
+                                    </div>
+
+                                    <!-- Row 4: City, Region, Digital GPS -->
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-city">City / Town *</label>
+                                        <input class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline transition-all" id="shipping-city" name="shipping_city" placeholder="e.g. Accra" required type="text" value="Accra">
+                                    </div>
+
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-region">Region *</label>
+                                        <select class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer" id="shipping-region" name="shipping_region" required>
+                                            <option selected value="Greater Accra">Greater Accra</option>
+                                            <option value="Ashanti">Ashanti Region</option>
+                                            <option value="Western">Western Region (Takoradi)</option>
+                                            <option value="Central">Central Region (Cape Coast)</option>
+                                            <option value="Eastern">Eastern Region (Koforidua)</option>
+                                            <option value="Volta">Volta Region (Ho)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="flex flex-col gap-space-xs md:col-span-2">
+                                        <div class="flex items-center justify-between">
+                                            <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="shipping-gps">GhanaPost Digital GPS Address *</label>
+                                            <a class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-0.5" href="https://ghanapostgps.com" target="_blank">
+                                                Find GPS code <span class="material-symbols-outlined text-xs">open_in_new</span>
+                                            </a>
+                                        </div>
+                                        <div class="relative flex items-center">
+                                            <span class="material-symbols-outlined absolute left-3 text-outline text-lg">pin_drop</span>
+                                            <input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary uppercase tracking-wide transition-all" id="shipping-gps" name="shipping_gps" placeholder="GA-000-0000" required type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SECTION 2: Delivery Speed Preference -->
+                            <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+                                <div class="flex items-center gap-space-sm mb-space-lg">
+                                    <span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-label-md">2</span>
+                                    <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Delivery Speed</h2>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                                    <!-- Option 1: Standard Express -->
+                                    <label class="relative flex items-start gap-space-md p-space-md rounded-xl bg-surface-container-low cursor-pointer transition-all hover:bg-surface-container border border-primary/20">
+                                        <input checked class="mt-1 w-4 h-4 accent-primary text-primary focus:ring-primary cursor-pointer" name="delivery_speed" type="radio" value="standard">
+                                        <div class="flex flex-col">
+                                            <div class="flex items-center gap-space-xs">
+                                                <span class="font-title-md text-title-md text-on-surface font-semibold">Standard Express</span>
+                                                <span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold">
+                                                    {% if qualifies_free_shipping %}FREE{% else %}GH₵{{ shipping|floatformat:2 }}{% endif %}
+                                                </span>
+                                            </div>
+                                            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Delivered via Gelo &amp; Co. logistics fleet in 1-2 business days across Accra &amp; Tema.</p>
+                                            <div class="flex items-center gap-1 mt-2 text-primary font-label-sm text-label-sm font-semibold">
+                                                <span class="material-symbols-outlined text-sm">schedule</span>
+                                                Estimated dispatch: Within 24-48 Hours
+                                            </div>
+                                        </div>
+                                    </label>
+
+                                    <!-- Option 2: Same-day priority -->
+                                    <label class="relative flex items-start gap-space-md p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-all border border-outline-variant/60">
+                                        <input class="mt-1 w-4 h-4 accent-primary text-primary focus:ring-primary cursor-pointer" name="delivery_speed" type="radio" value="priority">
+                                        <div class="flex flex-col">
+                                            <div class="flex items-center justify-between">
+                                                <span class="font-title-md text-title-md text-on-surface font-semibold">Same-Day Priority</span>
+                                                <span class="font-label-md text-label-md text-on-surface font-bold">Express Hub</span>
+                                            </div>
+                                            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Direct motorbike dispatch dispatched within Greater Accra.</p>
+                                            <div class="flex items-center gap-1 mt-2 text-secondary font-label-sm text-label-sm font-semibold">
+                                                <span class="material-symbols-outlined text-sm">bolt</span>
+                                                Dispatched as soon as packaged
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- SECTION 3: Payment Method Selection -->
+                            <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+                                <div class="flex items-center justify-between pb-space-md mb-space-lg">
+                                    <div class="flex items-center gap-space-sm">
+                                        <span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold text-label-md">3</span>
+                                        <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Payment Selection</h2>
+                                    </div>
+                                    <div class="flex items-center gap-1 text-tertiary font-label-sm text-label-sm">
+                                        <span class="material-symbols-outlined text-sm">verified_user</span>
+                                        Bank-grade SSL Secured
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-space-md">
+                                    <!-- PAYMENT OPTION 1: Mobile Money (Selected Default) -->
+                                    <div class="bg-surface-container-low rounded-xl p-space-lg transition-all border border-outline-variant" id="payment-momo-card">
+                                        <label class="flex items-start justify-between cursor-pointer w-full">
+                                            <div class="flex items-center gap-space-md">
+                                                <input checked class="w-5 h-5 accent-primary text-primary focus:ring-primary cursor-pointer" name="payment_method" onchange="switchPayment('momo')" type="radio" value="momo">
+                                                <div>
+                                                    <span class="font-title-md text-title-md text-on-surface font-bold">Mobile Money (Instant Handset Prompt)</span>
+                                                    <p class="font-body-sm text-body-sm text-on-surface-variant">MTN MoMo, Telecel Cash, AT Money</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-space-xs">
+                                                <span class="px-2 py-1 bg-surface-container-lowest rounded font-label-sm text-label-sm font-bold text-on-surface-variant shadow-sm">MTN</span>
+                                                <span class="px-2 py-1 bg-surface-container-lowest rounded font-label-sm text-label-sm font-bold text-on-surface-variant shadow-sm">Telecel</span>
+                                                <span class="px-2 py-1 bg-surface-container-lowest rounded font-label-sm text-label-sm font-bold text-on-surface-variant shadow-sm">AT</span>
+                                            </div>
+                                        </label>
+
+                                        <!-- Expanded MoMo Form -->
+                                        <div class="mt-space-lg pl-8 flex flex-col gap-space-md" id="momo-expanded-drawer">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                                                <div class="flex flex-col gap-space-xs">
+                                                    <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="momo-network">Select MoMo Network *</label>
+                                                    <select class="h-11 px-space-md rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="momo-network" name="momo_network">
+                                                        <option selected value="mtn">MTN Mobile Money</option>
+                                                        <option value="telecel">Telecel Cash</option>
+                                                        <option value="at">AT Money (AirtelTigo)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="flex flex-col gap-space-xs">
+                                                    <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="momo-number">Registered MoMo Number *</label>
+                                                    <div class="relative flex items-center">
+                                                        <input class="w-full h-11 px-space-md pr-10 rounded-lg bg-surface-container-lowest border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" id="momo-number" name="momo_number" placeholder="024 XXX XXXX" type="tel" value="{% if request.user.is_authenticated %}{{ request.user.phone_number }}{% endif %}">
+                                                        <span class="material-symbols-outlined absolute right-3 text-tertiary text-xl">check_circle</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-space-md rounded-lg bg-surface-container-lowest shadow-sm flex items-start gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+                                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">phonelink_ring</span>
+                                                <div>
+                                                    <span class="font-semibold text-on-surface">Authorization Push Alert:</span>
+                                                    When you click place order, an automatic prompt will pop up on your mobile handset. Please enter your confidential PIN to authorize payment of <strong class="text-primary font-bold">GH₵ {{ grand_total|floatformat:2 }}</strong>.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PAYMENT OPTION 2: Credit / Debit Card -->
+                                    <div class="bg-surface-container-lowest rounded-xl p-space-lg transition-all border border-outline-variant" id="payment-card-card">
+                                        <label class="flex items-start justify-between cursor-pointer w-full">
+                                            <div class="flex items-center gap-space-md">
+                                                <input class="w-5 h-5 accent-primary text-primary focus:ring-primary cursor-pointer" name="payment_method" onchange="switchPayment('card')" type="radio" value="card">
+                                                <div>
+                                                    <span class="font-title-md text-title-md text-on-surface font-semibold">Credit / Debit Card</span>
+                                                    <p class="font-body-sm text-body-sm text-on-surface-variant">Visa, MasterCard, Gh-Link (Local ATM cards)</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-space-xs">
+                                                <span class="px-2 py-1 bg-surface-container rounded font-label-sm text-label-sm font-semibold text-on-surface">Visa</span>
+                                                <span class="px-2 py-1 bg-surface-container rounded font-label-sm text-label-sm font-semibold text-on-surface">MasterCard</span>
+                                                <span class="px-2 py-1 bg-surface-container rounded font-label-sm text-label-sm font-semibold text-on-surface">Gh-Link</span>
+                                            </div>
+                                        </label>
+
+                                        <!-- Collapsed Card Form Drawer -->
+                                        <div class="mt-space-lg pl-8 flex-col gap-space-md hidden" id="card-expanded-drawer">
+                                            <div class="flex flex-col gap-space-xs">
+                                                <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="card-holder">Cardholder Name</label>
+                                                <input class="h-11 px-space-md rounded-lg bg-surface-container border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary uppercase" id="card-holder" placeholder="CARD HOLDER NAME" type="text">
+                                            </div>
+                                            <div class="flex flex-col gap-space-xs">
+                                                <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="card-num">Card Number</label>
+                                                <div class="relative flex items-center">
+                                                    <input class="w-full h-11 pl-space-md pr-10 rounded-lg bg-surface-container border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary tracking-widest" id="card-num" placeholder="4123 •••• •••• 8892" type="text">
+                                                    <span class="material-symbols-outlined absolute right-3 text-outline text-xl">credit_card</span>
+                                                </div>
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-space-md">
+                                                <div class="flex flex-col gap-space-xs">
+                                                    <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="card-expiry">Expiry Date</label>
+                                                    <input class="h-11 px-space-md rounded-lg bg-surface-container border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" id="card-expiry" maxlength="5" placeholder="MM / YY" type="text">
+                                                </div>
+                                                <div class="flex flex-col gap-space-xs">
+                                                    <label class="font-label-md text-label-md text-on-surface-variant font-semibold" for="card-cvv">Security Code (CVV)</label>
+                                                    <div class="relative flex items-center">
+                                                        <input class="w-full h-11 pl-space-md pr-10 rounded-lg bg-surface-container border border-outline-variant shadow-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" id="card-cvv" maxlength="4" placeholder="•••" type="password">
+                                                        <span class="material-symbols-outlined absolute right-3 text-outline text-lg">lock</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PAYMENT OPTION 3: Cash On Delivery -->
+                                    <div class="bg-surface-container-lowest rounded-xl p-space-lg transition-all border border-outline-variant" id="payment-cod-card">
+                                        <label class="flex items-start justify-between cursor-pointer w-full">
+                                            <div class="flex items-center gap-space-md">
+                                                <input class="w-5 h-5 accent-primary text-primary focus:ring-primary cursor-pointer" name="payment_method" onchange="switchPayment('cash')" type="radio" value="cash">
+                                                <div>
+                                                    <span class="font-title-md text-title-md text-on-surface font-semibold">Cash / MoMo On Delivery</span>
+                                                    <p class="font-body-sm text-body-sm text-on-surface-variant">Pay our verified rider directly upon physical package inspection</p>
+                                                </div>
+                                            </div>
+                                            <span class="material-symbols-outlined text-outline text-2xl">payments</span>
+                                        </label>
+
+                                        <!-- Collapsed COD Notice Drawer -->
+                                        <div class="mt-space-md pl-8 hidden" id="cod-expanded-drawer">
+                                            <div class="p-space-sm rounded-lg bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm">
+                                                Note: Please ensure you have the exact amount of <strong>GH₵ {{ grand_total|floatformat:2 }}</strong> in cash or ready for mobile transfer to the courier's official merchant till upon arrival.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column Submit Trigger on Mobile / Form Actions -->
+                            <button class="w-full h-14 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-title-md text-title-md font-bold transition-all shadow flex items-center justify-center gap-space-sm cursor-pointer active:scale-[0.99]" id="place-order-btn" type="submit">
+                                <span class="material-symbols-outlined text-xl">lock</span>
+                                <span>Place Order &amp; Pay GH₵ {{ grand_total|floatformat:2 }}</span>
+                            </button>
+                        </form>
+
+                        <!-- Right Column: Sticky Order Summary (4 Columns) -->
+                        <aside class="lg:col-span-4 sticky top-32 flex flex-col gap-space-md">
+                            <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-md">
+                                <div class="flex items-center justify-between pb-space-md border-b border-surface-container">
+                                    <h3 class="font-title-md text-title-md text-on-surface font-bold">Order Summary</h3>
+                                    <span class="font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-space-sm py-0.5 rounded-full font-semibold">{{ item_count }} item{{ item_count|pluralize }}</span>
+                                </div>
+
+                                <!-- Product Item Thumbnails List -->
+                                <div class="flex flex-col gap-space-md py-space-md max-h-80 overflow-y-auto">
+                                    {% for item in cart_item %}
+                                    <div class="flex items-center gap-space-sm">
+                                        <img class="w-16 h-16 rounded-lg object-cover bg-surface-container shrink-0" alt="{{ item.product.name }}" src="{{ item.product.image_url }}">
+                                        <div class="flex-1 min-w-0">
+                                            <h4 class="font-label-lg text-label-lg text-on-surface font-semibold truncate">{{ item.product.name }}</h4>
+                                            <p class="font-label-sm text-label-sm text-outline">Qty: {{ item.quantity }}</p>
+                                            <div class="font-label-lg text-label-lg text-on-surface font-bold mt-0.5">GH₵{{ item.line_total|floatformat:2 }}</div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <!-- Price Calculation Tiers -->
+                                <div class="flex flex-col gap-space-xs pt-space-sm text-on-surface-variant font-body-sm text-body-sm border-t border-surface-container">
+                                    <div class="flex justify-between items-center">
+                                        <span>Items Subtotal</span>
+                                        <span class="font-medium text-on-surface">GH₵{{ subtotal|floatformat:2 }}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Standard Delivery</span>
+                                        {% if qualifies_free_shipping %}
+                                        <span class="font-bold text-tertiary uppercase text-label-sm">Free</span>
+                                        {% else %}
+                                        <span class="font-medium text-on-surface">GH₵{{ shipping|floatformat:2 }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>VAT / NHIL / GetFund (3% Inclusive)</span>
+                                        <span class="font-medium text-on-surface">GH₵{{ tax|floatformat:2 }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Grand Total Divider -->
+                                <div class="pt-space-md mt-space-md flex items-baseline justify-between border-t border-surface-container">
+                                    <div class="flex flex-col">
+                                        <span class="font-title-md text-title-md text-on-surface font-bold">Grand Total</span>
+                                        <span class="font-label-sm text-label-sm text-outline">Includes all taxes and delivery fees</span>
+                                    </div>
+                                    <span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">GH₵{{ grand_total|floatformat:2 }}</span>
+                                </div>
+
+                                <!-- Safe Checkout Assurances -->
+                                <div class="flex flex-col gap-space-xs mt-space-md pt-space-sm text-center">
+                                    <div class="flex items-center justify-center gap-space-xs text-outline font-label-sm text-label-sm">
+                                        <span class="material-symbols-outlined text-sm text-tertiary">security</span>
+                                        <span>Guaranteed 256-bit Bank Grade Encryption</span>
+                                    </div>
+                                    <div class="flex items-center justify-center gap-space-xs text-outline font-label-sm text-label-sm">
+                                        <span class="material-symbols-outlined text-sm text-primary">published_with_changes</span>
+                                        <span>7-Day Hassle-Free Return Guarantee</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Support Assistance Capsule -->
+                            <div class="bg-surface-container-low rounded-xl p-space-md flex items-center gap-space-md">
+                                <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-xl">headset_mic</span>
+                                </div>
+                                <div class="flex flex-col min-w-0">
+                                    <div class="font-label-md text-label-md text-on-surface font-bold">Need Help With Your Order?</div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant truncate">Chat with our Accra Concierge on WhatsApp</p>
+                                </div>
+                                <a class="shrink-0 p-2 bg-surface-container-lowest text-primary hover:bg-primary hover:text-on-primary rounded-lg transition-colors shadow-sm" href="https://wa.me/233245550199" target="_blank">
+                                    <span class="material-symbols-outlined text-lg">chat</span>
+                                </a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="w-full bg-surface-container-lowest border-t border-surface-container mt-space-xl">
+            <div class="max-w-[1280px] mx-auto px-margin pt-space-xl pb-space-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl mb-space-xl">
+                    <div class="flex flex-col gap-space-md">
+                        <div class="flex items-center gap-space-xs">
+                            <img alt="Gelo &amp; Co. Logo" class="h-8 w-8 object-contain rounded-full mr-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADaaVNAXRRaPtewZvjn8pTMLSTUXfBedZ01TQlzHGnRDuYvbhhUiAr5fH4LJnkK-nREA7t_D4pjGbpahq8TItWiR_LemCEuaAS4XsCSq3TJymakeybZFOM-Wc9dP1cEMmGFZkqrduZ4sTHkPuvsFqz8ErjH0rj3Nxb_M9ZwyaxGXtS4SbgwS9lxZD-2ZR_Kolrto2Du_zwXSZ_2fpEcJ_GXVlqqlLfpKvfXNU7ZjVF7hSVaKSq6NGV1jT3HmU30Y0e7Qk">
+                            <span class="font-headline-sm text-headline-sm text-primary font-bold">Gelo &amp; Co.</span>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Gelo &amp; Co. brings quality everyday lifestyle goods, tech and apparel right to your doorstep across Ghana with seamless payments and fast delivery.</p>
+                    </div>
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Quick Links</h3>
+                        <div class="flex flex-col gap-space-xs">
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="all-products" href="{% url 'app:home' %}">Shop All</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="{% url 'app:carts' %}">My Cart</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="faqs" href="#">FAQs</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Customer Care &amp; Policies</h3>
+                        <div class="flex flex-col gap-space-xs">
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="contact-us" href="#">Contact Us</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="shipping-and-delivery" href="#">Shipping &amp; Delivery</a>
+                            <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="return-policy" href="#">Return Policy</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-space-sm">
+                        <h3 class="font-title-md text-title-md text-on-surface font-semibold">Contact &amp; Social</h3>
+                        <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">call</span>
+                                <span>+233 24 555 0199</span>
+                            </div>
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">mail</span>
+                                <span>support@geloandco.com.gh</span>
+                            </div>
+                            <div class="flex items-center gap-space-xs">
+                                <span class="material-symbols-outlined text-base text-primary">location_on</span>
+                                <span>Accra, Ghana</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-surface-container pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-md">
+                    <p class="font-body-sm text-body-sm text-outline">© 2025 Gelo &amp; Co. Ltd. All rights reserved.</p>
+                    <div class="flex items-center gap-space-sm font-label-sm text-label-sm text-outline">
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cards (Visa / MC)</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">MTN Mobile Money</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Telecel Cash</span>
+                        <span class="px-space-sm py-1 bg-surface-container rounded font-medium text-on-surface-variant">Cash on Delivery</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Micro-interactions Script -->
+        <script>
+            function switchPayment(type) {
+                const momoDrawer = document.getElementById('momo-expanded-drawer');
+                const cardDrawer = document.getElementById('card-expanded-drawer');
+                const codDrawer = document.getElementById('cod-expanded-drawer');
+                const momoCard = document.getElementById('payment-momo-card');
+                const cardCard = document.getElementById('payment-card-card');
+                const codCard = document.getElementById('payment-cod-card');
+
+                // Reset states
+                momoDrawer.classList.add('hidden');
+                cardDrawer.classList.add('hidden');
+                cardDrawer.classList.remove('flex');
+                codDrawer.classList.add('hidden');
+
+                momoCard.classList.remove('bg-surface-container-low');
+                momoCard.classList.add('bg-surface-container-lowest');
+                cardCard.classList.remove('bg-surface-container-low');
+                cardCard.classList.add('bg-surface-container-lowest');
+                codCard.classList.remove('bg-surface-container-low');
+                codCard.classList.add('bg-surface-container-lowest');
+
+                if (type === 'momo') {
+                    momoDrawer.classList.remove('hidden');
+                    momoCard.classList.add('bg-surface-container-low');
+                    momoCard.classList.remove('bg-surface-container-lowest');
+                } else if (type === 'card') {
+                    cardDrawer.classList.remove('hidden');
+                    cardDrawer.classList.add('flex');
+                    cardCard.classList.add('bg-surface-container-low');
+                    cardCard.classList.remove('bg-surface-container-lowest');
+                } else if (type === 'cash') {
+                    codDrawer.classList.remove('hidden');
+                    codCard.classList.add('bg-surface-container-low');
+                    codCard.classList.remove('bg-surface-container-lowest');
+                }
+            }
+        </script>
+    </body>
+</html>
