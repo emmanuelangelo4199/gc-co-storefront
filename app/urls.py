@@ -1,7 +1,9 @@
 from django.urls import path
 from .views import (
     my_homeView,
+    search_view,
     productDetails,
+    toggle_wishlist,
     loginFormWithSignup,
     logout_view,
     cart_items,
@@ -22,7 +24,9 @@ app_name = 'app'
 
 urlpatterns = [
     path('', my_homeView, name='home'),
+    path('search/', search_view, name='search'),
     path('products/', productDetails, name='product'),
+    path('products/<int:product_id>/', productDetails, name='product_detail'),
     path('accounts/', loginFormWithSignup, name='loginPage'),
     path('logout/', logout_view, name='logout'),
     path('category/<slug:slug>/', category_view, name='category'),
@@ -34,7 +38,8 @@ urlpatterns = [
     path('cart/remove/<int:item_id>/', remove_from_cart, name='remove_from_cart'),
     path('cart/clear/', clear_cart, name='clear_cart'),
 
-    # Saved for Later
+    # Wishlist / Saved for Later
+    path('wishlist/toggle/<int:product_id>/', toggle_wishlist, name='toggle_wishlist'),
     path('cart/save/<int:item_id>/', save_for_later, name='save_for_later'),
     path('cart/saved/move/<int:saved_id>/', move_saved_to_cart, name='move_saved_to_cart'),
     path('cart/saved/remove/<int:saved_id>/', remove_saved_item, name='remove_saved_item'),
@@ -42,5 +47,6 @@ urlpatterns = [
     # Checkout & Orders
     path('checkout/', checkout_view, name='checkout'),
     path('order-confirmation/<uuid:order_number>/', order_confirmation, name='order_confirmation'),
-    path('my-orders/', my_orders, name='my_orders'),
+    path('orders/', my_orders, name='my_orders'),
+    path('my-orders/', my_orders, name='my_orders_alias'),
 ]
