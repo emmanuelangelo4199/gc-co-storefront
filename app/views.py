@@ -59,6 +59,7 @@ def get_cart_data(cart, user=None):
     return {
         'cart_item': items,
         'item_count': item_count,
+        'cart_total_quantity': item_count,
         'subtotal': subtotal,
         'shipping': shipping,
         'tax': tax,
@@ -246,7 +247,8 @@ def loginFormWithSignup(request):
             login(request, user)
             merge_cart(request, user)
             messages.success(request, "Account created successfully.")
-            return redirect('app:home')
+            next_url = request.GET.get('next') or request.POST.get('next') or 'app:home'
+            return redirect(next_url)
 
         else:
             email = request.POST.get('email', '').strip().lower()
@@ -261,7 +263,8 @@ def loginFormWithSignup(request):
                 login(request, user)
                 merge_cart(request, user)
                 messages.success(request, "Welcome back!")
-                return redirect('app:home')
+                next_url = request.GET.get('next') or request.POST.get('next') or 'app:home'
+                return redirect(next_url)
             else:
                 messages.error(request, "Invalid email or password.")
                 return render(request, 'app/login_signup.html')
@@ -416,7 +419,7 @@ def clear_cart(request):
 def save_for_later(request, item_id):
     if not request.user.is_authenticated:
         messages.info(request, "Please log in to save items for later.")
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.content_type == 'application/json':
             return JsonResponse({'success': False, 'error': 'login_required'}, status=401)
         return redirect('app:loginPage')
 
@@ -484,7 +487,7 @@ def remove_saved_item(request, saved_id):
     saved = get_object_or_404(SavedItem, id=saved_id, user=request.user)
     saved.delete()
 
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.content_type == 'application/json':
         saved_count = SavedItem.objects.filter(user=request.user).count()
         return JsonResponse({'success': True, 'saved_count': saved_count})
 

@@ -205,6 +205,11 @@
             </div>
         </header>
         <main class="w-full pt-28 bg-surface min-h-[calc(100vh-112px)]">
+            <!-- Toast Notification Container -->
+            <div id="toast" class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-xl translate-y-24 opacity-0">
+                <span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span id="toast-message" class="font-body-sm text-body-sm font-medium">Notification</span>
+            </div>
             <div class="flex flex-col w-full">
                 <div class="max-w-[1280px] w-full mx-auto px-margin py-space-lg flex flex-col gap-space-lg">
                     <div class="flex flex-col gap-space-md">
@@ -286,12 +291,12 @@
                                         <div class="col-span-2 w-full md:w-auto flex items-center justify-between md:justify-center">
                                             <span class="md:hidden font-body-sm text-body-sm text-outline">Qty:</span>
                                             <div class="qty-stepper flex items-center bg-surface-container rounded-lg p-0.5">
-                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus" type="button" data-item-id="{{ item.id }}">
-                                                    <span class="material-symbols-outlined text-base">remove</span>
+                                                <button aria-label="Decrease quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-minus cursor-pointer" type="button" data-item-id="{{ item.id }}">
+                                                    <span class="material-symbols-outlined text-base pointer-events-none">remove</span>
                                                 </button>
                                                 <input class="qty-input w-9 text-center bg-transparent font-title-md text-title-md text-on-surface font-semibold focus:outline-none" readonly type="text" value="{{ item.quantity }}" data-max="{{ product.stock_quantity|default:99 }}">
-                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus" type="button" data-item-id="{{ item.id }}">
-                                                    <span class="material-symbols-outlined text-base">add</span>
+                                                <button aria-label="Increase quantity" class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-lowest transition-colors qty-plus cursor-pointer" type="button" data-item-id="{{ item.id }}">
+                                                    <span class="material-symbols-outlined text-base pointer-events-none">add</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -300,11 +305,11 @@
                                                 GH₵{{ item.line_total|floatformat:2 }}
                                             </div>
                                             <div class="flex items-center gap-0.5">
-                                                <button class="save-later-btn p-1.5 rounded-lg text-outline hover:text-primary transition-colors" title="Save for later" type="button" data-item-id="{{ item.id }}">
-                                                    <span class="material-symbols-outlined text-xl">bookmark_add</span>
+                                                <button class="save-later-btn p-1.5 rounded-lg text-outline hover:text-primary transition-colors cursor-pointer" title="Save for later" type="button" data-item-id="{{ item.id }}">
+                                                    <span class="material-symbols-outlined text-xl pointer-events-none">bookmark_add</span>
                                                 </button>
-                                                <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors" title="Remove item" type="button" data-item-id="{{ item.id }}">
-                                                    <span class="material-symbols-outlined text-xl">delete</span>
+                                                <button class="remove-item-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/40 transition-colors cursor-pointer" title="Remove item" type="button" data-item-id="{{ item.id }}">
+                                                    <span class="material-symbols-outlined text-xl pointer-events-none">delete</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -364,11 +369,11 @@
                                         </div>
                                         <div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
                                             <button class="move-saved-btn px-4 py-2 bg-surface-container-lowest text-primary hover:bg-surface font-label-md text-label-md rounded-lg shadow-sm font-semibold transition-colors flex items-center gap-1 cursor-pointer" type="button" data-item-id="{{ item.id }}">
-                                                <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+                                                <span class="material-symbols-outlined text-base pointer-events-none">add_shopping_cart</span>
                                                 <span>Move to Cart</span>
                                             </button>
                                             <button class="remove-saved-btn p-2 text-outline hover:text-error transition-colors cursor-pointer" title="Remove from saved" type="button" data-item-id="{{ item.id }}">
-                                                <span class="material-symbols-outlined text-lg">close</span>
+                                                <span class="material-symbols-outlined text-lg pointer-events-none">close</span>
                                             </button>
                                         </div>
                                     </div>
@@ -424,7 +429,7 @@
                                 </div>
                                 <div class="flex flex-col gap-space-sm font-body-md text-body-md">
                                     <div class="flex items-center justify-between text-on-surface-variant">
-                                        <span>Subtotal (<span id="summary-item-count">{{ item_count }}</span> item{{ item_count|pluralize }})</span>
+                                        <span id="summary-items-label">Subtotal (<span id="summary-item-count">{{ item_count }}</span> item{{ item_count|pluralize }})</span>
                                         <span class="font-semibold text-on-surface tabular-nums" id="order-subtotal">GH₵{{ subtotal|floatformat:2 }}</span>
                                     </div>
                                     <div class="flex items-center justify-between text-on-surface-variant">
@@ -583,7 +588,26 @@
                     }
                     return cookieValue;
                 }
-                const csrftoken = getCookie('csrftoken');
+
+                function getCsrfToken() {
+                    return '{{ csrf_token }}' || getCookie('gelo_csrftoken') || getCookie('csrftoken');
+                }
+
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
+                let toastTimer = null;
+
+                function showToast(msg) {
+                    if (!toast || !toastMessage) return;
+                    toastMessage.textContent = msg;
+                    toast.classList.remove('translate-y-24', 'opacity-0');
+                    toast.classList.add('translate-y-0', 'opacity-100');
+                    if (toastTimer) clearTimeout(toastTimer);
+                    toastTimer = setTimeout(() => {
+                        toast.classList.remove('translate-y-0', 'opacity-100');
+                        toast.classList.add('translate-y-24', 'opacity-0');
+                    }, 2500);
+                }
 
                 function updateSummary(data) {
                     if (data.subtotal !== undefined) {
@@ -635,9 +659,12 @@
                     if (badgeCount) {
                         badgeCount.textContent = data.item_count + (data.item_count === 1 ? ' item' : ' items');
                     }
-                    const summaryCount = document.getElementById('summary-item-count');
-                    if (summaryCount) {
-                        summaryCount.textContent = data.item_count;
+                    const summaryLabel = document.getElementById('summary-items-label');
+                    if (summaryLabel) {
+                        summaryLabel.innerHTML = `Subtotal (<span id="summary-item-count">${data.item_count}</span> item${data.item_count === 1 ? '' : 's'})`;
+                    } else {
+                        const summaryCount = document.getElementById('summary-item-count');
+                        if (summaryCount) summaryCount.textContent = data.item_count;
                     }
                     if (data.item_count === 0) {
                         window.location.reload();
@@ -649,124 +676,205 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRFToken': csrftoken,
+                            'X-CSRFToken': getCsrfToken(),
                             'X-Requested-With': 'XMLHttpRequest'
                         },
                         body: JSON.stringify(body || {})
-                    }).then(res => res.json());
+                    }).then(res => {
+                        return res.json().then(data => {
+                            if (!res.ok && res.status !== 401) {
+                                throw new Error(data.error || `HTTP error ${res.status}`);
+                            }
+                            return data;
+                        });
+                    });
                 }
 
+                // Increase quantity (+)
                 document.querySelectorAll('.qty-plus').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         const itemId = this.dataset.itemId;
-                        const input = this.parentElement.querySelector('.qty-input');
+                        const stepper = this.closest('.qty-stepper');
+                        const input = stepper ? stepper.querySelector('.qty-input') : null;
+                        if (!input) return;
                         const max = parseInt(input.dataset.max || 99, 10);
                         let val = parseInt(input.value, 10) || 1;
                         if (val < max) {
                             val += 1;
                             input.value = val;
-                            postJSON(`/cart/update/${itemId}/`, { quantity: val }).then(data => {
-                                if (data.success) {
-                                    const lineEl = document.getElementById(`line-total-${itemId}`);
-                                    if (lineEl) lineEl.textContent = 'GH₵' + data.line_total;
-                                    updateSummary(data);
-                                }
-                            });
+                            postJSON(`/cart/update/${itemId}/`, { quantity: val })
+                                .then(data => {
+                                    if (data.success) {
+                                        const lineEl = document.getElementById(`line-total-${itemId}`);
+                                        if (lineEl) lineEl.textContent = 'GH₵' + data.line_total;
+                                        updateSummary(data);
+                                    } else {
+                                        input.value = val - 1;
+                                        showToast(data.error || 'Failed to update quantity');
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Update error:', err);
+                                    input.value = val - 1;
+                                    showToast('Network error updating quantity');
+                                });
                         }
                     });
                 });
 
+                // Decrease quantity (-)
                 document.querySelectorAll('.qty-minus').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         const itemId = this.dataset.itemId;
-                        const input = this.parentElement.querySelector('.qty-input');
+                        const stepper = this.closest('.qty-stepper');
+                        const input = stepper ? stepper.querySelector('.qty-input') : null;
+                        if (!input) return;
                         let val = parseInt(input.value, 10) || 1;
                         if (val > 1) {
                             val -= 1;
                             input.value = val;
-                            postJSON(`/cart/update/${itemId}/`, { quantity: val }).then(data => {
-                                if (data.success) {
-                                    const lineEl = document.getElementById(`line-total-${itemId}`);
-                                    if (lineEl) lineEl.textContent = 'GH₵' + data.line_total;
-                                    updateSummary(data);
-                                }
-                            });
+                            postJSON(`/cart/update/${itemId}/`, { quantity: val })
+                                .then(data => {
+                                    if (data.success) {
+                                        const lineEl = document.getElementById(`line-total-${itemId}`);
+                                        if (lineEl) lineEl.textContent = 'GH₵' + data.line_total;
+                                        updateSummary(data);
+                                    } else {
+                                        input.value = val + 1;
+                                        showToast(data.error || 'Failed to update quantity');
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Update error:', err);
+                                    input.value = val + 1;
+                                    showToast('Network error updating quantity');
+                                });
                         }
                     });
                 });
 
+                // Delete button
                 document.querySelectorAll('.remove-item-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         const itemId = this.dataset.itemId;
                         const row = this.closest('.cart-item-row');
-                        postJSON(`/cart/remove/${itemId}/`).then(data => {
-                            if (data.success) {
-                                if (row) {
-                                    const divider = row.nextElementSibling;
-                                    if (divider && divider.classList.contains('item-divider')) {
-                                        divider.remove();
+                        postJSON(`/cart/remove/${itemId}/`)
+                            .then(data => {
+                                if (data.success) {
+                                    if (row) {
+                                        const divider = row.nextElementSibling;
+                                        if (divider && divider.classList.contains('item-divider')) {
+                                            divider.remove();
+                                        } else {
+                                            const prevDivider = row.previousElementSibling;
+                                            if (prevDivider && prevDivider.classList.contains('item-divider')) {
+                                                prevDivider.remove();
+                                            }
+                                        }
+                                        row.remove();
                                     }
-                                    row.remove();
+                                    updateSummary(data);
+                                    showToast('Item removed from cart');
+                                } else {
+                                    showToast('Could not remove item');
                                 }
-                                updateSummary(data);
-                            }
-                        });
+                            })
+                            .catch(err => {
+                                console.error('Remove error:', err);
+                                showToast('Network error removing item');
+                            });
                     });
                 });
 
+                // Save for later button
                 document.querySelectorAll('.save-later-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         const itemId = this.dataset.itemId;
-                        postJSON(`/cart/save/${itemId}/`).then(data => {
-                            if (data.success) {
-                                window.location.reload();
-                            } else if (data.error === 'login_required') {
-                                window.location.href = '{% url "app:loginPage" %}';
-                            }
-                        });
+                        postJSON(`/cart/save/${itemId}/`)
+                            .then(data => {
+                                if (data.success) {
+                                    window.location.reload();
+                                } else if (data.error === 'login_required') {
+                                    showToast('Please sign in to save items for later');
+                                    setTimeout(() => {
+                                        window.location.href = '{% url "app:loginPage" %}?next={% url "app:carts" %}';
+                                    }, 1000);
+                                } else {
+                                    showToast(data.error || 'Failed to save item');
+                                }
+                            })
+                            .catch(err => {
+                                console.error('Save for later error:', err);
+                                showToast('Error saving item for later');
+                            });
                     });
                 });
 
+                // Move saved to cart button
                 document.querySelectorAll('.move-saved-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         const itemId = this.dataset.itemId;
-                        postJSON(`/cart/saved/move/${itemId}/`).then(data => {
-                            if (data.success) {
-                                window.location.reload();
-                            }
-                        });
-                    });
-                });
-
-                document.querySelectorAll('.remove-saved-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const itemId = this.dataset.itemId;
-                        postJSON(`/cart/saved/remove/${itemId}/`).then(data => {
-                            if (data.success) {
-                                const row = this.closest('.saved-item-row');
-                                if (row) row.remove();
-                            }
-                        });
-                    });
-                });
-
-                const clearBtn = document.getElementById('clear-cart-btn');
-                if (clearBtn) {
-                    clearBtn.addEventListener('click', function() {
-                        if (confirm('Are you sure you want to clear your cart?')) {
-                            postJSON('/cart/clear/').then(data => {
+                        postJSON(`/cart/saved/move/${itemId}/`)
+                            .then(data => {
                                 if (data.success) {
                                     window.location.reload();
                                 }
+                            })
+                            .catch(err => {
+                                console.error('Move error:', err);
                             });
+                    });
+                });
+
+                // Remove from saved button
+                document.querySelectorAll('.remove-saved-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const itemId = this.dataset.itemId;
+                        postJSON(`/cart/saved/remove/${itemId}/`)
+                            .then(data => {
+                                if (data.success) {
+                                    const row = this.closest('.saved-item-row');
+                                    if (row) row.remove();
+                                    showToast('Removed from saved items');
+                                }
+                            })
+                            .catch(err => {
+                                console.error('Remove saved error:', err);
+                            });
+                    });
+                });
+
+                // Clear cart button
+                const clearBtn = document.getElementById('clear-cart-btn');
+                if (clearBtn) {
+                    clearBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (confirm('Are you sure you want to clear your cart?')) {
+                            postJSON('/cart/clear/')
+                                .then(data => {
+                                    if (data.success) {
+                                        window.location.reload();
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Clear cart error:', err);
+                                });
                         }
                     });
                 }
 
+                // Toggle saved items accordion
                 const toggleSavedBtn = document.getElementById('toggle-saved-items');
                 const savedContainer = document.getElementById('saved-items-container');
                 if (toggleSavedBtn && savedContainer) {
-                    toggleSavedBtn.addEventListener('click', function() {
+                    toggleSavedBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         savedContainer.classList.toggle('hidden');
                         const icon = toggleSavedBtn.querySelector('.material-symbols-outlined');
                         if (icon) {

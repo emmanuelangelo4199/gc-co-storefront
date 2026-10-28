@@ -222,7 +222,7 @@
                                 {% endif %} {% endcomment %}
                                 <div class="flex flex-col text-left">
                                     <span class="font-label-md text-label-md text-on-surface font-semibold">{{user.username}}</span>
-                                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="#">My Orders</a>
+                                    <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-colors" data-path="my-orders" href="{% url 'app:my_orders' %}">My Orders</a>
                                 </div>
                             </div>
                             <form method="POST" action="{% url 'app:logout' %}" id="logout-form" >
@@ -655,7 +655,7 @@
                             const res = await fetch(`/wishlist/toggle/${productId}/`, {
                                 method: 'POST',
                                 headers: {
-                                    'X-CSRFToken': getCookie('csrftoken'),
+                                    'X-CSRFToken': '{{ csrf_token }}' || getCookie('gelo_csrftoken') || getCookie('csrftoken'),
                                     'Content-Type': 'application/json'
                                 }
                             });
